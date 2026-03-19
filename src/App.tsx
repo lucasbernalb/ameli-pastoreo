@@ -1,11 +1,5 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import BrandMessage from './components/BrandMessage'
-import Gallery from './components/Gallery'
-import Products from './components/Products'
-import Differentiation from './components/Differentiation'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
+import { Navbar, Footer } from './components';
+import { Hero, About, Products, Gallery, Contact } from './sections';
 
 function App() {
   return (
@@ -13,15 +7,14 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <BrandMessage />
-        <Gallery />
+        <About />
         <Products />
-        <Differentiation />
+        <Gallery />
         <Contact />
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
