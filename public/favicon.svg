@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <linearGradient id="egg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5C242"/>
+      <stop offset="100%" style="stop-color:#E8944A"/>
+    </linearGradient>
+  </defs>
+  <circle cx="24" cy="24" r="22" fill="url(#egg-gradient)"/>
+  <text x="24" y="30" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle">A</text>
+</svg>

@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FFFEF7;
+  --color-cream-dark: #FFF5E6;
+  --color-egg-yellow: #F5C242;
+  --color-egg-yellow-light: #FAD979;
+  --color-orange: #E8944A;
+  --color-orange-light: #F5B677;
+  --color-green: #7B9E6B;
+  --color-green-dark: #5C7A4E;
+  --color-brown: #5C4033;
+  --color-brown-light: #8B6F5C;
+
+  --font-family-heading: 'Playfair Display', Georgia, serif;
+  --font-family-body: 'DM Sans', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-family-body);
+    background-color: var(--color-cream);
+    color: var(--color-brown);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-egg-yellow to-orange text-white font-semibold px-8 py-4 rounded-full 
+           shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-brown border-2 border-egg-yellow font-semibold px-6 py-3 rounded-full 
+           shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-3xl shadow-lg overflow-hidden transition-all duration-300 
+           hover:shadow-2xl hover:-translate-y-2;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 px-4 md:px-8;
+  }
+
+  .gradient-overlay {
+    background: linear-gradient(135deg, rgba(245, 194, 66, 0.3) 0%, rgba(232, 148, 74, 0.2) 100%);
+  }
+}
