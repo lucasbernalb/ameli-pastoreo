@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { FaWhatsapp } from 'react-icons/fa';
 import { WHATSAPP_ORDER_URL } from '../config';
-
-// Lazy load the heavy 3D scene for better initial load time
-const Scene3D = lazy(() => import('../components/Scene3D'));
+import HeroEgg from '../components/HeroEgg';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -36,7 +34,6 @@ const statsVariants = {
 };
 
 const Hero = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLElement>(null);
 
   const mouseX = useMotionValue(0);
@@ -58,7 +55,6 @@ const Hero = () => {
         
         mouseX.set(x);
         mouseY.set(y);
-        setMousePosition({ x, y });
       }
     };
 
@@ -89,9 +85,14 @@ const Hero = () => {
         />
       </div>
 
-      <Suspense fallback={null}>
-        <Scene3D mousePosition={mousePosition} />
-      </Suspense>
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block opacity-80">
+        <motion.div
+          style={{ x: smoothX, y: smoothY }}
+          className="relative"
+        >
+          <HeroEgg />
+        </motion.div>
+      </div>
 
       <motion.div
         variants={containerVariants}
