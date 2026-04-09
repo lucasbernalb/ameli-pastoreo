@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { galleryImages } from '../data';
+import { INSTAGRAM_URL, CONTACT_INFO } from '../config';
 
 const Gallery = () => {
   return (
@@ -61,14 +62,14 @@ const Gallery = () => {
           className="text-center mt-12"
         >
           <a
-            href="https://instagram.com/amelipastoreo"
+            href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 text-orange hover:text-green transition-colors font-semibold group"
           >
             <span className="text-2xl">📸</span>
             <span className="group-hover:underline">Síguenos en Instagram</span>
-            <span className="text-lg">@amelipastoreo</span>
+              <span className="text-lg">@{CONTACT_INFO.instagram}</span>
           </a>
         </motion.div>
       </div>

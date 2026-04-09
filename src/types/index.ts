@@ -8,17 +8,6 @@ export interface Product {
   badge?: string;
 }
 
-export interface NavItem {
-  name: string;
-  href: string;
-}
-
-export interface SocialLink {
-  name: string;
-  href: string;
-  icon: string;
-}
-
 export interface Value {
   title: string;
   subtitle: string;
@@ -29,9 +18,8 @@ export interface Value {
 export interface Differentiator {
   title: string;
   description: string;
-  icon?: string;
+  emoji: string;
   gradient: string;
-  emoji?: string;
 }
 
 export interface GalleryImage {

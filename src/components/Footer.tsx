@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaInstagram, FaLeaf, FaHeart } from 'react-icons/fa';
-import { navItems } from '../data';
+import { WHATSAPP_BASE_URL, INSTAGRAM_URL, CONTACT_INFO, SITE_CONFIG, NAV_LINKS } from '../config';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -40,7 +40,7 @@ const Footer = () => {
           >
             <h4 className="font-playfair font-bold text-brown mb-4">Enlaces</h4>
             <ul className="space-y-2">
-              {navItems.map((item) => (
+              {NAV_LINKS.map((item) => (
                 <li key={item.name}>
                   <a 
                     href={item.href} 
@@ -62,7 +62,7 @@ const Footer = () => {
             <h4 className="font-playfair font-bold text-brown mb-4">Síguenos</h4>
             <div className="flex gap-3">
               <motion.a
-                href="https://wa.me/51999999999"
+                href={WHATSAPP_BASE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-green text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
@@ -73,7 +73,7 @@ const Footer = () => {
                 <FaWhatsapp className="text-xl" />
               </motion.a>
               <motion.a
-                href="https://instagram.com/amelipastoreo"
+                href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-gradient-to-br from-purple-500 via-pink-500 to-orange text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
@@ -85,7 +85,7 @@ const Footer = () => {
               </motion.a>
             </div>
             <p className="text-brown-light text-sm mt-4">
-              @amelipastoreo
+              @{CONTACT_INFO.instagram}
             </p>
           </motion.div>
         </div>
@@ -96,11 +96,11 @@ const Footer = () => {
           viewport={{ once: true }}
           className="border-t border-brown/10 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
         >
-          <p className="text-brown-light text-sm">
-            © {currentYear} Ameli Pastoreo. Todos los derechos reservados.
-          </p>
+            <p className="text-brown-light text-sm">
+              © {currentYear} {SITE_CONFIG.name}. Todos los derechos reservados.
+            </p>
           <p className="text-brown-light text-sm flex items-center gap-1">
-            Hecho con <FaHeart className="text-orange text-xs" /> en el Perú
+            Hecho con <FaHeart className="text-orange text-xs" /> en Uruguay
           </p>
         </motion.div>
       </div>

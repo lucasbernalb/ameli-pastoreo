@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaInstagram, FaMapMarkerAlt, FaPhone, FaArrowRight } from 'react-icons/fa';
+import { WHATSAPP_ORDER_URL, INSTAGRAM_URL, CONTACT_INFO } from '../config';
 
 const Contact = () => {
   return (
@@ -38,7 +39,7 @@ const Contact = () => {
           className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl"
         >
           <motion.a
-            href="https://wa.me/51999999999?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20huevos%20Ameli%20Pastoreo"
+            href={WHATSAPP_ORDER_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="block bg-gradient-to-r from-green to-green-dark text-white px-8 py-6 rounded-2xl font-semibold text-xl shadow-xl hover:shadow-2xl transition-all mb-8 group"
@@ -58,7 +59,7 @@ const Contact = () => {
 
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <motion.a
-              href="https://instagram.com/amelipastoreo"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-5 bg-gradient-to-r from-purple-500 via-pink-500 to-orange text-white rounded-2xl hover:opacity-90 transition-opacity"
@@ -68,7 +69,7 @@ const Contact = () => {
               <FaInstagram className="text-3xl" />
               <div>
                 <span className="font-semibold block">Síguenos</span>
-                <span className="text-sm text-white/80">@amelipastoreo</span>
+                <span className="text-sm text-white/80">@{CONTACT_INFO.instagram}</span>
               </div>
             </motion.a>
 
@@ -76,7 +77,7 @@ const Contact = () => {
               <FaPhone className="text-3xl text-orange" />
               <div>
                 <span className="font-semibold block text-brown">Llámanos</span>
-                <span className="text-brown-light">+51 999 999 999</span>
+                <span className="text-brown-light">{CONTACT_INFO.phone}</span>
               </div>
             </div>
           </div>
@@ -88,7 +89,7 @@ const Contact = () => {
             <FaMapMarkerAlt className="text-3xl text-orange flex-shrink-0" />
             <div>
               <span className="font-semibold block text-brown">Visítanos</span>
-              <span className="text-brown-light">Km 45, Carretera Central, Lima</span>
+              <span className="text-brown-light">{CONTACT_INFO.address}</span>
             </div>
           </motion.div>
         </motion.div>

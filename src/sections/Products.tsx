@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaCheck } from 'react-icons/fa';
 import { products } from '../data';
+import { WHATSAPP_PERSONALIZED_URL, WHATSAPP_BASE_URL } from '../config';
 
 const Products = () => {
   return (
@@ -54,15 +55,15 @@ const Products = () => {
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors" />
               </div>
 
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-1">
                 <h3 className="font-playfair text-xl font-bold text-brown mb-2">
                   {product.name}
                 </h3>
-                <p className="text-brown-light text-sm mb-4 leading-relaxed">
+                <p className="text-brown-light text-sm mb-4 leading-relaxed min-h-10">
                   {product.description}
                 </p>
                 
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-4 mt-auto">
                   <span className="text-xs text-brown-light bg-cream px-3 py-1 rounded-full">
                     {product.unit}
                   </span>
@@ -73,7 +74,7 @@ const Products = () => {
                     {product.price}
                   </span>
                   <motion.a
-                    href={`https://wa.me/51999999999?text=Hola!%20Quiero%20comprar%20${encodeURIComponent(product.name)}`}
+                    href={WHATSAPP_PERSONALIZED_URL(product.name)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-green text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-shadow"
@@ -97,7 +98,7 @@ const Products = () => {
           className="text-center mt-16"
         >
           <motion.a
-            href="https://wa.me/51999999999?text=Hola!%20Quiero%20hacer%20un%20pedido%20personalizado"
+            href={`${WHATSAPP_BASE_URL}?text=Hola!%20Quiero%20hacer%20un%20pedido%20personalizado`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-gradient-to-r from-green to-green-dark text-white px-10 py-5 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transition-all"

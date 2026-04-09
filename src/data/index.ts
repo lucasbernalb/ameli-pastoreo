@@ -5,7 +5,7 @@ export const products: Product[] = [
     id: 1,
     name: 'Docena Premium',
     description: '12 huevos frescos de gallinas felices',
-    price: 'S/ 12.00',
+    price: '$300',
     unit: '12 unidades',
     gradient: 'from-egg-yellow to-orange',
     badge: 'Más vendido',
@@ -14,7 +14,7 @@ export const products: Product[] = [
     id: 2,
     name: 'Pack Tradicional',
     description: '6 huevos para probar la diferencia',
-    price: 'S/ 7.00',
+    price: '$150',
     unit: '6 unidades',
     gradient: 'from-orange to-egg-yellow',
   },
@@ -22,7 +22,7 @@ export const products: Product[] = [
     id: 3,
     name: 'Maple Familiar',
     description: '30 huevos para familias grandes',
-    price: 'S/ 28.00',
+    price: '$590',
     unit: '30 unidades',
     gradient: 'from-green to-green-dark',
   },
@@ -30,7 +30,7 @@ export const products: Product[] = [
     id: 4,
     name: 'Caja Economica',
     description: '60 huevos al mejor precio',
-    price: 'S/ 50.00',
+    price: '$960',
     unit: '60 unidades',
     gradient: 'from-egg-yellow-light to-egg-yellow',
   },
@@ -87,12 +87,8 @@ export const galleryImages: GalleryImage[] = [
   { id: 6, gradient: 'from-egg-yellow-light to-egg-yellow', icon: '☀️', alt: 'Amanecer en la granja' },
 ];
 
-export const navItems = [
-  { name: 'Inicio', href: '#inicio' },
-  { name: 'Nosotros', href: '#nosotros' },
-  { name: 'Productos', href: '#productos' },
-  { name: 'Galería', href: '#galeria' },
-  { name: 'Contacto', href: '#contacto' },
-];
-
 export const brandQuote = '"Creemos que los mejores huevos vienen de gallinas felices que viven libres y comen natural."';
+
+// Re-exportar navItems desde config para backward compatibility
+// Los componentes deben migrar gradualmente a usar @/config directamente
+export { NAV_LINKS as navItems } from '../config';

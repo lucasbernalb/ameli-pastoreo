@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFEF7"/>
+      <stop offset="100%" style="stop-color:#FFF5E6"/>
+    </linearGradient>
+    <linearGradient id="egg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5C242"/>
+      <stop offset="100%" style="stop-color:#E8944A"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="200" fill="#F5C242" opacity="0.1"/>
+  <circle cx="1100" cy="530" r="250" fill="#7B9E6B" opacity="0.1"/>
+  <circle cx="600" cy="315" r="300" fill="#E8944A" opacity="0.05"/>
+  
+  <!-- Egg shape -->
+  <ellipse cx="600" cy="300" rx="140" ry="180" fill="url(#egg)"/>
+  <ellipse cx="560" cy="250" rx="30" ry="50" fill="#FFFEF7" opacity="0.3"/>
+  
+  <!-- Text -->
+  <text x="600" y="530" font-family="serif" font-size="72" font-weight="bold" fill="#5C4033" text-anchor="middle">Ameli Pastoreo</text>
+  <text x="600" y="590" font-family="sans-serif" font-size="28" fill="#8B6F5C" text-anchor="middle">Huevos de Pastoreo - Del campo a tu mesa</text>
+</svg>
