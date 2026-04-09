@@ -85,7 +85,7 @@ const Hero = () => {
         />
       </div>
 
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block opacity-80">
+      <div className="absolute right-1/4 top-1/2 -translate-y-1/2 hidden lg:block opacity-80 scale-125">
         <motion.div
           style={{ x: smoothX, y: smoothY }}
           className="relative"
