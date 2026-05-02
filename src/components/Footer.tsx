@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaInstagram, FaLeaf, FaHeart } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaLeaf } from 'react-icons/fa';
 import { WHATSAPP_BASE_URL, INSTAGRAM_URL, CONTACT_INFO, SITE_CONFIG, NAV_LINKS } from '../config';
+import DevAttribution from './DevAttribution';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -99,9 +100,7 @@ const Footer = () => {
             <p className="text-brown-light text-sm">
               © {currentYear} {SITE_CONFIG.name}. Todos los derechos reservados.
             </p>
-          <p className="text-brown-light text-sm flex items-center gap-1">
-            Hecho con <FaHeart className="text-orange text-xs" /> en Uruguay
-          </p>
+          <DevAttribution />
         </motion.div>
       </div>
     </footer>
