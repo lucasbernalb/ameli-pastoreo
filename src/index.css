@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Cormorant+Garamond:wght@600;700&display=swap');
+@import "./assets/fonts.css";
 @import "tailwindcss";
 
 @theme {
@@ -13,8 +15,10 @@
   --color-brown-light: #8B6F5C;
   --color-berny: #7C3AED;
 
-  --font-family-heading: 'Playfair Display', Georgia, serif;
-  --font-family-body: 'DM Sans', system-ui, sans-serif;
+  --font-family-heading: 'Cormorant Garamond', serif;
+  --font-family-body: 'Manrope', sans-serif;
+  --font-family-quincho: 'Quincho Script', cursive;
+  --font-family-playfair: 'Cormorant Garamond', serif;
 }
 
 @layer base {
@@ -43,6 +47,14 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .font-quincho {
+    font-family: 'Quincho Script', cursive;
+  }
+
+  .font-playfair {
+    font-family: 'Cormorant Garamond', serif;
   }
   
   .animation-delay-100 {
