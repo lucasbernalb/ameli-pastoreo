@@ -17,11 +17,11 @@ export const AdminTable = ({ onLogout, onRetry, leads, loading, error }: AdminTa
     ? leads.filter((lead) => {
         const q = search.toLowerCase();
         return (
-          lead.nombre.toLowerCase().includes(q) ||
-          lead.email.toLowerCase().includes(q) ||
-          lead.telefono.toLowerCase().includes(q) ||
-          lead.localidad.toLowerCase().includes(q) ||
-          lead.plan.toLowerCase().includes(q)
+          String(lead.nombre).toLowerCase().includes(q) ||
+          String(lead.email).toLowerCase().includes(q) ||
+          String(lead.telefono).toLowerCase().includes(q) ||
+          String(lead.localidad).toLowerCase().includes(q) ||
+          String(lead.plan).toLowerCase().includes(q)
         );
       })
     : leads;
