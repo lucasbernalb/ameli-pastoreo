@@ -5,10 +5,12 @@ import { MockC } from './pages/MockC'
 import { AdminPage } from './pages/admin'
 import { HeroPrototype } from './experiments/HeroPrototype'
 import { PhotoLanding } from './experiments/PhotoLanding'
+import { PhotoLandingA } from './experiments/PhotoLandingA'
 
 const Page = () => {
   if (window.location.pathname === '/lab/hero') return <HeroPrototype />
   if (window.location.pathname === '/lab/photo') return <PhotoLanding />
+  if (window.location.pathname === '/lab/photo-a') return <PhotoLandingA />
   if (window.location.pathname === '/admin') {
     return <AdminPage />
   }
