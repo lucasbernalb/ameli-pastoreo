@@ -1,20 +1,19 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { MockC } from './pages/MockC'
 import { AdminPage } from './pages/admin'
-import { HeroPrototype } from './experiments/HeroPrototype'
-import { PhotoLanding } from './experiments/PhotoLanding'
-import { PhotoLandingA } from './experiments/PhotoLandingA'
+import { CinematicLanding } from './experiments/CinematicLanding'
+import { AmeliLoader } from './components/Loader'
 
 const Page = () => {
-  if (window.location.pathname === '/lab/hero') return <HeroPrototype />
-  if (window.location.pathname === '/lab/photo') return <PhotoLanding />
-  if (window.location.pathname === '/lab/photo-a') return <PhotoLandingA />
   if (window.location.pathname === '/admin') {
     return <AdminPage />
   }
-  return <MockC />
+  return (
+    <AmeliLoader>
+      <CinematicLanding />
+    </AmeliLoader>
+  )
 }
 
 createRoot(document.getElementById('root')!).render(
