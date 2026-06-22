@@ -1,15 +1,17 @@
 import PhotoHeroA from './PhotoHeroA';
 import PhotoStoryA from './PhotoStoryA';
+import PhotoBreather from './PhotoBreather';
 import PhotoQualityA from './PhotoQualityA';
-import PhotoGalleryA from './PhotoGalleryA';
+import PhotoFinalCTA from './PhotoFinalCTA';
 
 export const PhotoLandingA = () => {
   return (
     <div className="min-h-screen">
       <PhotoHeroA />
       <PhotoStoryA />
+      <PhotoBreather />
       <PhotoQualityA />
-      <PhotoGalleryA />
+      <PhotoFinalCTA />
     </div>
   );
 };

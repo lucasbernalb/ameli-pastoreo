@@ -3,17 +3,28 @@
 @import "tailwindcss";
 
 @theme {
+  --color-bg-cream: #F5F0E8;
+  --color-bg-beige: #EDE6D8;
+  --color-bg-warm: #E4D9C4;
+  --color-bg-card: #FAF5EC;
+
   --color-cream: #FFFEF7;
   --color-cream-dark: #FFF5E6;
+
   --color-egg-yellow: #F5C242;
   --color-egg-yellow-light: #FAD979;
   --color-orange: #E8944A;
   --color-orange-light: #F5B677;
+  --color-gold: #F5C242;
+  --color-gold-dark: #E8944A;
+
   --color-green: #7B9E6B;
   --color-green-dark: #5C7A4E;
+  --color-green-brand: #278759;
+
   --color-brown: #5C4033;
-  --color-brown-light: #8B6F5C;
-  --color-berny: #7C3AED;
+  --color-brown-mid: #8B6F5C;
+  --color-brown-light: #B8A08C;
 
   --font-family-heading: 'Cormorant Garamond', serif;
   --font-family-body: 'Manrope', sans-serif;
@@ -28,7 +39,7 @@
 
   body {
     font-family: var(--font-family-body);
-    background-color: var(--color-cream);
+    background-color: var(--color-bg-cream);
     color: var(--color-brown);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -44,11 +55,77 @@
   }
 }
 
+@utility bg-cream-texture {
+  background-color: #F5F0E8;
+  background-image: url("/texturas/F5F0E8-circles.png");
+  background-repeat: repeat;
+}
+
+@utility bg-beige-texture {
+  background-color: #EDE6D8;
+  background-image: url("/texturas/EDE6D8-dark-dotted-2.png");
+  background-repeat: repeat;
+}
+
+@utility bg-warm-texture {
+  background-color: #E4D9C4;
+  background-image: url("/texturas/E4D9C4-low-contrast-linen.png");
+  background-repeat: repeat;
+}
+
+@utility bg-egg-shell {
+  background-color: #F5F0E8;
+  background-image: url("/texturas/278759-egg-shell.png");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+@utility bg-egg-shell-gold {
+  background-color: #F5C242;
+  background-image: url("/texturas/F5C242-egg-shell.png");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+@utility bg-linen-blend {
+  background-color: #F5F0E8;
+  background-image: url("/texturas/E4D9C4-low-contrast-linen.png");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+  background-size: 200px;
+}
+
+@utility bg-wood-blend {
+  background-color: #EDE6D8;
+  background-image: url("/texturas/E4D9C4-purty-wood.png");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+  background-size: 100px;
+}
+
+@utility bg-card-texture {
+  background-color: #FAF5EC;
+  background-image: url("/texturas/F5F0E8-black-thread-light.png");
+  background-repeat: repeat;
+}
+
+@utility bg-gold-texture {
+  background-color: #F5C242;
+  background-image: url("/texturas/F5C242-egg-shell.png");
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+@utility bg-green-texture {
+  background-image: url("/texturas/7B9E6B-pool-table.png");
+  background-repeat: repeat;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .font-quincho {
     font-family: 'Quincho Script', cursive;
   }
@@ -56,15 +133,15 @@
   .font-playfair {
     font-family: 'Cormorant Garamond', serif;
   }
-  
+
   .animation-delay-100 {
     animation-delay: 100ms;
   }
-  
+
   .animation-delay-200 {
     animation-delay: 200ms;
   }
-  
+
   .animation-delay-300 {
     animation-delay: 300ms;
   }

@@ -1,13 +1,15 @@
 import PhotoHero from './PhotoHero';
-import PhotoBenefits from './PhotoBenefits';
-import PhotoProduct from './PhotoProduct';
+import PhotoFullBleed from './PhotoFullBleed';
+import PhotoProductHero from './PhotoProductHero';
+import PhotoFinalCTA from './PhotoFinalCTA';
 
 export const PhotoLanding = () => {
   return (
     <div className="min-h-screen">
       <PhotoHero />
-      <PhotoBenefits />
-      <PhotoProduct />
+      <PhotoFullBleed />
+      <PhotoProductHero />
+      <PhotoFinalCTA />
     </div>
   );
 };
