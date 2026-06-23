@@ -176,9 +176,9 @@ export const CinematicHero = () => {
                   <span
                     className="absolute inset-0 pointer-events-none"
                     style={{
-                      background: 'rgba(245,194,66,0.8)',
-                      borderRadius: '12% 6% 18% 6% / 6% 16% 4% 18%',
-                      transform: 'rotate(-1deg) scale(1.08) scaleX(1.12)',
+                      background: 'rgba(92,64,51,0.12)',
+                      borderRadius: '16% 4% 20% 4% / 4% 18% 4% 20%',
+                      transform: 'rotate(-1.5deg) scaleX(1.12)',
                     }}
                   />
                   <span
