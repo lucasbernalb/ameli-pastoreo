@@ -170,7 +170,7 @@ export const CinematicHero = () => {
 
               <a
                 href="#nosotros"
-                className="inline-flex items-center gap-3 text-white/85 hover:text-white font-quincho text-lg transition-all duration-300 group"
+                className="inline-flex items-center gap-3 text-white/85 hover:text-white font-playfair font-bold uppercase tracking-wide transition-all duration-300 group"
               >
                 Conocé nuestra historia
                 <span className="w-8 h-px bg-gold/60 group-hover:w-12 transition-all duration-300" />
