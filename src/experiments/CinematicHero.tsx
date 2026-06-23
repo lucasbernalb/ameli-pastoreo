@@ -31,10 +31,7 @@ export const CinematicHero = () => {
   }, []);
 
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ minHeight: 'clamp(500px, 80vh, 800px)' }}
-    >
+    <section className="relative min-h-screen overflow-hidden">
       <AnimatePresence>
         <motion.div
           key={heroSlides[index].image}
@@ -66,7 +63,7 @@ export const CinematicHero = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(90deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 45%, rgba(0,0,0,.15) 100%)',
+          background: 'linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.3) 50%, rgba(0,0,0,.1) 100%)',
         }}
       />
 
@@ -80,143 +77,105 @@ export const CinematicHero = () => {
         style={{ backgroundColor: 'rgba(245,194,66,.03)' }}
       />
 
-      <div
-        className="relative z-10 flex flex-col px-6 md:px-12 lg:px-20 max-w-7xl mx-auto"
-        style={{ height: 'clamp(500px, 80vh, 800px)' }}
-      >
+      <div className="relative z-10 min-h-screen flex flex-col px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
         <motion.img
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           src="/logo-ameli/logo ameli corregido blanco.png"
           alt="Ameli Pastoreo"
-          className="w-28 md:w-36 pt-3 md:pt-5 mb-3 md:mb-4 drop-shadow-lg"
+          className="self-start w-28 md:w-36 pt-6 md:pt-10 drop-shadow-lg"
           loading="eager"
         />
 
-        <div className="flex-1 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="flex-1 flex flex-col justify-center">
           <motion.div
             initial="hidden"
             animate="visible"
-            transition={{ staggerChildren: 0.12, delayChildren: 0.2 }}
+            transition={{ staggerChildren: 0.12, delayChildren: 0.25 }}
+            className="max-w-2xl"
           >
-            <div className="relative">
-              <div
-                className="absolute inset-0 pointer-events-none opacity-[0.04]"
-                style={{
-                  backgroundImage: 'url("/texturas/278759-egg-shell.png")',
-                  backgroundRepeat: 'repeat',
-                  mixBlendMode: 'multiply',
-                }}
-              />
-
-              <motion.div variants={item} className="mb-4 md:mb-5 relative">
-                <div className="w-12 h-px bg-gold/60 mb-3" />
-                <span className="inline-block relative">
-                  <span
-                    className="absolute inset-0 scale-110 scale-x-[1.15] pointer-events-none"
-                    style={{
-                      background: 'rgba(245,194,66,0.8)',
-                      borderRadius: '12% 6% 18% 6% / 6% 16% 4% 18%',
-                      transform: 'rotate(-1deg) scale(1.08) scaleX(1.12)',
-                    }}
-                  />
-                  <span
-                    className="relative text-xs md:text-sm tracking-[0.35em] uppercase font-semibold text-white"
-                    style={{ textShadow: '0 1px 4px rgba(0,0,0,.4)' }}
-                  >
-                    PRODUCTO ARTESANAL · PASTOREO LIBRE
-                  </span>
+            <motion.div variants={item}>
+              <div className="w-12 h-px bg-gold/60 mb-3" />
+              <span className="inline-block relative">
+                <span
+                  className="absolute inset-0 scale-110 scale-x-[1.15] pointer-events-none"
+                  style={{
+                    background: 'rgba(245,194,66,0.8)',
+                    borderRadius: '12% 6% 18% 6% / 6% 16% 4% 18%',
+                    transform: 'rotate(-1deg) scale(1.08) scaleX(1.12)',
+                  }}
+                />
+                <span
+                  className="relative text-xs md:text-sm tracking-[0.35em] uppercase font-semibold text-white"
+                  style={{ textShadow: '0 1px 4px rgba(0,0,0,.4)' }}
+                >
+                  PRODUCTO ARTESANAL · PASTOREO LIBRE
                 </span>
-              </motion.div>
+              </span>
+            </motion.div>
 
-              <motion.h1
-                variants={item}
-                className="font-playfair font-bold text-white leading-[0.88] tracking-[-0.02em]"
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
-              >
-                HUEVOS DE
-                <br />
-                <span className="relative inline-block">
-                  <span
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: 'rgba(92,64,51,0.8)',
-                      borderRadius: '16% 4% 20% 4% / 4% 18% 4% 20%',
-                      transform: 'rotate(-1.5deg) scaleX(1.15)',
-                    }}
-                  />
-                  <span
-                    className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#F3D27A] via-[#D4A544] to-[#F6E09B]"
-                    style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,.4))' }}
-                  >
-                    CAMPO
-                  </span>
+            <motion.h1
+              variants={item}
+              className="font-playfair font-bold text-white leading-[0.88] tracking-[-0.02em] mt-6 md:mt-8"
+              style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
+            >
+              HUEVOS DE
+              <br />
+              <span className="relative inline-block">
+                <span
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'rgba(92,64,51,0.8)',
+                    borderRadius: '16% 4% 20% 4% / 4% 18% 4% 20%',
+                    transform: 'rotate(-1.5deg) scaleX(1.15)',
+                  }}
+                />
+                <span
+                  className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#F3D27A] via-[#D4A544] to-[#F6E09B]"
+                  style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,.4))' }}
+                >
+                  CAMPO
                 </span>
-              </motion.h1>
+              </span>
+            </motion.h1>
 
-              <motion.p
-                variants={item}
-                className="text-white/92 max-w-xl mt-4 leading-relaxed relative"
-                style={{ fontSize: 'clamp(0.9rem, 1.2vw, 1.1rem)', textShadow: '0 1px 4px rgba(0,0,0,.3)' }}
+            <motion.p
+              variants={item}
+              className="text-white/90 max-w-lg mt-5 leading-relaxed font-semibold"
+              style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.15rem)' }}
+            >
+              Naturales, frescos y producidos con amor.
+              <br />
+              Gallinas felices para una vida más sana.
+            </motion.p>
+
+            <motion.div variants={item} className="flex flex-wrap items-center gap-5 mt-8">
+              <a
+                href={WHATSAPP_ORDER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative inline-flex items-center justify-center bg-[#5C7A4E] text-white px-8 py-5 rounded-full font-bold text-base shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl active:translate-y-0 overflow-hidden"
               >
-                Naturales, frescos y producidos con amor.
-                <br />
-                Gallinas felices para una vida más sana.
-              </motion.p>
-            </div>
-          </motion.div>
+                <div
+                  className="absolute inset-0 opacity-[0.08] pointer-events-none"
+                  style={{
+                    backgroundImage: 'url("/texturas/F5F0E8-black-thread-light.png")',
+                    backgroundRepeat: 'repeat',
+                    mixBlendMode: 'multiply',
+                  }}
+                />
+                <span className="relative z-10">Hacé tu pedido</span>
+              </a>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="space-y-5"
-          >
-            <a
-              href={WHATSAPP_ORDER_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative w-full inline-flex items-center justify-center bg-[#5C7A4E] text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl active:translate-y-0 overflow-hidden"
-            >
-              <div
-                className="absolute inset-0 opacity-[0.08] pointer-events-none"
-                style={{
-                  backgroundImage: 'url("/texturas/F5F0E8-black-thread-light.png")',
-                  backgroundRepeat: 'repeat',
-                  mixBlendMode: 'multiply',
-                }}
-              />
-              <span className="relative z-10">Hacé tu pedido</span>
-            </a>
-
-            <a
-              href="#nosotros"
-              className="inline-flex items-center gap-3 text-white/80 hover:text-white font-medium text-lg transition-all duration-300 group"
-            >
-              Conocé nuestra historia
-              <span className="w-8 h-px bg-gold/60 group-hover:w-12 transition-all duration-300" />
-            </a>
-
-            <div className="pt-2 space-y-2.5">
-              {benefits.map((b, i) => (
-                <div key={i} className="flex items-center gap-3 text-white/85">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#D4A544"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  <span className="text-sm md:text-base">{b.text}</span>
-                </div>
-              ))}
-            </div>
+              <a
+                href="#nosotros"
+                className="inline-flex items-center gap-3 text-white/85 hover:text-white font-quincho text-lg transition-all duration-300 group"
+              >
+                Conocé nuestra historia
+                <span className="w-8 h-px bg-gold/60 group-hover:w-12 transition-all duration-300" />
+              </a>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -224,7 +183,7 @@ export const CinematicHero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.9 }}
-          className="flex gap-2 mt-4 mb-4"
+          className="flex gap-2 pb-6 md:pb-8 justify-center"
         >
           {heroSlides.map((_, i) => (
             <button
@@ -238,6 +197,31 @@ export const CinematicHero = () => {
           ))}
         </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        className="absolute bottom-6 md:bottom-10 right-6 md:right-12 lg:right-20 backdrop-blur-md bg-black/30 border border-white/10 rounded-xl p-4 md:p-5 space-y-2.5 max-w-[200px] md:max-w-[220px]"
+      >
+        {benefits.map((b, i) => (
+          <div key={i} className="flex items-center gap-2.5 text-white/80">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#D4A544"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <span className="text-xs md:text-sm leading-snug font-medium">{b.text}</span>
+          </div>
+        ))}
+      </motion.div>
     </section>
   );
 };
