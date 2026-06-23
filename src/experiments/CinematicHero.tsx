@@ -170,10 +170,24 @@ export const CinematicHero = () => {
 
               <a
                 href="#nosotros"
-                className="inline-flex items-center gap-3 text-white/85 hover:text-white font-playfair font-bold uppercase tracking-wide transition-all duration-300 group"
+                className="inline-flex items-center gap-3 text-white/85 hover:text-white transition-all duration-300 group"
               >
-                Conocé nuestra historia
-                <span className="w-8 h-px bg-gold/60 group-hover:w-12 transition-all duration-300" />
+                <span className="inline-block relative">
+                  <span
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'rgba(245,194,66,0.8)',
+                      borderRadius: '12% 6% 18% 6% / 6% 16% 4% 18%',
+                      transform: 'rotate(-1deg) scale(1.08) scaleX(1.12)',
+                    }}
+                  />
+                  <span
+                    className="relative font-playfair font-bold uppercase tracking-wide text-white"
+                    style={{ textShadow: '0 1px 4px rgba(0,0,0,.4)' }}
+                  >
+                    Conocé nuestra historia
+                  </span>
+                </span>
               </a>
             </motion.div>
           </motion.div>

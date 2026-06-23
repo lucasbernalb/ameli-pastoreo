@@ -13,15 +13,6 @@ import { FooterCinematic } from './FooterCinematic';
 export const CinematicLanding = () => {
   return (
     <div className="min-h-screen bg-cream-texture">
-      <div
-        className="fixed inset-0 pointer-events-none z-[9999]"
-        style={{
-          backgroundImage: 'url("/texturas/278759-egg-shell.png")',
-          backgroundRepeat: 'repeat',
-          opacity: 0.04,
-          mixBlendMode: 'multiply',
-        }}
-      />
       <NavbarCinematic />
       <CinematicHero />
 
