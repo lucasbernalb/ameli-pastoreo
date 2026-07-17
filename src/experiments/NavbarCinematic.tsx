@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NAV_LINKS } from '../config';
+import { scrollToSection } from '../lib/scrollTo';
 
 export const NavbarCinematic = () => {
   const [visible, setVisible] = useState(false);
@@ -45,6 +46,7 @@ export const NavbarCinematic = () => {
             <div className="flex justify-between items-center h-16 md:h-20">
               <a
                 href="#inicio"
+                onClick={(e) => { e.preventDefault(); scrollToSection('inicio'); }}
                 className="flex items-center gap-3"
               >
                 <img
@@ -55,25 +57,27 @@ export const NavbarCinematic = () => {
               </a>
 
               <div className="hidden md:flex items-center gap-8">
-                {NAV_LINKS.slice(0, -1).map((item) => (
+                  {NAV_LINKS.slice(0, -1).map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={(e) => { e.preventDefault(); scrollToSection(item.href.replace('#', '')); }}
+                      className="text-[#F8F5F0]/75 hover:text-[#F8F5F0] transition-colors text-base font-playfair tracking-wide relative py-1 after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold/60 after:w-0 hover:after:w-full after:transition-all after:duration-300"
+                    >
+                      {item.name}
+                    </a>
+                  ))}
                   <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-[#F8F5F0]/75 hover:text-[#F8F5F0] transition-colors text-base font-playfair tracking-wide relative py-1 after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold/60 after:w-0 hover:after:w-full after:transition-all after:duration-300"
+                    href={NAV_LINKS[NAV_LINKS.length - 1].href}
+                    onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }}
+                    className="bg-[#5C7A4E] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
                   >
-                    {item.name}
+                    Contacto
                   </a>
-                ))}
-                <a
-                  href={NAV_LINKS[NAV_LINKS.length - 1].href}
-                  className="bg-[#5C7A4E] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
-                >
-                  Contacto
-                </a>
               </div>
 
               <button
-                className="md:hidden text-[#F8F5F0]/80 p-2 hover:bg-white/5 rounded-lg transition-colors"
+                className="md:hidden text-[#F8F5F0]/80 p-3 hover:bg-white/5 rounded-lg transition-colors"
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label="Toggle menu"
               >
@@ -98,10 +102,10 @@ export const NavbarCinematic = () => {
           <AnimatePresence>
             {mobileOpen && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
                 className="md:hidden border-t border-white/5 bg-[#1C140E]/95"
               >
                 <div className="px-4 py-6 space-y-4">
@@ -110,15 +114,15 @@ export const NavbarCinematic = () => {
                       key={item.name}
                       href={item.href}
                       className="block text-[#F8F5F0]/75 hover:text-[#F8F5F0] transition-colors py-2 border-b border-white/5 text-lg font-playfair tracking-wide"
-                      onClick={() => setMobileOpen(false)}
+                      onClick={(e) => { e.preventDefault(); scrollToSection(item.href.replace('#', '')); setMobileOpen(false); }}
                     >
                       {item.name}
                     </a>
                   ))}
                   <a
                     href={NAV_LINKS[NAV_LINKS.length - 1].href}
-                    className="block bg-[#5C7A4E] text-white px-6 py-3 rounded-full text-sm font-semibold text-center mt-4"
-                    onClick={() => setMobileOpen(false)}
+                    className="block bg-[#5C7A4E] text-white px-6 py-3.5 rounded-full text-sm font-semibold text-center mt-4"
+                    onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); setMobileOpen(false); }}
                   >
                     Contacto
                   </a>

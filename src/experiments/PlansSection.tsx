@@ -1,47 +1,9 @@
 import { motion } from 'framer-motion';
+import { PLANS_DATA, PLAN_VALUE_MAP } from './data/plans';
+import { usePlanContext } from './PlanContext';
+import { scrollToSection } from '../lib/scrollTo';
 
-const plans = [
-  {
-    value: 'individual',
-    label: '12',
-    title: 'Plan Individual',
-    description: 'Ideal para 1-2 personas',
-    benefits: ['Gallinas libres', '12 huevos frescos/sem', 'Entrega semanal'],
-    popular: false,
-  },
-  {
-    value: 'amigo',
-    label: '18',
-    title: 'Plan Amigo',
-    description: 'Ideal para parejas',
-    benefits: ['Gallinas libres', '18 huevos frescos/sem', 'Entrega semanal'],
-    popular: true,
-  },
-  {
-    value: 'estandar',
-    label: '24',
-    title: 'Plan Estándar',
-    description: 'Ideal para consumo frecuente',
-    benefits: ['Gallinas libres', '24 huevos frescos/sem', 'Entrega semanal'],
-    popular: false,
-  },
-  {
-    value: 'familiar',
-    label: '30',
-    title: 'Plan Familiar',
-    description: 'Ideal para familias',
-    benefits: ['Gallinas libres', '30 huevos frescos/sem', 'Entrega semanal'],
-    popular: false,
-  },
-  {
-    value: 'personalizado',
-    label: '+30',
-    title: 'Plan Personalizado',
-    description: 'Adaptado a tu consumo',
-    benefits: ['Gallinas libres', 'Cantidad a medida', 'Entrega semanal'],
-    popular: false,
-  },
-];
+const plans = PLANS_DATA;
 
 export const PlansSection = () => {
   return (
@@ -107,7 +69,7 @@ export const PlansSection = () => {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto mt-8 justify-items-center">
+        <div className="grid md:grid-cols-2 gap-8 max-w-full md:max-w-3xl mx-auto mt-8 justify-items-center">
           {plans.slice(3).map((plan, i) => (
             <PlanCard key={plan.value} plan={plan} index={i + 3} />
           ))}
@@ -118,6 +80,7 @@ export const PlansSection = () => {
 };
 
 const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number }) => {
+  const { onSelectPlan } = usePlanContext();
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -125,7 +88,7 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -4, transition: { duration: 0.3 } }}
-      className={`relative w-full max-w-sm rounded-[28px] px-8 py-10 transition-all duration-300 flex flex-col h-full ${
+      className={`relative w-full max-w-sm rounded-[28px] px-6 md:px-8 py-8 md:py-10 transition-all duration-300 flex flex-col h-full ${
         plan.popular
           ? 'text-white shadow-[0_25px_60px_rgba(0,0,0,0.18)]'
           : 'bg-card-texture text-brown shadow-xl'
@@ -186,20 +149,35 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
 
       <div className={`relative z-10 flex flex-col flex-1`}>
         <div className="flex-1">
-          <p
-            className={`text-8xl font-bold leading-[0.9] mb-1 ${
-              plan.popular ? 'text-white' : 'text-brown'
+          <div
+            className={`inline-block px-6 py-4 rounded-2xl mb-5 ${
+              plan.popular
+                ? 'bg-white/20'
+                : 'bg-[#5C7A4E]/15'
             }`}
           >
-            {plan.label}
-          </p>
-          <p
-            className={`text-[15px] uppercase tracking-[0.25em] font-semibold mb-5 ${
-              plan.popular ? 'text-white/80' : 'text-[#7A5F4F]'
-            }`}
-          >
-            Huevos
-          </p>
+            <p
+              className={`text-7xl md:text-8xl font-bold leading-[0.9] mb-1 ${
+                plan.popular ? 'text-white' : 'text-brown'
+              }`}
+            >
+              {plan.label}
+            </p>
+            <p
+              className={`text-[15px] uppercase tracking-[0.25em] font-semibold mb-1 ${
+                plan.popular ? 'text-white/90' : 'text-[#7A5F4F]'
+              }`}
+            >
+              Huevos
+            </p>
+            <p
+              className={`text-sm uppercase tracking-[0.2em] font-semibold ${
+                plan.popular ? 'text-white/80' : 'text-[#7A5F4F]/90'
+              }`}
+            >
+              por semana
+            </p>
+          </div>
 
           <h3
             className={`text-2xl font-playfair font-bold mb-1 ${
@@ -215,6 +193,24 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
           >
             {plan.description}
           </p>
+
+          {plan.price ? (
+            <p
+              className={`text-2xl font-bold mb-6 ${
+                plan.popular ? 'text-white' : 'text-brown'
+              }`}
+            >
+              ${plan.price.toLocaleString()}
+            </p>
+          ) : (
+            <p
+              className={`text-base font-medium italic mb-6 ${
+                plan.popular ? 'text-white/70' : 'text-[#6B4F3F]/80'
+              }`}
+            >
+              {plan.customPriceLabel}
+            </p>
+          )}
 
           <ul className="space-y-2.5 mb-8">
             {plan.benefits.map((benefit) => (
@@ -243,8 +239,11 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
           </ul>
         </div>
 
-        <a
-          href="#sumate"
+        <button
+          onClick={() => {
+            onSelectPlan(PLAN_VALUE_MAP[plan.value]);
+            scrollToSection('contact-form');
+          }}
           className={`inline-flex items-center justify-center w-full h-14 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 mt-auto ${
             plan.popular
               ? 'bg-white text-[#5C7A4E] shadow-md'
@@ -253,7 +252,7 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
           aria-label={`Lo quiero: ${plan.title}`}
         >
           Lo quiero
-        </a>
+        </button>
       </div>
     </motion.div>
   );

@@ -21,7 +21,7 @@ export const INSTAGRAM_URL = `https://instagram.com/${instagramUsername}`;
 
 // Información de contacto
 export const CONTACT_INFO = {
-  phone: '+598 93 366 234',
+  phone: '+598 91 621 580',
   whatsapp: whatsappNumber,
   address: 'km 24, Soca, Canelones',
   instagram: instagramUsername,
@@ -42,7 +42,7 @@ export const SITE_CONFIG = {
 export const NAV_LINKS = [
   { name: 'Inicio', href: '#inicio' },
   { name: 'Nosotros', href: '#nosotros' },
-  { name: 'Productos', href: '#productos' },
+  { name: 'Planes', href: '#planes' },
   { name: 'Galería', href: '#galeria' },
   { name: 'Contacto', href: '#contacto' },
 ] as const;

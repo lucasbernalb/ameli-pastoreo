@@ -116,3 +116,10 @@ Editar el array `products` para cambiar los productos mostrados.
 ## 📄 Licencia
 
 Privado - Ameli Pastoreo © 2026
+
+## 📚 Project Documentation
+
+- README.md → instalación y configuración
+- AGENTS.md → arquitectura y responsabilidades
+- DESIGN_SYSTEM.md → reglas visuales del proyecto
+- RESPONSIVE.md → adaptación a tablet y mobile

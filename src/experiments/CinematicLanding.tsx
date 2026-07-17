@@ -7,49 +7,20 @@ import { FormSection } from './FormSection';
 import { GallerySection } from './GallerySection';
 import { ImageMaskReveal } from './ImageMaskReveal';
 
-import { LogoLoop } from './LogoLoop';
 import { FooterCinematic } from './FooterCinematic';
+import { WhatsAppFloat } from './WhatsAppFloat';
 
 export const CinematicLanding = () => {
   return (
     <div className="min-h-screen bg-cream-texture">
       <NavbarCinematic />
-      <CinematicHero />
-
-      <section className="relative min-h-[28vh] flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#5C4033' }}>
-        <div
-          className="absolute inset-0 opacity-[0.15]"
-          style={{
-            backgroundImage: 'url("/texturas/brown-gravel.png")',
-            backgroundRepeat: 'repeat',
-          }}
-        />
-        <div className="relative z-10 w-full">
-          <LogoLoop
-            logos={[
-            { src: '/logo-ameli/logo ameli corregido blanco.png', alt: 'Ameli Pastoreo', scale: 0.55 },
-            { src: '/logo-ameli/ameli-grande.png', alt: 'Ameli Pastoreo' },
-            { src: '/logo-ameli/logo ameli corregido blanco.png', alt: 'Ameli Pastoreo', scale: 0.55 },
-            { src: '/logo-ameli/ameli-grande.png', alt: 'Ameli Pastoreo' },
-            { src: '/logo-ameli/logo ameli corregido blanco.png', alt: 'Ameli Pastoreo', scale: 0.55 },
-            { src: '/logo-ameli/ameli-grande.png', alt: 'Ameli Pastoreo' },
-            { src: '/logo-ameli/logo ameli corregido blanco.png', alt: 'Ameli Pastoreo', scale: 0.55 },
-            { src: '/logo-ameli/ameli-grande.png', alt: 'Ameli Pastoreo' },
-          ]}
-            speed={80}
-            direction="left"
-            logoHeight={100}
-            gap={120}
-            hoverSpeed={0}
-            scaleOnHover
-            fadeOut
-            fadeOutColor="#5C4033"
-            ariaLabel="Ameli Pastoreo"
-          />
-        </div>
+      <section id="inicio">
+        <CinematicHero />
       </section>
 
-      <AboutSection />
+      <section id="nosotros">
+        <AboutSection />
+      </section>
 
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#5C7A4E]">
         <div
@@ -103,11 +74,17 @@ export const CinematicLanding = () => {
         </div>
       </section>
 
-      <PlansSection />
+      <section id="planes">
+        <PlansSection />
+      </section>
 
-      <FormSection />
+      <section id="sumate">
+        <FormSection />
+      </section>
 
-      <GallerySection />
+      <section id="galeria">
+        <GallerySection />
+      </section>
 
       <div
         style={{
@@ -128,6 +105,7 @@ export const CinematicLanding = () => {
       </div>
 
       <FooterCinematic />
+      <WhatsAppFloat />
     </div>
   );
 };

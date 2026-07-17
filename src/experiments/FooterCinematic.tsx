@@ -1,16 +1,18 @@
 import { motion } from 'framer-motion';
+import { CONTACT_INFO, WHATSAPP_ORDER_URL } from '../config';
+import { scrollToSection } from '../lib/scrollTo';
 
 const links = [
   { name: 'Inicio', href: '#inicio' },
   { name: 'Nuestra historia', href: '#nosotros' },
   { name: 'Planes', href: '#planes' },
   { name: 'Galería', href: '#galeria' },
-  { name: 'Reservar plan', href: '#sumate' },
+  { name: 'Reservar plan', href: '#contact-form' },
 ];
 
 export const FooterCinematic = () => {
   return (
-    <footer className="relative overflow-hidden" style={{ backgroundColor: '#3E2A1F' }}>
+    <footer className="relative overflow-hidden" style={{ backgroundColor: '#1C140E' }}>
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -35,8 +37,7 @@ export const FooterCinematic = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-8"
-        style={{ minHeight: '440px' }}
+        className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pt-16 md:pt-20 pb-8 min-h-0 md:min-h-[440px]"
       >
         <div className="flex items-center gap-3 justify-center mb-14 md:mb-18">
           <div className="h-px flex-1 max-w-[120px]" style={{ backgroundColor: 'rgba(255,255,255,.12)' }} />
@@ -70,21 +71,29 @@ export const FooterCinematic = () => {
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-white/65 text-sm">
-                <span className="text-white/40 mt-0.5 flex-shrink-0">📍</span>
-                <span>Montevideo, Canelones y Costa</span>
+                <span className="text-white/40 mt-0.5 flex-shrink-0">
+                  <img src="/src/assets/icons/location.svg" alt="Ubicación" className="w-4 h-4 opacity-40" />
+                </span>
+                <span>Soca, Canelones</span>
               </li>
               <li className="flex items-start gap-3 text-white/65 text-sm">
-                <span className="text-white/40 mt-0.5 flex-shrink-0">📞</span>
-                <a href="tel:+59893366234" className="hover:text-gold transition-colors duration-300">+598 93 366 234</a>
+                <span className="text-white/40 mt-0.5 flex-shrink-0">
+                  <img src="/src/assets/icons/whatsapp.svg" alt="WhatsApp" className="w-4 h-4 opacity-40" />
+                </span>
+                <a href={WHATSAPP_ORDER_URL} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors duration-300">{CONTACT_INFO.phone}</a>
               </li>
               <li className="flex items-start gap-3 text-white/65 text-sm">
-                <span className="text-white/40 mt-0.5 flex-shrink-0">✉</span>
+                <span className="text-white/40 mt-0.5 flex-shrink-0">
+                  <img src="/src/assets/icons/gmail.svg" alt="Email" className="w-4 h-4 opacity-40" />
+                </span>
                 <a href="mailto:hola@amelipastoreo.com" className="hover:text-gold transition-colors duration-300">hola@amelipastoreo.com</a>
               </li>
               <li className="flex items-start gap-3 text-white/65 text-sm">
-                <span className="text-white/40 mt-0.5 flex-shrink-0">📷</span>
+                <span className="text-white/40 mt-0.5 flex-shrink-0">
+                  <img src="/src/assets/icons/instagram.svg" alt="Instagram" className="w-4 h-4 opacity-40" />
+                </span>
                 <a
-                  href={`https://instagram.com/amelipastoreo`}
+                  href="https://www.instagram.com/amelipastoreo/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-gold transition-colors duration-300"
@@ -104,6 +113,7 @@ export const FooterCinematic = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
+                    onClick={(e) => { e.preventDefault(); scrollToSection(link.href.replace('#', '')); }}
                     className="inline-block text-white/65 text-sm hover:text-gold transition-all duration-300 hover:translate-x-0.5"
                   >
                     {link.name}

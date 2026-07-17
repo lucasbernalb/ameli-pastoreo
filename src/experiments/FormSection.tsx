@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { usePlanContext } from './PlanContext';
+import { WHATSAPP_ORDER_URL } from '../config';
 
 type FormData = {
   nombre: string;
@@ -27,6 +29,20 @@ const benefits = [
 ];
 
 type ChipData = { value: string; label: string; subtitle: string };
+
+type CountryCode = { code: string; flag: string; label: string };
+
+const countryCodes: CountryCode[] = [
+  { code: '+598', flag: '🇺🇾', label: 'Uruguay' },
+  { code: '+54', flag: '🇦🇷', label: 'Argentina' },
+  { code: '+55', flag: '🇧🇷', label: 'Brasil' },
+  { code: '+56', flag: '🇨🇱', label: 'Chile' },
+  { code: '+595', flag: '🇵🇾', label: 'Paraguay' },
+  { code: '+591', flag: '🇧🇴', label: 'Bolivia' },
+  { code: '+51', flag: '🇵🇪', label: 'Perú' },
+  { code: '+1', flag: '🇺🇸', label: 'EE.UU.' },
+  { code: '+34', flag: '🇪🇸', label: 'España' },
+];
 
 const Chip = ({ chip, selected, onChange, name }: { chip: ChipData; selected: boolean; onChange: React.ChangeEventHandler<HTMLInputElement>; name: string }) => (
   <motion.label
@@ -57,8 +73,13 @@ const Chip = ({ chip, selected, onChange, name }: { chip: ChipData; selected: bo
       }`}>
         {chip.label}
       </span>
-      <span className={`text-[11px] font-medium block mt-0.5 ${
-        selected ? 'text-white/75' : 'text-brown-mid'
+      <span className={`text-[10px] font-semibold block leading-tight ${
+        selected ? 'text-white/80' : 'text-brown-mid/90'
+      }`}>
+        por semana
+      </span>
+      <span className={`text-xs font-semibold block mt-0.5 ${
+        selected ? 'text-white/80' : 'text-brown-mid'
       }`}>
         {chip.subtitle}
       </span>
@@ -67,34 +88,115 @@ const Chip = ({ chip, selected, onChange, name }: { chip: ChipData; selected: bo
 );
 
 export const FormSection = () => {
+  const { selectedPlan, onSelectPlan } = usePlanContext();
   const [formData, setFormData] = useState<FormData>({
     nombre: '', email: '', telefono: '', localidad: '', plan: '',
   });
+  const [countryCode, setCountryCode] = useState('+598');
+  const [customQuantity, setCustomQuantity] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const isPersonalized = formData.plan.includes('Personalizado');
+
+  const sanitizeName = (value: string) => value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '').slice(0, 50);
+  const sanitizeLocalidad = (value: string) => value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\-]/g, '').slice(0, 50);
+  const sanitizeTelefono = (value: string) => value.replace(/\D/g, '').slice(0, 15);
+  const stripHtml = (value: string) => value.replace(/<[^>]*>/g, '');
+
+  useEffect(() => {
+    if (selectedPlan) {
+      setFormData((prev) => ({ ...prev, plan: selectedPlan }));
+      if (!selectedPlan.includes('Personalizado')) {
+        setCustomQuantity('');
+      }
+    }
+  }, [selectedPlan]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    let sanitized = value;
+    if (name === 'nombre') sanitized = sanitizeName(value);
+    else if (name === 'localidad') sanitized = sanitizeLocalidad(value);
+    else if (name === 'telefono') sanitized = sanitizeTelefono(value);
+    setFormData((prev) => ({ ...prev, [name]: sanitized }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
+    if (name === 'plan') {
+      onSelectPlan(value);
+    }
   };
 
-  const validate = (data: FormData) =>
-    Boolean(data.nombre.trim() && data.email.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) && data.telefono.trim() && data.localidad.trim() && data.plan);
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case 'nombre':
+        if (!value.trim()) return 'El nombre es obligatorio.';
+        if (value.trim().length < 2) return 'El nombre debe tener al menos 2 caracteres.';
+        return '';
+      case 'email':
+        if (!value.trim()) return 'El email es obligatorio.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Ingresá un email válido.';
+        if (value.length > 100) return 'El email es demasiado largo.';
+        return '';
+      case 'telefono':
+        if (!value.trim()) return 'El teléfono es obligatorio.';
+        if (value.length < 4) return 'Ingresá al menos 4 dígitos.';
+        return '';
+      case 'localidad':
+        if (!value.trim()) return 'La localidad es obligatoria.';
+        if (value.trim().length < 2) return 'Ingresá una localidad válida.';
+        return '';
+      default:
+        return '';
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate(formData)) {
-      setMessage({ type: 'error', text: 'Completá todos los campos correctamente.' });
+    const fieldErrors: Record<string, string> = {};
+    let hasError = false;
+    for (const field of ['nombre', 'email', 'telefono', 'localidad'] as const) {
+      const err = validateField(field, formData[field]);
+      if (err) { fieldErrors[field] = err; hasError = true; }
+    }
+    if (!formData.plan) {
+      fieldErrors.plan = 'Seleccioná un plan.';
+      hasError = true;
+    }
+    if (isPersonalized) {
+      const qty = parseInt(customQuantity, 10);
+      if (!qty || qty < 31) {
+        fieldErrors.customQuantity = 'Indicá una cantidad mínima de 31 huevos por semana.';
+        hasError = true;
+      }
+    }
+    if (hasError) {
+      setErrors(fieldErrors);
       return;
     }
     setLoading(true);
     setMessage(null);
     try {
-      const params = new URLSearchParams({ ...formData, origen: 'Landing Cinematic' });
-      const res = await fetch(import.meta.env.VITE_GOOGLE_SCRIPT_URL, { method: 'POST', body: params });
-      const data = await res.json();
-      if (!res.ok || !data.success) throw new Error(data.error || 'Error al guardar');
+      const finalPlan = isPersonalized && customQuantity
+        ? `Personalizado - ${customQuantity} huevos/semana`
+        : formData.plan;
+      const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+      if (!scriptUrl) {
+        setMessage({ type: 'error', text: 'Error de configuración. Contactanos por WhatsApp.' });
+        setLoading(false);
+        return;
+      }
+      const sanitizedData = {
+        nombre: stripHtml(formData.nombre.trim()),
+        email: stripHtml(formData.email.trim()),
+        telefono: `${countryCode} ${formData.telefono.trim()}`,
+        localidad: stripHtml(formData.localidad.trim()),
+        plan: finalPlan,
+      };
+      const params = new URLSearchParams({ ...sanitizedData, origen: 'Landing Cinematic' });
+      await fetch(scriptUrl, { method: 'POST', mode: 'no-cors', body: params });
       setMessage({ type: 'success', text: '¡Gracias! Te contactaremos en menos de 48 hs.' });
       setFormData({ nombre: '', email: '', telefono: '', localidad: '', plan: '' });
+      setCustomQuantity('');
     } catch {
       setMessage({ type: 'error', text: 'Error de conexión. Intentá de nuevo.' });
     } finally {
@@ -127,54 +229,70 @@ export const FormSection = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block relative mb-4">
-              <span
-                className="absolute inset-0 scale-110 scale-x-[1.15] pointer-events-none"
-                style={{
-                  background: 'rgba(245,194,66,0.8)',
-                  borderRadius: '12% 6% 18% 6% / 6% 16% 4% 18%',
-                  transform: 'rotate(-1deg) scale(1.08) scaleX(1.12)',
-                }}
-              />
-              <span className="relative text-sm md:text-base tracking-[0.25em] uppercase font-semibold text-white">
-                Sumate
-              </span>
+      <div className="relative z-10 max-w-5xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center md:text-left max-w-3xl mx-auto"
+        >
+          <span className="inline-block relative mb-4">
+            <span
+              className="absolute inset-0 scale-110 scale-x-[1.15] pointer-events-none"
+              style={{
+                background: 'rgba(245,194,66,0.8)',
+                borderRadius: '12% 6% 18% 6% / 6% 16% 4% 18%',
+                transform: 'rotate(-1deg) scale(1.08) scaleX(1.12)',
+              }}
+            />
+            <span className="relative text-sm md:text-base tracking-[0.25em] uppercase font-semibold text-white">
+              Sumate
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#F8F5F0] leading-tight mb-6">
-              Recibí{' '}
-              <span className="text-gold">huevos frescos</span>{' '}
-              cada semana
-            </h2>
-            <p className="text-lg leading-relaxed mb-8 max-w-md" style={{ color: 'rgba(248,245,240,.85)' }}>
-              Completá tus datos y te contactamos para coordinar tu entrega semanal.
-            </p>
+          </span>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#F8F5F0] leading-tight mb-6 uppercase">
+            Del{' '}
+            <span className="text-gold">campo</span>{' '}
+            a tu mesa
+          </h2>
+          <p className="text-lg leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0" style={{ color: 'rgba(248,245,240,.85)' }}>
+            Completá tus datos y te contactamos para coordinar tu entrega semanal.
+          </p>
 
-            <ul className="space-y-3 mb-10">
-              {benefits.map((benefit) => (
-                <li key={benefit} className="flex items-start gap-3" style={{ color: 'rgba(248,245,240,.92)' }}>
-                  <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="3 10 8 15 17 5" />
-                  </svg>
-                  <span className="text-base">{benefit}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          <ul className="space-y-3 mb-10 max-w-2xl mx-auto md:mx-0">
+            {benefits.map((benefit) => (
+              <li key={benefit} className="flex items-start gap-3" style={{ color: 'rgba(248,245,240,.92)' }}>
+                <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="3 10 8 15 17 5" />
+                </svg>
+                <span className="text-base">{benefit}</span>
+              </li>
+            ))}
+          </ul>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+          <a
+            href={WHATSAPP_ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-4 rounded-full font-semibold text-sm shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
           >
+            <img
+              src="/src/assets/icons/whatsapp.svg"
+              alt="WhatsApp"
+              className="w-5 h-5"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
+            Hablar por WhatsApp
+          </a>
+        </motion.div>
+
+        <motion.div id="contact-form"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mt-12 md:mt-16 max-w-2xl mx-auto"
+        >
             <div
               className="relative rounded-[28px] overflow-hidden"
               style={{
@@ -193,7 +311,7 @@ export const FormSection = () => {
                   mixBlendMode: 'multiply',
                 }}
               />
-              <form className="p-8 md:p-10 relative" onSubmit={handleSubmit}>
+              <form className="p-6 md:p-10 relative" onSubmit={handleSubmit}>
                 <div className="space-y-5">
                   <div>
                     <label htmlFor="form-nombre" className="block text-sm font-medium text-brown mb-1.5">Nombre</label>
@@ -232,16 +350,60 @@ export const FormSection = () => {
                 <p className="text-sm font-semibold text-brown mt-8 mb-4">
                   Elegí tu plan de huevos
                 </p>
-                <div className="grid grid-cols-3 gap-3">
+                {/* Mobile: 2+2+1 */}
+                <div className="grid grid-cols-2 gap-3 sm:hidden">
+                  {planChips.slice(0, 2).map((chip) => (
+                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
+                  ))}
+                </div>
+                <div className="grid grid-cols-2 gap-3 mt-3 sm:hidden">
+                  {planChips.slice(2, 4).map((chip) => (
+                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
+                  ))}
+                </div>
+                <div className="mt-3 sm:hidden flex justify-center">
+                  <Chip chip={planChips[4]} selected={formData.plan === planChips[4].value} onChange={handleChange} name="plan" />
+                </div>
+                {/* Desktop/tablet: 3+2 */}
+                <div className="hidden sm:grid sm:grid-cols-3 gap-3">
                   {planChips.slice(0, 3).map((chip) => (
                     <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
                   ))}
                 </div>
-                <div className="grid grid-cols-2 gap-3 max-w-[66%] mx-auto mt-3">
+                <div className="hidden sm:grid sm:grid-cols-2 gap-3 max-w-[66%] mx-auto mt-3">
                   {planChips.slice(3).map((chip) => (
                     <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
                   ))}
                 </div>
+
+                <AnimatePresence>
+                  {isPersonalized && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    >
+                      <div className="mt-6">
+                        <label htmlFor="custom-quantity" className="block text-sm font-medium text-brown mb-1.5">
+                          ¿Cuántos huevos necesitás por semana?
+                        </label>
+                        <input
+                          id="custom-quantity"
+                          type="number"
+                          value={customQuantity}
+                          onChange={(e) => setCustomQuantity(e.target.value.replace(/\D/g, ''))}
+                          placeholder="Ej: 36, 45 o 60"
+                          min="31"
+                          className="w-full h-14 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                        />
+                        <p className="text-xs text-brown-mid/70 mt-2 leading-relaxed">
+                          Indicá una cantidad aproximada. Nuestro equipo calculará el plan ideal y te enviará una propuesta personalizada.
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {message && (
                   <p className={`text-sm text-center mt-5 py-3 px-4 rounded-2xl ${
@@ -261,14 +423,13 @@ export const FormSection = () => {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  {loading ? 'Enviando…' : 'QUIERO MIS HUEVOS'}
+                  {loading ? 'Enviando…' : 'QUIERO MI PLAN'}
                 </motion.button>
               </form>
             </div>
           </motion.div>
         </div>
-      </div>
-    </section>
+      </section>
   );
 };
 

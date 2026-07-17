@@ -59,7 +59,7 @@ export const AboutSection = () => {
               muted
               playsInline
               onEnded={handleVideoEnded}
-              className="w-full h-full object-cover object-[50%_30%]"
+              className="w-full h-full object-cover object-[50%_35%] md:object-[50%_30%]"
             >
               <source src="/videos/video-gallina-de-cerca.mp4" type="video/mp4" />
             </video>
@@ -86,7 +86,7 @@ export const AboutSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: 'easeOut' }}
-            className="max-w-5xl ml-[8%] mr-8 px-4 text-left z-10 -mt-16"
+            className="max-w-5xl ml-4 md:ml-[8%] mr-4 md:mr-8 px-4 text-left z-10 -mt-16"
           >
             <motion.span
               initial={{ opacity: 0, y: 15 }}

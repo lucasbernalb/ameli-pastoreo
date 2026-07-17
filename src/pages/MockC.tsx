@@ -184,6 +184,9 @@ export const MockC = () => {
                 <div className="text-[13px] font-semibold text-white/85 leading-tight uppercase">
                   {p.qtyLabel}
                 </div>
+                <div className="text-[10px] font-medium text-white/70 leading-tight">
+                  por semana
+                </div>
               </motion.label>
             ))}
           </motion.div>

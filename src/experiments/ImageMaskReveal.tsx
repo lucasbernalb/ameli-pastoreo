@@ -33,7 +33,7 @@ export const ImageMaskReveal = ({
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black/40"
+      className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-black/40"
     >
       <motion.div
         className="absolute inset-0"
@@ -91,7 +91,7 @@ export const ImageMaskReveal = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: label ? 0.25 : 0 }}
-          className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight uppercase"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight uppercase"
         >
           {headline}
         </motion.h2>

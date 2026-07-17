@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { scrollToSection } from '../lib/scrollTo';
 
 export const ContactSection = () => {
   return (
@@ -54,7 +55,8 @@ export const ContactSection = () => {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
-            href="#sumate"
+            href="#contact-form"
+            onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }}
             className="bg-gradient-to-r from-green to-green-dark text-white px-12 py-5 rounded-full font-semibold text-xl shadow-xl hover:shadow-2xl transition-all hover:scale-105 active:scale-98"
           >
             Hacé tu pedido

@@ -4,15 +4,18 @@ import './index.css'
 import { AdminPage } from './pages/admin'
 import { CinematicLanding } from './experiments/CinematicLanding'
 import { AmeliLoader } from './components/Loader'
+import { PlanProvider } from './experiments/PlanContext'
 
 const Page = () => {
   if (window.location.pathname === '/admin') {
     return <AdminPage />
   }
   return (
-    <AmeliLoader>
-      <CinematicLanding />
-    </AmeliLoader>
+    <PlanProvider>
+      <AmeliLoader>
+        <CinematicLanding />
+      </AmeliLoader>
+    </PlanProvider>
   )
 }
 

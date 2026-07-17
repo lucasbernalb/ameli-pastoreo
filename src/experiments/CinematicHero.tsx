@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { WHATSAPP_ORDER_URL } from '../config';
-import { VideoOnHover } from './VideoOnHover';
-
+import { scrollToSection } from '../lib/scrollTo';
 const heroSlides = [
-  { image: '/images/optimized/hero-sunset.webp', video: '/videos/video-gallinero-pasto-moviendose.mp4' },
   { image: '/images/optimized/chickens-group.webp' },
   { image: '/images/optimized/chickens-group2.webp' },
 ];
@@ -41,22 +38,12 @@ export const CinematicHero = () => {
           exit={{ x: '-100%', scale: 1 }}
           transition={{ duration: 0.6, ease: 'easeInOut' }}
         >
-          {heroSlides[index].video ? (
-            <VideoOnHover
-              image={heroSlides[index].image}
-              video={heroSlides[index].video}
-              alt="Campo Ameli Pastoreo"
-              className="w-full h-full object-cover"
-              containerClassName="w-full h-full"
-            />
-          ) : (
-            <img
-              src={heroSlides[index].image}
-              alt="Campo Ameli Pastoreo"
-              className="w-full h-full object-cover"
-              loading="eager"
-            />
-          )}
+          <img
+            src={heroSlides[index].image}
+            alt="Campo Ameli Pastoreo"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
         </motion.div>
       </AnimatePresence>
 
@@ -143,18 +130,17 @@ export const CinematicHero = () => {
             <motion.p
               variants={item}
               className="text-white/90 max-w-lg mt-5 leading-relaxed font-semibold"
-              style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.15rem)' }}
+              style={{ fontSize: 'clamp(1rem, 1.3vw, 1.15rem)' }}
             >
               Naturales, frescos y producidos con amor.
               <br />
               Gallinas felices para una vida más sana.
             </motion.p>
 
-            <motion.div variants={item} className="flex flex-wrap items-center gap-5 mt-8">
+            <motion.div variants={item} className="flex items-center gap-5 mt-8">
               <a
-                href={WHATSAPP_ORDER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#planes"
+                onClick={(e) => { e.preventDefault(); scrollToSection('planes'); }}
                 className="relative inline-flex items-center justify-center bg-[#5C7A4E] text-white px-8 py-5 rounded-full font-bold text-base shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl active:translate-y-0 overflow-hidden"
               >
                 <div
@@ -166,28 +152,6 @@ export const CinematicHero = () => {
                   }}
                 />
                 <span className="relative z-10">Hacé tu pedido</span>
-              </a>
-
-              <a
-                href="#nosotros"
-                className="inline-flex items-center gap-3 text-white/85 hover:text-white transition-all duration-300 group"
-              >
-                <span className="inline-block relative">
-                  <span
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: 'rgba(92,64,51,0.12)',
-                      borderRadius: '16% 4% 20% 4% / 4% 18% 4% 20%',
-                      transform: 'rotate(-1.5deg) scaleX(1.12)',
-                    }}
-                  />
-                  <span
-                    className="relative font-playfair font-bold uppercase tracking-wide text-white"
-                    style={{ textShadow: '0 1px 4px rgba(0,0,0,.4)' }}
-                  >
-                    Conocé nuestra historia
-                  </span>
-                </span>
               </a>
             </motion.div>
           </motion.div>
@@ -216,7 +180,7 @@ export const CinematicHero = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute bottom-6 md:bottom-10 right-6 md:right-12 lg:right-20 backdrop-blur-md bg-black/30 border border-white/10 rounded-xl p-4 md:p-5 space-y-2.5 max-w-[200px] md:max-w-[220px]"
+        className="absolute bottom-6 md:bottom-10 left-6 right-6 md:left-auto md:right-12 lg:right-20 backdrop-blur-md bg-black/30 border border-white/10 rounded-xl p-4 md:p-5 space-y-2.5 max-w-none md:max-w-[220px]"
       >
         {benefits.map((b, i) => (
           <div key={i} className="flex items-center gap-2.5 text-white/80">

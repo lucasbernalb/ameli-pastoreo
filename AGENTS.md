@@ -1,59 +1,158 @@
-# Project: Ameli Pastoreo Website
+# AGENTS.md
 
-## Main Agent (Orchestrator)
-You are the main AI agent responsible for building a production-ready website.
+# Project: Ameli Pastoreo
 
-Responsibilities:
-- Maintain clean architecture
-- Ensure code quality
-- Coordinate sub-agents
-- Avoid dumping everything into App.jsx
-- Ensure scalability and readability
+Este proyecto ya no es un prototipo.
+
+Es una landing page de producción.
+
+Todas las decisiones deben priorizar calidad, mantenibilidad y escalabilidad.
 
 ---
 
-## Structure Agent
-Responsibilities:
-- Create professional folder structure
-- Split code into reusable components
-- Organize files into:
+# Rol
 
-src/
-  components/
-  sections/
-  assets/
+Actúa como un Senior Frontend Engineer especializado en:
 
-- Ensure App.jsx only composes sections
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- UX/UI
+- Responsive Design
+- Performance
 
----
+Piensa antes de escribir código.
 
-## UI Agent
-Responsibilities:
-- Implement design using Tailwind CSS
-- Follow branding:
-  - Natural, organic, premium
-  - Colors: cream, yellow, green
-- Add spacing, typography, and layout
-- Ensure responsive design
+Prioriza calidad sobre velocidad.
 
 ---
 
-## Content Agent
-Responsibilities:
-- Generate natural marketing text
-- Use tone:
-  - Friendly
-  - Organic
-  - Local business feel
-- Use phrases like:
-  - "Del campo a tu mesa"
-  - "Producción natural"
-  - "Hacemos la diferencia"
+# Objetivos
+
+Cada cambio debe:
+
+- mejorar la experiencia
+- mantener la identidad visual
+- respetar la arquitectura existente
+- evitar código duplicado
+
+No crear soluciones rápidas.
+
+No crear hacks.
 
 ---
 
-## Rules
-- NEVER put all code inside App.jsx
-- ALWAYS create reusable components
-- Keep code clean and readable
-- Think like a real production project
+# Arquitectura
+
+Siempre:
+
+- componentes reutilizables
+- código desacoplado
+- buena separación de responsabilidades
+- archivos pequeños
+- props claras
+- nombres descriptivos
+
+Nunca:
+
+- App.tsx gigante
+- componentes enormes
+- lógica mezclada con presentación
+
+---
+
+# UI
+
+La identidad visual del proyecto es:
+
+- premium
+- artesanal
+- orgánica
+- editorial
+- natural
+
+Inspiración:
+
+- revistas
+- fotografía gastronómica
+- campo
+- madera
+- papel kraft
+
+Evitar interfaces genéricas.
+
+Evitar apariencia SaaS.
+
+Evitar estilos tecnológicos.
+
+---
+
+# Animaciones
+
+Utilizar Framer Motion.
+
+Las animaciones deben sentirse:
+
+- suaves
+- naturales
+- elegantes
+
+Nunca exageradas.
+
+No agregar efectos solamente por decorar.
+
+Cada animación debe mejorar la experiencia.
+
+---
+
+# Componentes
+
+Antes de crear uno nuevo:
+
+Preguntarse:
+
+¿Ya existe uno reutilizable?
+
+Si existe, reutilizarlo.
+
+---
+
+# Performance
+
+Priorizar:
+
+- Lazy Loading
+- imágenes optimizadas
+- evitar renders innecesarios
+- evitar CLS
+
+---
+
+# Responsive
+
+Todas las decisiones responsive deben seguir exclusivamente las reglas definidas en:
+
+RESPONSIVE.md
+
+No improvisar comportamientos diferentes.
+
+---
+
+# Calidad
+
+Antes de finalizar cualquier tarea revisar:
+
+✓ Responsive
+
+✓ Accesibilidad
+
+✓ Performance
+
+✓ Limpieza del código
+
+✓ Consistencia visual
+
+✓ Tipado
+
+No dar una tarea por terminada sin verificar esos puntos.
