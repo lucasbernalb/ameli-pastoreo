@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePlanContext } from './PlanContext';
 import { WHATSAPP_ORDER_URL } from '../config';
+import whatsappIcon from '../assets/icons/whatsapp.svg';
 
 type FormData = {
   nombre: string;
@@ -277,7 +278,7 @@ export const FormSection = () => {
             className="inline-flex items-center gap-3 bg-[#25D366] text-white px-6 py-4 rounded-full font-semibold text-sm shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0"
           >
             <img
-              src="/src/assets/icons/whatsapp.svg"
+              src={whatsappIcon}
               alt="WhatsApp"
               className="w-5 h-5"
               style={{ filter: 'brightness(0) invert(1)' }}

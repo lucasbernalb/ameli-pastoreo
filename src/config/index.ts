@@ -6,7 +6,7 @@
  */
 
 // Números de contacto - Leer de variables de entorno con fallback a valores demo
-const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '51999999999';
+const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '59891621580';
 const instagramUsername = import.meta.env.VITE_INSTAGRAM_USERNAME || 'amelipastoreo';
 const siteUrl = import.meta.env.VITE_SITE_URL || '';
 

@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import { CONTACT_INFO, WHATSAPP_ORDER_URL } from '../config';
 import { scrollToSection } from '../lib/scrollTo';
+import locationIcon from '../assets/icons/location.svg';
+import whatsappIcon from '../assets/icons/whatsapp.svg';
+import gmailIcon from '../assets/icons/gmail.svg';
+import instagramIcon from '../assets/icons/instagram.svg';
 
 const links = [
   { name: 'Inicio', href: '#inicio' },
@@ -72,25 +76,25 @@ export const FooterCinematic = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-white/65 text-sm">
                 <span className="text-white/40 mt-0.5 flex-shrink-0">
-                  <img src="/src/assets/icons/location.svg" alt="Ubicación" className="w-4 h-4 opacity-40" />
+                  <img src={locationIcon} alt="Ubicación" className="w-4 h-4 opacity-40" />
                 </span>
                 <span>Soca, Canelones</span>
               </li>
               <li className="flex items-start gap-3 text-white/65 text-sm">
                 <span className="text-white/40 mt-0.5 flex-shrink-0">
-                  <img src="/src/assets/icons/whatsapp.svg" alt="WhatsApp" className="w-4 h-4 opacity-40" />
+                  <img src={whatsappIcon} alt="WhatsApp" className="w-4 h-4 opacity-40" />
                 </span>
                 <a href={WHATSAPP_ORDER_URL} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors duration-300">{CONTACT_INFO.phone}</a>
               </li>
               <li className="flex items-start gap-3 text-white/65 text-sm">
                 <span className="text-white/40 mt-0.5 flex-shrink-0">
-                  <img src="/src/assets/icons/gmail.svg" alt="Email" className="w-4 h-4 opacity-40" />
+                  <img src={gmailIcon} alt="Email" className="w-4 h-4 opacity-40" />
                 </span>
                 <a href="mailto:hola@amelipastoreo.com" className="hover:text-gold transition-colors duration-300">hola@amelipastoreo.com</a>
               </li>
               <li className="flex items-start gap-3 text-white/65 text-sm">
                 <span className="text-white/40 mt-0.5 flex-shrink-0">
-                  <img src="/src/assets/icons/instagram.svg" alt="Instagram" className="w-4 h-4 opacity-40" />
+                  <img src={instagramIcon} alt="Instagram" className="w-4 h-4 opacity-40" />
                 </span>
                 <a
                   href="https://www.instagram.com/amelipastoreo/"

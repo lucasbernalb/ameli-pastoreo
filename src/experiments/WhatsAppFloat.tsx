@@ -1,4 +1,5 @@
 import { WHATSAPP_ORDER_URL } from '../config';
+import whatsappIcon from '../assets/icons/whatsapp.svg';
 
 export const WhatsAppFloat = () => {
   return (
@@ -10,7 +11,7 @@ export const WhatsAppFloat = () => {
       aria-label="Contactar por WhatsApp"
     >
       <img
-        src="/src/assets/icons/whatsapp.svg"
+        src={whatsappIcon}
         alt="WhatsApp"
         className="w-7 h-7"
         style={{ filter: 'brightness(0) invert(1)' }}
