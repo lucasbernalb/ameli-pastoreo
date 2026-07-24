@@ -48,7 +48,7 @@ const Chip = ({ chip, selected, onChange, name }: { chip: ChipData; selected: bo
         : undefined,
     }}
     transition={selected ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : undefined}
-    className={`cursor-pointer rounded-full border px-4 py-3 transition-all duration-200 ${
+    className={`cursor-pointer rounded-full border px-3 py-2.5 transition-all duration-200 ${
       selected
         ? 'bg-[#89B178] text-white border-gold shadow-md -translate-y-0.5'
         : 'bg-[#F0EBE6] text-brown border-gold/30 hover:border-gold/60 hover:shadow-sm hover:-translate-y-0.5'
@@ -247,7 +247,7 @@ export const FormSection = () => {
             <span className="text-gold">campo</span>{' '}
             a tu mesa
           </h2>
-          <p className="text-lg leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0" style={{ color: 'rgba(248,245,240,.85)' }}>
+          <p className="text-lg leading-relaxed mb-6 max-w-2xl mx-auto md:mx-0" style={{ color: 'rgba(248,245,240,.85)' }}>
             Completá tus datos y en menos de 24 horas te contactamos para coordinar tu entrega semanal.
           </p>
           <a
@@ -271,7 +271,7 @@ export const FormSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-12 md:mt-16 max-w-2xl mx-auto"
+          className="mt-10 md:mt-12 max-w-2xl mx-auto"
         >
             <div
               className="relative rounded-[28px] overflow-hidden"
@@ -291,43 +291,43 @@ export const FormSection = () => {
                   mixBlendMode: 'multiply',
                 }}
               />
-              <form className="p-6 md:p-10 relative" onSubmit={handleSubmit}>
-                <div className="space-y-5">
+              <form className="p-5 md:p-8 relative" onSubmit={handleSubmit}>
+                <div className="space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0">
                   <div>
-                    <label htmlFor="form-nombre" className="block text-sm font-medium text-brown mb-1.5">Nombre</label>
+                    <label htmlFor="form-nombre" className="block text-sm font-medium text-brown mb-1">Nombre</label>
                     <input
                       id="form-nombre" type="text" name="nombre"
                       value={formData.nombre} onChange={handleChange}
-                      className="w-full h-14 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                      className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
                   </div>
                   <div>
-                    <label htmlFor="form-email" className="block text-sm font-medium text-brown mb-1.5">Email</label>
+                    <label htmlFor="form-email" className="block text-sm font-medium text-brown mb-1">Email</label>
                     <input
                       id="form-email" type="email" name="email"
                       value={formData.email} onChange={handleChange}
-                      className="w-full h-14 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                      className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
                   </div>
                   <div>
-                    <label htmlFor="form-telefono" className="block text-sm font-medium text-brown mb-1.5">Teléfono</label>
+                    <label htmlFor="form-telefono" className="block text-sm font-medium text-brown mb-1">Teléfono</label>
                     <input
                       id="form-telefono" type="tel" name="telefono"
                       value={formData.telefono} onChange={handleChange}
-                      className="w-full h-14 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                      className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
                   </div>
                   <div>
-                    <label htmlFor="form-localidad" className="block text-sm font-medium text-brown mb-1.5">Localidad</label>
+                    <label htmlFor="form-localidad" className="block text-sm font-medium text-brown mb-1">Localidad</label>
                     <input
                       id="form-localidad" type="text" name="localidad"
                       value={formData.localidad} onChange={handleChange}
-                      className="w-full h-14 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                      className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
                   </div>
                 </div>
 
-                <p className="text-sm font-semibold text-brown mt-8 mb-4">
+                <p className="text-sm font-semibold text-brown mt-6 mb-3">
                   Elegí tu plan de huevos
                 </p>
                 {/* Mobile: 2+2+1 */}
@@ -365,7 +365,7 @@ export const FormSection = () => {
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
                       <div className="mt-6">
-                        <label htmlFor="custom-quantity" className="block text-sm font-medium text-brown mb-1.5">
+                        <label htmlFor="custom-quantity" className="block text-sm font-medium text-brown mb-1">
                           ¿Cuántos huevos necesitás por semana?
                         </label>
                         <input
@@ -375,7 +375,7 @@ export const FormSection = () => {
                           onChange={(e) => setCustomQuantity(e.target.value.replace(/\D/g, ''))}
                           placeholder="Ej: 36, 45 o 60"
                           min="31"
-                          className="w-full h-14 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                          className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                         />
                         <p className="text-[12px] text-brown leading-relaxed mt-2">
                           Indicá una cantidad aproximada. Nuestro equipo calculará el plan ideal y te enviará una propuesta personalizada.
@@ -395,7 +395,7 @@ export const FormSection = () => {
 
                 <motion.button
                   type="submit" disabled={loading}
-                  className="w-full mt-8 h-16 rounded-full font-bold text-sm uppercase tracking-[0.125em] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_12px_30px_rgba(0,0,0,.18)] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full mt-6 h-14 rounded-full font-bold text-sm uppercase tracking-[0.125em] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_12px_30px_rgba(0,0,0,.18)] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{
                     backgroundColor: '#7EA96F',
                     color: '#fff',

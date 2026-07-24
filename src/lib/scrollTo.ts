@@ -1,7 +1,7 @@
 const OFFSETS: Record<string, number> = {
   inicio: 0,
   sumate: -80,
-  'contact-form': -80,
+  'contact-form': -120,
 };
 
 export const scrollToSection = (id: string) => {

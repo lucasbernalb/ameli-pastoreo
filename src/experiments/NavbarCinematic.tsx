@@ -72,7 +72,7 @@ export const NavbarCinematic = () => {
                     onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }}
                     className="bg-[#5C7A4E] text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
                   >
-                    Contacto
+                    Hacé tu pedido
                   </a>
               </div>
 
@@ -124,7 +124,7 @@ export const NavbarCinematic = () => {
                     className="block bg-[#5C7A4E] text-white px-6 py-3.5 rounded-full text-sm font-semibold text-center mt-4"
                     onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); setMobileOpen(false); }}
                   >
-                    Contacto
+                    Hacé tu pedido
                   </a>
                 </div>
               </motion.div>
