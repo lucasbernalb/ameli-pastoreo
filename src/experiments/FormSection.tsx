@@ -20,15 +20,6 @@ const planChips: ChipData[] = [
   { value: 'Plan Personalizado (+30 huevos por semana)', label: '+30 HUEVOS', subtitle: 'Personalizado' },
 ];
 
-const benefits = [
-  'Gallinas criadas en pastoreo natural',
-  'Huevos frescos con entrega semanal',
-  'Producción familiar de calidad premium',
-  'Entregamos en Montevideo, Canelones y Costa',
-  'Te contactamos en menos de 24 horas',
-  'Sin compromiso de compra',
-];
-
 type ChipData = { value: string; label: string; subtitle: string };
 
 type CountryCode = { code: string; flag: string; label: string };
@@ -195,7 +186,7 @@ export const FormSection = () => {
       };
       const params = new URLSearchParams({ ...sanitizedData, origen: 'Landing Cinematic' });
       await fetch(scriptUrl, { method: 'POST', mode: 'no-cors', body: params });
-      setMessage({ type: 'success', text: '¡Gracias! Te contactaremos en menos de 48 hs.' });
+      setMessage({ type: 'success', text: '¡Gracias! Te contactaremos en menos de 24 hs.' });
       setFormData({ nombre: '', email: '', telefono: '', localidad: '', plan: '' });
       setCustomQuantity('');
     } catch {
@@ -257,20 +248,8 @@ export const FormSection = () => {
             a tu mesa
           </h2>
           <p className="text-lg leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0" style={{ color: 'rgba(248,245,240,.85)' }}>
-            Completá tus datos y te contactamos para coordinar tu entrega semanal.
+            Completá tus datos y en menos de 24 horas te contactamos para coordinar tu entrega semanal.
           </p>
-
-          <ul className="space-y-3 mb-10 max-w-2xl mx-auto md:mx-0">
-            {benefits.map((benefit) => (
-              <li key={benefit} className="flex items-start gap-3" style={{ color: 'rgba(248,245,240,.92)' }}>
-                <svg className="w-5 h-5 mt-0.5 flex-shrink-0 text-gold" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="3 10 8 15 17 5" />
-                </svg>
-                <span className="text-base">{benefit}</span>
-              </li>
-            ))}
-          </ul>
-
           <a
             href={WHATSAPP_ORDER_URL}
             target="_blank"
@@ -398,7 +377,7 @@ export const FormSection = () => {
                           min="31"
                           className="w-full h-14 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                         />
-                        <p className="text-xs text-brown-mid/70 mt-2 leading-relaxed">
+                        <p className="text-[12px] text-brown leading-relaxed mt-2">
                           Indicá una cantidad aproximada. Nuestro equipo calculará el plan ideal y te enviará una propuesta personalizada.
                         </p>
                       </div>

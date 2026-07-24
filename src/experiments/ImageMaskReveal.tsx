@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, type ReactNode } from 'react';
 import { VideoOnHover } from './VideoOnHover';
 
 interface ImageMaskRevealProps {
@@ -9,6 +9,7 @@ interface ImageMaskRevealProps {
   label?: string;
   headline: string;
   body?: string;
+  children?: ReactNode;
 }
 
 export const ImageMaskReveal = ({
@@ -18,6 +19,7 @@ export const ImageMaskReveal = ({
   label,
   headline,
   body,
+  children,
 }: ImageMaskRevealProps) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -29,15 +31,16 @@ export const ImageMaskReveal = ({
     [0, 1],
     ['circle(0% at 50% 50%)', 'circle(100% at 50% 50%)']
   );
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
 
   return (
     <section
       ref={ref}
-      className="relative min-h-[70vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-black/40"
+      className="relative min-h-screen flex items-start justify-center overflow-hidden bg-black/40 pt-24 md:pt-32 pb-24 md:pb-32"
     >
       <motion.div
         className="absolute inset-0"
-        style={{ clipPath } as any}
+        style={{ clipPath, y: parallaxY } as any}
       >
         {video ? (
           <VideoOnHover
@@ -57,11 +60,15 @@ export const ImageMaskReveal = ({
         )}
       </motion.div>
       <div
-        className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"
+        className="absolute inset-0 bg-gradient-to-t from-[#3C2415]/70 via-black/30 to-transparent"
+        style={{ clipPath } as any}
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50"
         style={{ clipPath } as any}
       />
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center px-4 text-white">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 text-center text-white">
         {label && (
           <motion.span
             initial={{ opacity: 0, y: 20 }}
@@ -80,7 +87,7 @@ export const ImageMaskReveal = ({
                   transform: 'rotate(-1deg) scale(1.08) scaleX(1.12)',
                 }}
               />
-              <span className="relative text-sm tracking-[0.2em] uppercase font-semibold text-white">
+              <span className="relative text-base tracking-[0.2em] uppercase font-semibold text-white">
                 {label}
               </span>
             </span>
@@ -91,7 +98,7 @@ export const ImageMaskReveal = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: label ? 0.25 : 0 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight uppercase"
+          className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight uppercase mt-4 md:mt-6"
         >
           {headline}
         </motion.h2>
@@ -101,11 +108,12 @@ export const ImageMaskReveal = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-base md:text-lg mt-6 max-w-2xl mx-auto leading-relaxed text-white/80"
+            className="text-base md:text-lg mt-10 max-w-2xl mx-auto leading-relaxed text-white/80"
           >
             {body}
           </motion.p>
         )}
+        {children && <div className="mt-12 md:mt-16">{children}</div>}
       </div>
     </section>
   );

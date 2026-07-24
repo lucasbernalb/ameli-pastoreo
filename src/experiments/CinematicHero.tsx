@@ -12,9 +12,11 @@ const item = {
 };
 
 const benefits = [
-  { text: 'Gallinas criadas a campo abierto' },
-  { text: 'Alimentación 100% natural' },
-  { text: 'Entregas semanales sin compromiso' },
+  { text: 'Bienestar animal' },
+  { text: 'Pastoreo rotativo regenerativo' },
+  { text: 'Entregas semanales (producto fresco)' },
+  { text: '+ Vitaminas' },
+  { text: '+ OMEGA 3' },
 ];
 
 export const CinematicHero = () => {
@@ -94,10 +96,10 @@ export const CinematicHero = () => {
                   }}
                 />
                 <span
-                  className="relative text-xs md:text-sm tracking-[0.35em] uppercase font-semibold text-white"
+                  className="relative text-sm md:text-base tracking-[0.35em] uppercase font-semibold text-white"
                   style={{ textShadow: '0 1px 4px rgba(0,0,0,.4)' }}
                 >
-                  PRODUCTO ARTESANAL · PASTOREO LIBRE
+                  gallinas libres en pastoreo rotativo
                 </span>
               </span>
             </motion.div>
@@ -132,9 +134,7 @@ export const CinematicHero = () => {
               className="text-white/90 max-w-lg mt-5 leading-relaxed font-semibold"
               style={{ fontSize: 'clamp(1rem, 1.3vw, 1.15rem)' }}
             >
-              Naturales, frescos y producidos con amor.
-              <br />
-              Gallinas felices para una vida más sana.
+              Producto artesanal, calidad superior
             </motion.p>
 
             <motion.div variants={item} className="flex items-center gap-5 mt-8">
@@ -180,22 +180,23 @@ export const CinematicHero = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute bottom-6 md:bottom-10 left-6 right-6 md:left-auto md:right-12 lg:right-20 backdrop-blur-md bg-black/30 border border-white/10 rounded-xl p-4 md:p-5 space-y-2.5 max-w-none md:max-w-[220px]"
+        className="absolute bottom-6 md:bottom-10 left-6 right-6 md:left-auto md:right-12 lg:right-20 backdrop-blur-md bg-black/30 border border-white/10 rounded-xl p-4 md:p-5 space-y-2.5 max-w-none md:max-w-[260px]"
       >
         {benefits.map((b, i) => (
-          <div key={i} className="flex items-center gap-2.5 text-white/80">
+          <div key={i} className="flex items-center gap-3 text-white/80">
             <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#D4A544"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
+                  className="shrink-0"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#D4A544"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
             <span className="text-xs md:text-sm leading-snug font-medium">{b.text}</span>
           </div>
         ))}

@@ -88,7 +88,7 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -4, transition: { duration: 0.3 } }}
-      className={`relative w-full max-w-sm rounded-[28px] px-6 md:px-8 py-8 md:py-10 transition-all duration-300 flex flex-col h-full ${
+      className={`relative w-full max-w-sm rounded-[28px] px-6 md:px-8 py-6 md:py-8 transition-all duration-300 flex flex-col h-full ${
         plan.popular
           ? 'text-white shadow-[0_25px_60px_rgba(0,0,0,0.18)]'
           : 'bg-card-texture text-brown shadow-xl'
@@ -148,55 +148,40 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
       )}
 
       <div className={`relative z-10 flex flex-col flex-1`}>
-        <div className="flex-1">
           <div
-            className={`inline-block px-6 py-4 rounded-2xl mb-5 ${
+            className={`inline-block px-4 py-2.5 rounded-xl mb-4 ${
               plan.popular
                 ? 'bg-white/20'
                 : 'bg-[#5C7A4E]/15'
             }`}
           >
             <p
-              className={`text-7xl md:text-8xl font-bold leading-[0.9] mb-1 ${
+              className={`text-6xl md:text-7xl font-bold leading-[0.9] mb-0.5 ${
                 plan.popular ? 'text-white' : 'text-brown'
               }`}
             >
               {plan.label}
             </p>
             <p
-              className={`text-[15px] uppercase tracking-[0.25em] font-semibold mb-1 ${
+              className={`text-[13px] uppercase tracking-[0.25em] font-semibold ${
                 plan.popular ? 'text-white/90' : 'text-[#7A5F4F]'
               }`}
             >
-              Huevos
-            </p>
-            <p
-              className={`text-sm uppercase tracking-[0.2em] font-semibold ${
-                plan.popular ? 'text-white/80' : 'text-[#7A5F4F]/90'
-              }`}
-            >
-              por semana
+              huevos por semana
             </p>
           </div>
 
           <h3
-            className={`text-2xl font-playfair font-bold mb-1 ${
+            className={`text-xl font-playfair font-bold ${
               plan.popular ? 'text-white' : 'text-brown'
             }`}
           >
             {plan.title}
           </h3>
-          <p
-            className={`text-[17px] leading-relaxed mb-6 ${
-              plan.popular ? 'text-white/80' : 'text-[#6B4F3F]'
-            }`}
-          >
-            {plan.description}
-          </p>
 
           {plan.price ? (
             <p
-              className={`text-2xl font-bold mb-6 ${
+              className={`text-3xl md:text-4xl font-bold mt-1 mb-5 ${
                 plan.popular ? 'text-white' : 'text-brown'
               }`}
             >
@@ -204,7 +189,7 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
             </p>
           ) : (
             <p
-              className={`text-base font-medium italic mb-6 ${
+              className={`text-base font-medium italic mt-1 mb-5 ${
                 plan.popular ? 'text-white/70' : 'text-[#6B4F3F]/80'
               }`}
             >
@@ -212,12 +197,12 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
             </p>
           )}
 
-          <ul className="space-y-2.5 mb-8">
+          <ul className="space-y-2 mb-5">
             {plan.benefits.map((benefit) => (
               <li
                 key={benefit}
-                className={`flex items-center gap-2 text-[15px] ${
-                  plan.popular ? 'text-white/90' : 'text-brown font-medium'
+                className={`flex items-center gap-2 text-sm ${
+                  plan.popular ? 'text-white/85' : 'text-brown font-medium'
                 }`}
               >
                 <svg
@@ -237,14 +222,13 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
               </li>
             ))}
           </ul>
-        </div>
 
         <button
           onClick={() => {
             onSelectPlan(PLAN_VALUE_MAP[plan.value]);
             scrollToSection('contact-form');
           }}
-          className={`inline-flex items-center justify-center w-full h-14 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 mt-auto ${
+          className={`inline-flex items-center justify-center w-full h-12 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 ${
             plan.popular
               ? 'bg-white text-[#5C7A4E] shadow-md'
               : 'bg-gradient-to-r from-green to-green-dark text-white shadow-md'
