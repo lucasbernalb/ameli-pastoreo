@@ -10,6 +10,7 @@ interface ImageMaskRevealProps {
   headline: string;
   body?: string;
   children?: ReactNode;
+  bgClass?: string;
 }
 
 export const ImageMaskReveal = ({
@@ -20,6 +21,7 @@ export const ImageMaskReveal = ({
   headline,
   body,
   children,
+  bgClass = 'bg-black/40',
 }: ImageMaskRevealProps) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -36,7 +38,7 @@ export const ImageMaskReveal = ({
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-start justify-center overflow-hidden bg-black/40 pt-24 md:pt-32 pb-24 md:pb-32"
+      className={`relative min-h-screen flex items-start justify-center overflow-hidden ${bgClass} pt-24 md:pt-32 pb-24 md:pb-32`}
     >
       <motion.div
         className="absolute inset-0"

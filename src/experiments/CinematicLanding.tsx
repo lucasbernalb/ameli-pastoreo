@@ -55,6 +55,7 @@ export const CinematicLanding = () => {
           alt="Yema de huevo cayendo"
           label="La diferencia"
           headline="Se ve en la yema"
+          bgClass="bg-transparent"
         >
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 xl:gap-24">
             <motion.div
