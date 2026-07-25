@@ -54,7 +54,7 @@ export const CinematicLanding = () => {
           image="/images/gallery/yema-cayendo.webp"
           alt="Yema de huevo cayendo"
           label="La diferencia"
-          headline="Se ve en la yema"
+          headline="Está adentro"
           bgClass="bg-transparent"
         >
           <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 xl:gap-24">
@@ -65,9 +65,12 @@ export const CinematicLanding = () => {
               transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
               className="text-left bg-black/10 backdrop-blur-[1px] rounded-2xl p-6 md:p-8"
             >
-              <h3 className="text-gold text-lg md:text-xl lg:text-2xl font-bold uppercase tracking-wider mb-6">
+              <h3 className="text-gold text-lg md:text-xl lg:text-2xl font-bold uppercase tracking-wider mb-2">
                 Vitaminas y Antioxidantes
               </h3>
+              <p className="text-white/70 uppercase text-xs md:text-sm mb-6 leading-relaxed">
+                (Comparado con huevos industriales)*
+              </p>
               <ul className="space-y-3">
                 {[
                   'Vitamina D: 4 veces más.',
@@ -98,6 +101,10 @@ export const CinematicLanding = () => {
                   </li>
                 ))}
               </ul>
+
+              <p className="text-white/70 uppercase text-xs md:text-sm mt-6 leading-relaxed">
+                *(USDA, Mother Earth News 2007, Penn State University 2003 y 2010, y publicaciones de The Poultry Site y Healthline)
+              </p>
             </motion.div>
 
             <motion.div
@@ -126,7 +133,7 @@ export const CinematicLanding = () => {
                 },
               ].map((item) => (
                 <div key={item.label}>
-                  <span className="text-gold font-bold text-sm md:text-base uppercase tracking-wider">{item.label}</span>
+                  <span className="text-gold font-bold text-lg md:text-xl lg:text-2xl uppercase tracking-wider font-playfair">{item.label}</span>
                   <p className="text-sm md:text-[15px] text-white/90 font-medium leading-relaxed mt-2">{item.text}</p>
                 </div>
               ))}
@@ -167,7 +174,7 @@ export const CinematicLanding = () => {
                 transition={{ duration: 0.6, ease: 'easeOut' }}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight uppercase"
               >
-                Nuestro campo
+                Nuestra granja
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, x: -30 }}

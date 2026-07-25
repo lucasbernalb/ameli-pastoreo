@@ -117,7 +117,7 @@ export const AboutSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="absolute z-10 text-gold text-sm tracking-[0.2em] uppercase bottom-12"
+        className="absolute z-10 text-gold text-base tracking-[0.2em] uppercase bottom-6 md:bottom-12"
       >
         Proyecto familiar
       </motion.p>

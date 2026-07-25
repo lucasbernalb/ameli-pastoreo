@@ -33,7 +33,6 @@ export const ImageMaskReveal = ({
     [0, 1],
     ['circle(0% at 50% 50%)', 'circle(100% at 50% 50%)']
   );
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
 
   return (
     <section
@@ -42,7 +41,7 @@ export const ImageMaskReveal = ({
     >
       <motion.div
         className="absolute inset-0"
-        style={{ clipPath, y: parallaxY } as any}
+        style={{ clipPath } as any}
       >
         {video ? (
           <VideoOnHover
@@ -89,7 +88,7 @@ export const ImageMaskReveal = ({
                   transform: 'rotate(-1deg) scale(1.08) scaleX(1.12)',
                 }}
               />
-              <span className="relative text-base tracking-[0.2em] uppercase font-semibold text-white">
+              <span className="relative text-lg tracking-[0.2em] uppercase font-semibold text-white">
                 {label}
               </span>
             </span>

@@ -59,7 +59,7 @@ export const PlansSection = () => {
             Elegí el que mejor se adapte a vos
           </h2>
           <p className="text-lg text-white/60 max-w-2xl mx-auto mt-4">
-            Todos nuestros planes incluyen entrega semanal en Montevideo, Canelones y la costa.
+            Entregas semanales en Montevideo, Ciudad de la costa y La costa de Oro
           </p>
         </motion.div>
 

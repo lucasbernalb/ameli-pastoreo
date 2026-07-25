@@ -83,7 +83,7 @@ export const CinematicHero = () => {
             initial="hidden"
             animate="visible"
             transition={{ staggerChildren: 0.12, delayChildren: 0.25 }}
-            className="max-w-2xl pt-10 md:pt-0"
+            className="max-w-2xl pt-10 md:pt-6"
           >
             <motion.div variants={item}>
               <div className="w-12 h-px bg-gold/60 mb-3" />
@@ -97,7 +97,7 @@ export const CinematicHero = () => {
                   }}
                 />
                 <span
-                  className="relative text-sm md:text-base tracking-[0.35em] uppercase font-semibold text-white"
+                  className="relative text-sm md:text-lg tracking-[0.35em] uppercase font-semibold text-white"
                   style={{ textShadow: '0 1px 4px rgba(0,0,0,.4)' }}
                 >
                   gallinas libres en pastoreo rotativo
