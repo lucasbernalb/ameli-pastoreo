@@ -242,7 +242,7 @@ export const FormSection = () => {
               Sumate
             </span>
           </span>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#F8F5F0] leading-tight mb-6 uppercase">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#F8F5F0] leading-tight mb-6 uppercase">
             Del{' '}
             <span className="text-gold">campo</span>{' '}
             a tu mesa
@@ -298,7 +298,7 @@ export const FormSection = () => {
                     <input
                       id="form-nombre" type="text" name="nombre"
                       value={formData.nombre} onChange={handleChange}
-                      className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                      className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
                   </div>
                   <div>
@@ -306,7 +306,7 @@ export const FormSection = () => {
                     <input
                       id="form-email" type="email" name="email"
                       value={formData.email} onChange={handleChange}
-                      className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                      className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
                   </div>
                   <div>
@@ -314,7 +314,7 @@ export const FormSection = () => {
                     <input
                       id="form-telefono" type="tel" name="telefono"
                       value={formData.telefono} onChange={handleChange}
-                      className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                      className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
                   </div>
                   <div>
@@ -322,7 +322,7 @@ export const FormSection = () => {
                     <input
                       id="form-localidad" type="text" name="localidad"
                       value={formData.localidad} onChange={handleChange}
-                      className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                      className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
                   </div>
                 </div>
@@ -331,26 +331,26 @@ export const FormSection = () => {
                   Elegí tu plan de huevos
                 </p>
                 {/* Mobile: 2+2+1 */}
-                <div className="grid grid-cols-2 gap-3 sm:hidden">
+                <div className="grid grid-cols-2 gap-3 md:hidden">
                   {planChips.slice(0, 2).map((chip) => (
                     <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
                   ))}
                 </div>
-                <div className="grid grid-cols-2 gap-3 mt-3 sm:hidden">
+                <div className="grid grid-cols-2 gap-3 mt-3 md:hidden">
                   {planChips.slice(2, 4).map((chip) => (
                     <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
                   ))}
                 </div>
-                <div className="mt-3 sm:hidden flex justify-center">
+                <div className="mt-3 md:hidden flex justify-center">
                   <Chip chip={planChips[4]} selected={formData.plan === planChips[4].value} onChange={handleChange} name="plan" />
                 </div>
                 {/* Desktop/tablet: 3+2 */}
-                <div className="hidden sm:grid sm:grid-cols-3 gap-3">
+                <div className="hidden md:grid md:grid-cols-3 gap-3">
                   {planChips.slice(0, 3).map((chip) => (
                     <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
                   ))}
                 </div>
-                <div className="hidden sm:grid sm:grid-cols-2 gap-3 max-w-[66%] mx-auto mt-3">
+                <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-[66%] mx-auto mt-3">
                   {planChips.slice(3).map((chip) => (
                     <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
                   ))}
@@ -375,7 +375,7 @@ export const FormSection = () => {
                           onChange={(e) => setCustomQuantity(e.target.value.replace(/\D/g, ''))}
                           placeholder="Ej: 36, 45 o 60"
                           min="31"
-                          className="w-full h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
+                          className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                         />
                         <p className="text-[12px] text-brown leading-relaxed mt-2">
                           Indicá una cantidad aproximada. Nuestro equipo calculará el plan ideal y te enviará una propuesta personalizada.

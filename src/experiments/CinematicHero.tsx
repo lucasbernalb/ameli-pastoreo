@@ -77,12 +77,13 @@ export const CinematicHero = () => {
           loading="eager"
         />
 
-        <div className="flex-1 flex flex-col justify-center">
+        <div className="flex-1 flex flex-col">
+          {/* Badge - anchored at top on mobile, animated as part of stagger */}
           <motion.div
             initial="hidden"
             animate="visible"
             transition={{ staggerChildren: 0.12, delayChildren: 0.25 }}
-            className="max-w-2xl"
+            className="max-w-2xl pt-10 md:pt-0"
           >
             <motion.div variants={item}>
               <div className="w-12 h-px bg-gold/60 mb-3" />
@@ -103,58 +104,68 @@ export const CinematicHero = () => {
                 </span>
               </span>
             </motion.div>
-
-            <motion.h1
-              variants={item}
-              className="font-playfair font-bold text-white leading-[0.88] tracking-[-0.02em] mt-6 md:mt-8"
-              style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
-            >
-              HUEVOS DE
-              <br />
-              <span className="relative inline-block">
-                <span
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: 'rgba(92,64,51,0.8)',
-                    borderRadius: '16% 4% 20% 4% / 4% 18% 4% 20%',
-                    transform: 'rotate(-1.5deg) scaleX(1.15)',
-                  }}
-                />
-                <span
-                  className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#F3D27A] via-[#D4A544] to-[#F6E09B]"
-                  style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,.4))' }}
-                >
-                  CAMPO
-                </span>
-              </span>
-            </motion.h1>
-
-            <motion.p
-              variants={item}
-              className="text-white/90 max-w-lg mt-5 leading-relaxed font-semibold"
-              style={{ fontSize: 'clamp(1rem, 1.3vw, 1.15rem)' }}
-            >
-              Producto artesanal, calidad superior
-            </motion.p>
-
-            <motion.div variants={item} className="flex items-center gap-5 mt-8">
-              <a
-                href="#planes"
-                onClick={(e) => { e.preventDefault(); scrollToSection('planes'); }}
-                className="relative inline-flex items-center justify-center bg-[#5C7A4E] text-white px-8 py-5 rounded-full font-bold text-base shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl active:translate-y-0 overflow-hidden"
-              >
-                <div
-                  className="absolute inset-0 opacity-[0.08] pointer-events-none"
-                  style={{
-                    backgroundImage: 'url("/texturas/F5F0E8-black-thread-light.png")',
-                    backgroundRepeat: 'repeat',
-                    mixBlendMode: 'multiply',
-                  }}
-                />
-                <span className="relative z-10">Hacé tu pedido</span>
-              </a>
-            </motion.div>
           </motion.div>
+
+          {/* H1, subtitle, CTA - vertically centered */}
+          <div className="flex-1 flex flex-col justify-center -mt-[95px] md:mt-0">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              transition={{ staggerChildren: 0.12, delayChildren: 0.25 }}
+              className="max-w-2xl"
+            >
+              <motion.h1
+                variants={item}
+                className="font-playfair font-bold text-white leading-[0.88] tracking-[-0.02em] mt-0 md:mt-8"
+                style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
+              >
+                HUEVOS DE
+                <br />
+                <span className="relative inline-block">
+                  <span
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'rgba(92,64,51,0.8)',
+                      borderRadius: '16% 4% 20% 4% / 4% 18% 4% 20%',
+                      transform: 'rotate(-1.5deg) scaleX(1.15)',
+                    }}
+                  />
+                  <span
+                    className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#F3D27A] via-[#D4A544] to-[#F6E09B]"
+                    style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,.4))' }}
+                  >
+                    CAMPO
+                  </span>
+                </span>
+              </motion.h1>
+
+              <motion.p
+                variants={item}
+                className="text-white/90 max-w-lg mt-6 md:mt-5 leading-relaxed font-semibold"
+                style={{ fontSize: 'clamp(1rem, 1.3vw, 1.15rem)' }}
+              >
+                Producto artesanal, calidad superior
+              </motion.p>
+
+              <motion.div variants={item} className="flex items-center gap-5 mt-10 md:mt-8">
+                <a
+                  href="#planes"
+                  onClick={(e) => { e.preventDefault(); scrollToSection('planes'); }}
+                  className="relative inline-flex items-center justify-center bg-[#5C7A4E] text-white px-8 py-5 rounded-full font-bold text-base shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl active:translate-y-0 overflow-hidden"
+                >
+                  <div
+                    className="absolute inset-0 opacity-[0.08] pointer-events-none"
+                    style={{
+                      backgroundImage: 'url("/texturas/F5F0E8-black-thread-light.png")',
+                      backgroundRepeat: 'repeat',
+                      mixBlendMode: 'multiply',
+                    }}
+                  />
+                  <span className="relative z-10">Hacé tu pedido</span>
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
 
         <motion.div
@@ -180,7 +191,7 @@ export const CinematicHero = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute bottom-6 md:bottom-10 left-6 right-6 md:left-auto md:right-12 lg:right-20 backdrop-blur-md bg-black/30 border border-white/10 rounded-xl p-4 md:p-5 space-y-2.5 max-w-none md:max-w-[260px]"
+        className="absolute bottom-9 md:bottom-10 left-6 right-6 md:left-auto md:right-12 lg:right-20 backdrop-blur-md bg-black/30 border border-white/10 rounded-xl p-4 md:p-5 space-y-2.5 max-w-none md:max-w-[260px]"
       >
         {benefits.map((b, i) => (
           <div key={i} className="flex items-center gap-3 text-white/80">

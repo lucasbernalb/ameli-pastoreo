@@ -228,7 +228,7 @@ const PlanCard = ({ plan, index }: { plan: (typeof plans)[number]; index: number
             onSelectPlan(PLAN_VALUE_MAP[plan.value]);
             scrollToSection('contact-form');
           }}
-          className={`inline-flex items-center justify-center w-full h-12 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 ${
+          className={`inline-flex items-center justify-center w-full h-14 md:h-12 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 ${
             plan.popular
               ? 'bg-white text-[#5C7A4E] shadow-md'
               : 'bg-gradient-to-r from-green to-green-dark text-white shadow-md'

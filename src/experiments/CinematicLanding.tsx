@@ -57,7 +57,7 @@ export const CinematicLanding = () => {
           headline="Se ve en la yema"
           bgClass="bg-transparent"
         >
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 xl:gap-24">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 lg:gap-20 xl:gap-24">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -165,7 +165,7 @@ export const CinematicLanding = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight uppercase"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight uppercase"
               >
                 Nuestro campo
               </motion.h2>

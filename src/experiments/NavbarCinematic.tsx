@@ -15,6 +15,15 @@ export const NavbarCinematic = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   return (
     <AnimatePresence>
       {visible && (
@@ -113,7 +122,7 @@ export const NavbarCinematic = () => {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="block text-[#F8F5F0]/75 hover:text-[#F8F5F0] transition-colors py-2 border-b border-white/5 text-lg font-playfair tracking-wide"
+                      className="block text-[#F8F5F0]/75 hover:text-[#F8F5F0] transition-colors py-3 border-b border-white/5 text-lg font-playfair tracking-wide"
                       onClick={(e) => { e.preventDefault(); scrollToSection(item.href.replace('#', '')); setMobileOpen(false); }}
                     >
                       {item.name}

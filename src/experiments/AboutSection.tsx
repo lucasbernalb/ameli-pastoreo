@@ -12,7 +12,7 @@ export const AboutSection = () => {
     >
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/60 to-black/40" />
 
-      <div className="relative z-10 max-w-5xl ml-4 md:ml-[10%] mr-4 md:mr-10 px-6 py-28 text-left">
+      <div className="relative z-10 max-w-5xl ml-4 md:ml-[10%] mr-4 md:mr-10 px-6 py-16 md:py-28 text-left">
         <motion.span
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -40,11 +40,11 @@ export const AboutSection = () => {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight uppercase mb-14"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight uppercase mb-8 md:mb-14"
         >
           "Cuando todos<br />
           ganan",<br />
-          <span className="relative inline-block whitespace-nowrap">
+          <span className="relative inline-block whitespace-normal md:whitespace-nowrap">
             <span
               className="absolute inset-0 -skew-y-1 scale-105 rounded pointer-events-none"
               style={{
@@ -60,7 +60,7 @@ export const AboutSection = () => {
           </span>
         </motion.h2>
 
-        <div className="space-y-10 max-w-4xl">
+        <div className="space-y-8 md:space-y-10 max-w-4xl">
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

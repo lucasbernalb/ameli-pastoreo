@@ -49,21 +49,7 @@ export const GallerySection = () => {
           variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
           className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-4"
         >
-          {/* Img 1 - large, spans 3 rows on left */}
-          <motion.div
-            variants={itemVariants}
-            className="md:col-start-1 md:row-span-3 relative rounded-[16px] overflow-hidden shadow-xl group"
-          >
-            <img
-              src={images[0].src}
-              alt={images[0].alt}
-              className="w-full h-full object-cover min-h-[220px] lg:min-h-[380px] transition-transform duration-700 group-hover:scale-[1.03]"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          </motion.div>
-
-          {/* Text card - top right */}
+          {/* Text card - first in mobile, top-right in desktop */}
           <motion.div
             variants={itemVariants}
             className="md:col-start-2 md:row-start-1 rounded-[16px] p-5 md:p-6 shadow-md"
@@ -100,6 +86,20 @@ export const GallerySection = () => {
               Descubrí nuestra historia
               <span className="w-6 h-px bg-gold/60 group-hover/link:w-10 transition-all duration-300" />
             </a>
+          </motion.div>
+
+          {/* Img 1 - large, spans 3 rows on left */}
+          <motion.div
+            variants={itemVariants}
+            className="md:col-start-1 md:row-span-3 relative rounded-[16px] overflow-hidden shadow-xl group"
+          >
+            <img
+              src={images[0].src}
+              alt={images[0].alt}
+              className="w-full h-full object-cover min-h-[220px] lg:min-h-[380px] transition-transform duration-700 group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           </motion.div>
 
           {/* Img 2 - right column, row 2 */}
