@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 
 const LOGOS = [
+  '/logo-ameli/logotipo1.png',
   '/logo-ameli/logotipo2.png',
   '/logo-ameli/logotipo3.png',
   '/logo-ameli/logotipo4.png',
-  '/logo-ameli/logotipo5.png',
 ]
 
 const CRITICAL_IMAGES = [
-  '/images/optimized/hero-sunset.webp',
   '/images/optimized/chickens-group.webp',
   '/images/optimized/chickens-group2.webp',
   '/logo-ameli/logo ameli corregido blanco.png',

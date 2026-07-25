@@ -9,10 +9,10 @@ interface LogoConfig {
 }
 
 const LOGOS: LogoConfig[] = [
-  { src: '/logo-ameli/logotipo2.png', bg: '#4A3426', accent: '#FFFFFF' },
-  { src: '/logo-ameli/logotipo3.png', bg: '#F5C242', accent: '#5C4033' },
-  { src: '/logo-ameli/logotipo4.png', bg: '#5C4033', accent: '#F5F0E8' },
-  { src: '/logo-ameli/logotipo5.png', bg: '#F8F5F0', accent: '#5C4033' },
+  { src: '/logo-ameli/logotipo1.png', bg: '#4A3426', accent: '#FFFFFF' },
+  { src: '/logo-ameli/logotipo2.png', bg: '#F5C242', accent: '#5C4033' },
+  { src: '/logo-ameli/logotipo3.png', bg: '#5C4033', accent: '#F5F0E8' },
+  { src: '/logo-ameli/logotipo4.png', bg: '#F8F5F0', accent: '#5C4033' },
 ]
 
 export interface AmeliLoaderProps {
