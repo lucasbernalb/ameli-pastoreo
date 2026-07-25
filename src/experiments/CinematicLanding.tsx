@@ -74,7 +74,7 @@ export const CinematicLanding = () => {
                   'Vitamina A: 66% más (dos tercios más).',
                   'Betacarotenos: 7 veces más.',
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm md:text-[15px] text-white/70 leading-relaxed">
+                  <li key={item} className="flex items-start gap-3 text-sm md:text-[15px] text-white/90 font-medium leading-relaxed">
                     <span className="text-gold mt-0.5 shrink-0 text-xs">✦</span>
                     {item}
                   </li>
@@ -91,7 +91,7 @@ export const CinematicLanding = () => {
                   'Colesterol: 33% menos.',
                   'Grasas saturadas: 25% menos.',
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm md:text-[15px] text-white/70 leading-relaxed">
+                  <li key={item} className="flex items-start gap-3 text-sm md:text-[15px] text-white/90 font-medium leading-relaxed">
                     <span className="text-gold mt-0.5 shrink-0 text-xs">✦</span>
                     {item}
                   </li>
@@ -126,7 +126,7 @@ export const CinematicLanding = () => {
               ].map((item) => (
                 <div key={item.label}>
                   <span className="text-gold font-bold text-sm md:text-base uppercase tracking-wider">{item.label}</span>
-                  <p className="text-sm md:text-[15px] text-white/70 leading-relaxed mt-2">{item.text}</p>
+                  <p className="text-sm md:text-[15px] text-white/90 font-medium leading-relaxed mt-2">{item.text}</p>
                 </div>
               ))}
             </motion.div>
