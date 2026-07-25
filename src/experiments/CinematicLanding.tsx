@@ -22,14 +22,35 @@ export const CinematicLanding = () => {
         <AboutSection />
       </section>
 
-      <div
-        style={{
-          backgroundColor: '#7B9E6B',
-          backgroundImage: 'url("/texturas/7B9E6B-football-no-lines.png")',
-          backgroundRepeat: 'repeat',
-        }}
-      >
-        <ImageMaskReveal
+      <div className="relative overflow-hidden" style={{ backgroundColor: '#4A3426' }}>
+        <div
+          className="absolute inset-0 opacity-[0.2] pointer-events-none"
+          style={{
+            backgroundImage: 'url("/texturas/#5C4033dark-wood.png")',
+            backgroundRepeat: 'repeat',
+            mixBlendMode: 'overlay',
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.12] pointer-events-none"
+          style={{
+            backgroundImage: 'url("/texturas/brown-gravel.png")',
+            backgroundRepeat: 'repeat',
+            mixBlendMode: 'overlay',
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+          style={{
+            backgroundImage: 'url("/texturas/278759-egg-shell.png")',
+            backgroundRepeat: 'repeat',
+            mixBlendMode: 'overlay',
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30 pointer-events-none" />
+
+        <div className="relative z-10">
+          <ImageMaskReveal
           image="/images/gallery/yema-cayendo.webp"
           alt="Yema de huevo cayendo"
           label="La diferencia"
@@ -111,6 +132,7 @@ export const CinematicLanding = () => {
             </motion.div>
           </div>
         </ImageMaskReveal>
+      </div>
       </div>
 
       <section id="planes">
