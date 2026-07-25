@@ -42,22 +42,29 @@ export const AboutSection = () => {
           transition={{ duration: 1, ease: 'easeOut' }}
           className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight uppercase mb-8 md:mb-14"
         >
-          "Cuando todos<br />
-          ganan",<br />
-          <span className="relative inline-block whitespace-normal md:whitespace-nowrap">
-            <span
-              className="absolute inset-0 -skew-y-1 scale-105 rounded pointer-events-none"
-              style={{
-                background: 'rgba(92,126,75,0.75)',
-              }}
-            />
-            <span
-              className="relative text-transparent bg-clip-text bg-gradient-to-r from-[#F3D27A] via-[#D4A544] to-[#F6E09B] italic"
-              style={{ filter: 'drop-shadow(0 2px 8px rgba(0,0,0,.4))' }}
-            >
-              Proyecto familiar
+          "Cuando todos
+          ganan"
+          <div className="text-center mt-4 md:mt-6 space-y-2 md:space-y-3">
+            <span className="block text-base md:text-lg tracking-[0.2em] uppercase font-bold text-gold">
+              Bienestar animal
             </span>
-          </span>
+            <div className="flex items-center justify-center gap-2">
+              <span className="w-3 h-px bg-gold/50" />
+              <span className="w-1.5 h-1.5 rounded-full bg-gold/60" />
+              <span className="w-3 h-px bg-gold/50" />
+            </div>
+            <span className="block text-base md:text-lg tracking-[0.2em] uppercase font-bold text-gold">
+              Alimentación consciente
+            </span>
+            <div className="flex items-center justify-center gap-2">
+              <span className="w-3 h-px bg-gold/50" />
+              <span className="w-1.5 h-1.5 rounded-full bg-gold/60" />
+              <span className="w-3 h-px bg-gold/50" />
+            </div>
+            <span className="block text-base md:text-lg tracking-[0.2em] uppercase font-bold text-gold">
+              Impulso a la producción agroecológica familiar
+            </span>
+          </div>
         </motion.h2>
 
         <div className="space-y-8 md:space-y-10 max-w-4xl">
@@ -68,10 +75,14 @@ export const AboutSection = () => {
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="text-lg md:text-xl text-white/90 leading-relaxed"
           >
-            Amelí surge del trabajo de Francisco y Lucas, padre e hijo. Comenzamos a
+            Amelí surge de nuestro trabajo, Francisco y Lucas, padre e hijo. Comenzamos a
             principios de 2025 con un gallinero móvil, con ruedas, que se va moviendo
-            por el campo periódicamente, a esto se le llama pastoreo rotativo, que a su
-            vez regenera la tierra mediante el guano de las propias gallinas.
+            por el campo periódicamente, a esto se le llama pastoreo rotativo, gracias a
+            este sistema las gallinas viven al aire libre, toman sol, desarrollan su
+            comportamiento natural y complementan su alimentación con posturas e insectos
+            dándole mejores cualidades que repercuten en la calidad del alimento. A su
+            vez regeneramos la tierra, el guano de las propias gallinas fertiliza el
+            campo, produciendo una mejora continua, respetando la biodiversidad.
           </motion.p>
 
           <motion.p
@@ -95,9 +106,8 @@ export const AboutSection = () => {
             className="text-lg md:text-xl text-white/90 leading-relaxed"
           >
             Nos enorgullece nuestro trabajo, estamos decididos a llegar a la mayor
-            cantidad de personas posibles a través de la alimentación consciente y el
-            desarrollo sostenible. Dejando como mensaje, que hacer las cosas de forma
-            distinta es posible.
+            cantidad de personas que eligen una alimentación consciente. Dejando como
+            mensaje, que es posible producir de forma sostenible.
           </motion.p>
         </div>
       </div>
@@ -109,7 +119,7 @@ export const AboutSection = () => {
         transition={{ duration: 0.8, delay: 0.6 }}
         className="absolute z-10 text-gold text-sm tracking-[0.2em] uppercase bottom-12"
       >
-        Bienestar animal desde el primer día
+        Proyecto familiar
       </motion.p>
     </section>
   );
