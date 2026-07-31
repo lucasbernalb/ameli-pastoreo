@@ -59,7 +59,7 @@ export const NavbarCinematic = () => {
                 className="flex items-center gap-3"
               >
                 <img
-                  src="/logo-ameli/logo ameli corregido blanco.png"
+                  src="/logo-ameli/logo-blanco.png"
                   alt="Ameli Pastoreo"
                   className="h-10 md:h-12 w-auto object-contain drop-shadow-lg"
                 />

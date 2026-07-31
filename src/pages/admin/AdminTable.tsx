@@ -53,7 +53,7 @@ export const AdminTable = ({ onLogout, onRetry, leads, loading, error }: AdminTa
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <img
-              src="/logo-ameli/ameli-grande.png"
+              src="/logo-ameli/logotipo1.png"
               alt="Amelí"
               className="w-14 drop-shadow-lg"
             />

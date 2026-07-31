@@ -36,11 +36,11 @@ npm run preview
 
 | Variable | Descripción | Ejemplo |
 |----------|-------------|---------|
-| `VITE_WHATSAPP_NUMBER` | Número de WhatsApp (sin + ni espacios) | `51999999999` |
+| `VITE_WHATSAPP_NUMBER` | Número de WhatsApp (solo números, sin +) | `5989621580` |
 | `VITE_INSTAGRAM_USERNAME` | Usuario de Instagram (sin @) | `amelipastoreo` |
-| `VITE_CONTACT_PHONE` | Teléfono de contacto | `+51 999 999 999` |
-| `VITE_FARM_ADDRESS` | Dirección de la granja | `Km 45, Carretera Central, Lima` |
-| `VITE_SITE_URL` | URL del sitio (para Open Graph) | `https://tudominio.vercel.app` |
+| `VITE_SITE_URL` | URL pública del sitio (para Open Graph) | `https://tudominio.vercel.app` |
+| `VITE_GOOGLE_SCRIPT_URL` | URL del Google Apps Script (formulario y admin) | *(por entorno)* |
+| `VITE_ADMIN_PASSWORD` | Password de acceso al panel admin | *(por entorno)* |
 
 ## 🚢 Deploy a Vercel
 

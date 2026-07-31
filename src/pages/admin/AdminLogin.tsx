@@ -26,7 +26,7 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
         className="bg-[#278759] text-white rounded-xl shadow-lg p-8 max-w-sm w-full"
       >
         <img
-          src="/logo-ameli/logo ameli corregido blanco.png"
+          src="/logo-ameli/logo-blanco.png"
           alt="Amelí"
           className="w-40 mx-auto mb-6 drop-shadow-lg"
         />

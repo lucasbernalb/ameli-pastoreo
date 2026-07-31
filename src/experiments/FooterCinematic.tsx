@@ -54,7 +54,7 @@ export const FooterCinematic = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 lg:gap-16">
           <div className="max-w-[420px]">
             <img
-              src="/logo-ameli/logo ameli corregido blanco.png"
+              src="/logo-ameli/logo-blanco.png"
               alt="Ameli Pastoreo"
               className="h-14 md:h-16 w-auto mb-4"
             />

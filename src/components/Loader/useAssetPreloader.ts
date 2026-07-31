@@ -10,7 +10,7 @@ const LOGOS = [
 const CRITICAL_IMAGES = [
   '/images/optimized/chickens-group.webp',
   '/images/optimized/chickens-group2.webp',
-  '/logo-ameli/logo ameli corregido blanco.png',
+  '/logo-ameli/logo-blanco.png',
   '/texturas/278759-egg-shell.png',
   ...LOGOS,
 ]

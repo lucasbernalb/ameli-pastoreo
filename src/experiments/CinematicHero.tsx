@@ -71,7 +71,7 @@ export const CinematicHero = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          src="/logo-ameli/logo ameli corregido blanco.png"
+          src="/logo-ameli/logo-blanco.png"
           alt="Ameli Pastoreo"
           className="self-start w-28 md:w-36 pt-6 md:pt-10 drop-shadow-lg"
           loading="eager"

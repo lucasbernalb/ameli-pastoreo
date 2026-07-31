@@ -19,7 +19,7 @@ export const PhotoHero = () => {
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <img
-            src="/logo-ameli/logo ameli corregido blanco.png"
+            src="/logo-ameli/logo-blanco.png"
             alt="Ameli Pastoreo"
             className="w-48 mx-auto mb-8 drop-shadow-lg"
             loading="eager"
