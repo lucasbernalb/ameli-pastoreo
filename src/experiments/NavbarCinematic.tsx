@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NAV_LINKS } from '../config';
 import { scrollToSection } from '../lib/scrollTo';
+import { useActiveSection } from './useActiveSection';
 
 export const NavbarCinematic = () => {
   const [visible, setVisible] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const active = useActiveSection();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,16 +68,19 @@ export const NavbarCinematic = () => {
               </a>
 
               <div className="hidden md:flex items-center gap-8">
-                  {NAV_LINKS.slice(0, -1).map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      onClick={(e) => { e.preventDefault(); scrollToSection(item.href.replace('#', '')); }}
-                      className="text-[#F8F5F0]/75 hover:text-[#F8F5F0] transition-colors text-base font-playfair tracking-wide relative py-1 after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold/60 after:w-0 hover:after:w-full after:transition-all after:duration-300"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
+                  {NAV_LINKS.slice(0, -1).map((item) => {
+                    const isActive = active === item.href.replace('#', '');
+                    return (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        onClick={(e) => { e.preventDefault(); scrollToSection(item.href.replace('#', '')); }}
+                        className={`text-base font-playfair tracking-wide relative py-1 after:absolute after:bottom-0 after:left-0 after:h-px after:bg-gold/60 after:transition-all after:duration-300 ${isActive ? 'text-[#F8F5F0] after:w-full' : 'text-[#F8F5F0]/75 hover:text-[#F8F5F0] after:w-0 hover:after:w-full'}`}
+                      >
+                        {item.name}
+                      </a>
+                    );
+                  })}
                   <a
                     href={NAV_LINKS[NAV_LINKS.length - 1].href}
                     onClick={(e) => { e.preventDefault(); scrollToSection('contact-form'); }}
@@ -118,16 +123,19 @@ export const NavbarCinematic = () => {
                 className="md:hidden border-t border-white/5 bg-[#1C140E]/95"
               >
                 <div className="px-4 py-6 space-y-4">
-                  {NAV_LINKS.slice(0, -1).map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="block text-[#F8F5F0]/75 hover:text-[#F8F5F0] transition-colors py-3 border-b border-white/5 text-lg font-playfair tracking-wide"
-                      onClick={(e) => { e.preventDefault(); scrollToSection(item.href.replace('#', '')); setMobileOpen(false); }}
-                    >
-                      {item.name}
-                    </a>
-                  ))}
+                  {NAV_LINKS.slice(0, -1).map((item) => {
+                    const isActive = active === item.href.replace('#', '');
+                    return (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={`block transition-colors py-3 border-b text-lg font-playfair tracking-wide ${isActive ? 'text-[#F8F5F0] border-gold/60' : 'text-[#F8F5F0]/75 hover:text-[#F8F5F0] border-white/5'}`}
+                        onClick={(e) => { e.preventDefault(); scrollToSection(item.href.replace('#', '')); setMobileOpen(false); }}
+                      >
+                        {item.name}
+                      </a>
+                    );
+                  })}
                   <a
                     href={NAV_LINKS[NAV_LINKS.length - 1].href}
                     className="block bg-[#5C7A4E] text-white px-6 py-3.5 rounded-full text-sm font-semibold text-center mt-4"
