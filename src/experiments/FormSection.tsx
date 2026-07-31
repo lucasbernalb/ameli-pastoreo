@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePlanContext } from './PlanContext';
 import { WHATSAPP_ORDER_URL } from '../config';
+import { scrollToSection } from '../lib/scrollTo';
 import whatsappIcon from '../assets/icons/whatsapp.svg';
 
 type FormData = {
@@ -327,9 +328,16 @@ export const FormSection = () => {
                   </div>
                 </div>
 
-                <p className="text-sm font-semibold text-brown mt-6 mb-3">
-                  Elegí tu plan de huevos
-                </p>
+                <div className="flex items-center justify-center gap-2 mt-6 mb-3 flex-wrap">
+                  <p className="text-sm font-semibold text-brown">Elegí tu plan de huevos</p>
+                  <a
+                    href="#planes"
+                    onClick={(e) => { e.preventDefault(); scrollToSection('planes'); }}
+                    className="text-xs uppercase tracking-wide text-gold font-semibold underline underline-offset-4 hover:opacity-70 transition-opacity shrink-0 cursor-pointer"
+                  >
+                    Ver planes
+                  </a>
+                </div>
                 {/* Mobile: 2+2+1 */}
                 <div className="grid grid-cols-2 gap-3 md:hidden">
                   {planChips.slice(0, 2).map((chip) => (

@@ -9,29 +9,14 @@ export const PlansSection = () => {
   return (
     <section className="relative py-24 md:py-40 overflow-hidden" style={{ backgroundColor: '#4A3426' }}>
       <div
-        className="absolute inset-0 opacity-[0.2] pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'url("/texturas/#5C4033dark-wood.png")',
-          backgroundRepeat: 'repeat',
-          mixBlendMode: 'overlay',
+          backgroundImage: 'url("/images/gallery/Maples%20packaging.webp")',
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
         }}
       />
-      <div
-        className="absolute inset-0 opacity-[0.12] pointer-events-none"
-        style={{
-          backgroundImage: 'url("/texturas/brown-gravel.png")',
-          backgroundRepeat: 'repeat',
-          mixBlendMode: 'overlay',
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.06] pointer-events-none"
-        style={{
-          backgroundImage: 'url("/texturas/278759-egg-shell.png")',
-          backgroundRepeat: 'repeat',
-          mixBlendMode: 'overlay',
-        }}
-      />
+      <div className="absolute inset-0 bg-[rgba(28,20,14,0.7)] pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30 pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4">

@@ -6,6 +6,7 @@ import { ImageMaskReveal } from './ImageMaskReveal';
 import { PlansSection } from './PlansSection';
 import { FormSection } from './FormSection';
 import { GallerySection } from './GallerySection';
+import { SectionSeparator } from './SectionSeparator';
 
 import { FooterCinematic } from './FooterCinematic';
 import { WhatsAppFloat } from './WhatsAppFloat';
@@ -142,6 +143,8 @@ export const CinematicLanding = () => {
         </ImageMaskReveal>
       </div>
       </div>
+
+      <SectionSeparator />
 
       <section id="planes">
         <PlansSection />
