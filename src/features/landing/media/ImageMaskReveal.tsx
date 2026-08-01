@@ -41,7 +41,7 @@ export const ImageMaskReveal = ({
     >
       <motion.div
         className="absolute inset-0"
-        style={{ clipPath } as any}
+        style={{ clipPath }}
       >
         {video ? (
           <VideoOnHover
@@ -60,13 +60,13 @@ export const ImageMaskReveal = ({
           />
         )}
       </motion.div>
-      <div
+      <motion.div
         className="absolute inset-0 bg-gradient-to-t from-[#3C2415]/70 via-black/30 to-transparent"
-        style={{ clipPath } as any}
+        style={{ clipPath }}
       />
-      <div
+      <motion.div
         className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50"
-        style={{ clipPath } as any}
+        style={{ clipPath }}
       />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-6 text-center text-white">

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { PLANS_DATA, PLAN_VALUE_MAP } from './data/plans';
-import { usePlanContext } from './PlanContext';
+import { usePlanContext } from './plan-context';
 import { scrollToSection } from '@/lib/scrollTo';
 
 type Plan = (typeof PLANS_DATA)[number];
@@ -12,7 +12,7 @@ export const PlanCard = ({ plan, index, carousel }: { plan: Plan; index: number;
       initial={{ opacity: 0, y: carousel ? 30 : 40 }}
       {...(carousel
         ? { animate: { opacity: 1, y: 0 } }
-        : { whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-50px' } as any }
+        : { whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-50px' } }
       )}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       {...(carousel ? {} : { whileHover: { y: -4, transition: { duration: 0.3 } } })}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { AdminLogin } from './AdminLogin';
 import { AdminTable } from './AdminTable';
 import type { Lead } from '@/types/lead';
@@ -38,14 +38,8 @@ export const AdminPage = () => {
     }
   }, []);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchLeads();
-    }
-  }, [isAuthenticated, fetchLeads]);
-
   if (!isAuthenticated) {
-    return <AdminLogin onSuccess={() => setIsAuthenticated(true)} />;
+    return <AdminLogin onSuccess={() => { setIsAuthenticated(true); fetchLeads(); }} />;
   }
 
   return (

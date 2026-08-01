@@ -4,9 +4,9 @@ import './index.css'
 import { AdminPage } from '@/pages/admin'
 import { LandingPage } from '@/pages/landing'
 import { AmeliLoader } from '@/components/Loader'
-import { PlanProvider } from '@/features/landing/plans/PlanContext'
+import { PlanProvider } from '@/features/landing/plans/PlanProvider'
 
-const Page = () => {
+export const Page = () => {
   if (window.location.pathname === '/admin') {
     return <AdminPage />
   }

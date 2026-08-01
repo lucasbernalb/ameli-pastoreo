@@ -56,11 +56,16 @@ export const AmeliLoader = ({ children }: AmeliLoaderProps) => {
   }, [logoIndex, phase])
 
   useEffect(() => {
-    if (assetsReady && allLogosSeen && phase === 'loading') {
-      setPhase('ready')
-      setTimeout(() => setPhase('complete'), 800)
+    if (!(assetsReady && allLogosSeen)) return
+
+    const t1 = setTimeout(() => setPhase('ready'), 0)
+    const t2 = setTimeout(() => setPhase('complete'), 800)
+
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
     }
-  }, [assetsReady, allLogosSeen, phase])
+  }, [assetsReady, allLogosSeen])
 
   useEffect(() => {
     if (phase !== 'complete') {

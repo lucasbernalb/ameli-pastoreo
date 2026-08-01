@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePlanContext } from '../plans/PlanContext';
+import { usePlanContext } from '../plans/plan-context';
 import { WHATSAPP_ORDER_URL } from '@/config';
 import { scrollToSection } from '@/lib/scrollTo';
 import whatsappIcon from '@/assets/icons/whatsapp.svg';
@@ -22,20 +22,6 @@ const planChips: ChipData[] = [
 ];
 
 type ChipData = { value: string; label: string; subtitle: string };
-
-type CountryCode = { code: string; flag: string; label: string };
-
-const countryCodes: CountryCode[] = [
-  { code: '+598', flag: '🇺🇾', label: 'Uruguay' },
-  { code: '+54', flag: '🇦🇷', label: 'Argentina' },
-  { code: '+55', flag: '🇧🇷', label: 'Brasil' },
-  { code: '+56', flag: '🇨🇱', label: 'Chile' },
-  { code: '+595', flag: '🇵🇾', label: 'Paraguay' },
-  { code: '+591', flag: '🇧🇴', label: 'Bolivia' },
-  { code: '+51', flag: '🇵🇪', label: 'Perú' },
-  { code: '+1', flag: '🇺🇸', label: 'EE.UU.' },
-  { code: '+34', flag: '🇪🇸', label: 'España' },
-];
 
 const Chip = ({ chip, selected, onChange, name }: { chip: ChipData; selected: boolean; onChange: React.ChangeEventHandler<HTMLInputElement>; name: string }) => (
   <motion.label
@@ -85,7 +71,7 @@ export const FormSection = () => {
   const [formData, setFormData] = useState<FormData>({
     nombre: '', email: '', telefono: '', localidad: '', plan: '',
   });
-  const [countryCode, setCountryCode] = useState('+598');
+  const [countryCode] = useState('+598');
   const [customQuantity, setCustomQuantity] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -93,17 +79,19 @@ export const FormSection = () => {
   const isPersonalized = formData.plan.includes('Personalizado');
 
   const sanitizeName = (value: string) => value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '').slice(0, 50);
-  const sanitizeLocalidad = (value: string) => value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s\-]/g, '').slice(0, 50);
+  const sanitizeLocalidad = (value: string) => value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s-]/g, '').slice(0, 50);
   const sanitizeTelefono = (value: string) => value.replace(/\D/g, '').slice(0, 15);
   const stripHtml = (value: string) => value.replace(/<[^>]*>/g, '');
 
   useEffect(() => {
-    if (selectedPlan) {
+    if (!selectedPlan) return;
+    const timer = setTimeout(() => {
       setFormData((prev) => ({ ...prev, plan: selectedPlan }));
       if (!selectedPlan.includes('Personalizado')) {
         setCustomQuantity('');
       }
-    }
+    }, 0);
+    return () => clearTimeout(timer);
   }, [selectedPlan]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
