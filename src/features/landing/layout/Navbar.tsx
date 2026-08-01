@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_LINKS } from '../config';
-import { scrollToSection } from '../lib/scrollTo';
-import { useActiveSection } from './useActiveSection';
+import { NAV_LINKS } from '@/config';
+import { scrollToSection } from '@/lib/scrollTo';
+import { useActiveSection } from '@/features/landing/hooks/useActiveSection';
 
-export const NavbarCinematic = () => {
+export const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const active = useActiveSection();
@@ -153,4 +153,4 @@ export const NavbarCinematic = () => {
   );
 };
 
-export default NavbarCinematic;
+export default Navbar;

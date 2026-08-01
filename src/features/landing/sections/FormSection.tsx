@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePlanContext } from './PlanContext';
-import { WHATSAPP_ORDER_URL } from '../config';
-import { scrollToSection } from '../lib/scrollTo';
-import whatsappIcon from '../assets/icons/whatsapp.svg';
+import { usePlanContext } from '../plans/PlanContext';
+import { WHATSAPP_ORDER_URL } from '@/config';
+import { scrollToSection } from '@/lib/scrollTo';
+import whatsappIcon from '@/assets/icons/whatsapp.svg';
 
 type FormData = {
   nombre: string;

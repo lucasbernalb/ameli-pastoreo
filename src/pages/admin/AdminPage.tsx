@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AdminLogin } from './AdminLogin';
 import { AdminTable } from './AdminTable';
-import type { Lead } from '../../types/lead';
+import type { Lead } from '@/types/lead';
 
 export const AdminPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

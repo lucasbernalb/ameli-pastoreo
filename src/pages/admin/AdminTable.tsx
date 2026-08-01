@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Lead } from '../../types/lead';
+import type { Lead } from '@/types/lead';
 import { ImSpinner2 } from 'react-icons/im';
 
 interface AdminTableProps {

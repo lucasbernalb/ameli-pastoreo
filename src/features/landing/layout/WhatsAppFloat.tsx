@@ -1,5 +1,5 @@
-import { WHATSAPP_ORDER_URL } from '../config';
-import whatsappIcon from '../assets/icons/whatsapp.svg';
+import { WHATSAPP_ORDER_URL } from '@/config';
+import whatsappIcon from '@/assets/icons/whatsapp.svg';
 
 export const WhatsAppFloat = () => {
   return (

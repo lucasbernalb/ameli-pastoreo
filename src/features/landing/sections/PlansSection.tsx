@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { PLANS_DATA } from './data/plans';
-import { PlanCard } from './PlanCard';
-import { PlansCarousel } from './PlansCarousel';
+import { PLANS_DATA } from '../plans/data/plans';
+import { PlanCard } from '../plans/PlanCard';
+import { PlansCarousel } from '../plans/PlansCarousel';
 
 const plans = PLANS_DATA;
 

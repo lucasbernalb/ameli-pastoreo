@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { PLANS_DATA, PLAN_VALUE_MAP } from './data/plans';
 import { usePlanContext } from './PlanContext';
-import { scrollToSection } from '../lib/scrollTo';
+import { scrollToSection } from '@/lib/scrollTo';
 
 type Plan = (typeof PLANS_DATA)[number];
 

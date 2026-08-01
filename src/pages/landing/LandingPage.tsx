@@ -1,22 +1,22 @@
 import { motion } from 'framer-motion';
-import { CinematicHero } from './CinematicHero';
-import { NavbarCinematic } from './NavbarCinematic';
-import { AboutSection } from './AboutSection';
-import { ImageMaskReveal } from './ImageMaskReveal';
-import { PlansSection } from './PlansSection';
-import { FormSection } from './FormSection';
-import { GallerySection } from './GallerySection';
-import { SectionSeparator } from './SectionSeparator';
+import { Hero } from '@/features/landing/sections/Hero';
+import { Navbar } from '@/features/landing/layout/Navbar';
+import { AboutSection } from '@/features/landing/sections/AboutSection';
+import { ImageMaskReveal } from '@/features/landing/media/ImageMaskReveal';
+import { PlansSection } from '@/features/landing/sections/PlansSection';
+import { FormSection } from '@/features/landing/sections/FormSection';
+import { GallerySection } from '@/features/landing/sections/GallerySection';
+import { SectionSeparator } from '@/features/landing/layout/SectionSeparator';
 
-import { FooterCinematic } from './FooterCinematic';
-import { WhatsAppFloat } from './WhatsAppFloat';
+import { Footer } from '@/features/landing/layout/Footer';
+import { WhatsAppFloat } from '@/features/landing/layout/WhatsAppFloat';
 
-export const CinematicLanding = () => {
+export const LandingPage = () => {
   return (
     <div className="min-h-screen bg-cream-texture">
-      <NavbarCinematic />
+      <Navbar />
       <section id="inicio">
-        <CinematicHero />
+        <Hero />
       </section>
 
       <section id="nosotros">
@@ -210,10 +210,10 @@ export const CinematicLanding = () => {
         </div>
       </section>
 
-      <FooterCinematic />
+      <Footer />
       <WhatsAppFloat />
     </div>
   );
 };
 
-export default CinematicLanding;
+export default LandingPage;

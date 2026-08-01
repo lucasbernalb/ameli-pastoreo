@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { CONTACT_INFO, WHATSAPP_ORDER_URL } from '../config';
-import { scrollToSection } from '../lib/scrollTo';
-import locationIcon from '../assets/icons/location.svg';
-import whatsappIcon from '../assets/icons/whatsapp.svg';
-import gmailIcon from '../assets/icons/gmail.svg';
-import instagramIcon from '../assets/icons/instagram.svg';
+import { CONTACT_INFO, WHATSAPP_ORDER_URL } from '@/config';
+import { scrollToSection } from '@/lib/scrollTo';
+import locationIcon from '@/assets/icons/location.svg';
+import whatsappIcon from '@/assets/icons/whatsapp.svg';
+import gmailIcon from '@/assets/icons/gmail.svg';
+import instagramIcon from '@/assets/icons/instagram.svg';
 
 const links = [
   { name: 'Inicio', href: '#inicio' },
@@ -14,7 +14,7 @@ const links = [
   { name: 'Reservar plan', href: '#contact-form' },
 ];
 
-export const FooterCinematic = () => {
+export const Footer = () => {
   return (
     <footer className="relative overflow-hidden" style={{ backgroundColor: '#1C140E' }}>
       <div
@@ -146,4 +146,4 @@ export const FooterCinematic = () => {
   );
 };
 
-export default FooterCinematic;
+export default Footer;

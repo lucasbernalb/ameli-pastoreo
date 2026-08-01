@@ -1,10 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { AdminPage } from './pages/admin'
-import { CinematicLanding } from './experiments/CinematicLanding'
-import { AmeliLoader } from './components/Loader'
-import { PlanProvider } from './experiments/PlanContext'
+import { AdminPage } from '@/pages/admin'
+import { LandingPage } from '@/pages/landing'
+import { AmeliLoader } from '@/components/Loader'
+import { PlanProvider } from '@/features/landing/plans/PlanContext'
 
 const Page = () => {
   if (window.location.pathname === '/admin') {
@@ -13,7 +13,7 @@ const Page = () => {
   return (
     <PlanProvider>
       <AmeliLoader>
-        <CinematicLanding />
+        <LandingPage />
       </AmeliLoader>
     </PlanProvider>
   )

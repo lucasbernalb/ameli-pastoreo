@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { scrollToSection } from '../lib/scrollTo';
+import { scrollToSection } from '@/lib/scrollTo';
 const heroSlides = [
   { image: '/images/optimized/chickens-group.webp' },
   { image: '/images/optimized/chickens-group2.webp' },
@@ -19,7 +19,7 @@ const benefits = [
   { text: '+ OMEGA 3' },
 ];
 
-export const CinematicHero = () => {
+export const Hero = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -216,4 +216,4 @@ export const CinematicHero = () => {
   );
 };
 
-export default CinematicHero;
+export default Hero;
