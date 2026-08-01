@@ -8,7 +8,6 @@ Website para Ameli Pastoreo - Huevos naturales de pastoreo en Perú.
 - **Vite 5** - Build tool
 - **Tailwind CSS 4** - Styling
 - **Framer Motion** - Animations
-- **React Three Fiber** - 3D graphics
 
 ## 📦 Instalación
 
@@ -58,27 +57,27 @@ vercel
 
 ```
 src/
-├── config/          # Configuración centralizada
-│   └── index.ts      # URLs, contacto, metadata
-├── components/       # Componentes reutilizables
-│   ├── Navbar.tsx
-│   ├── Footer.tsx
-│   ├── Scene3D.tsx   # Canvas 3D con huevo
-│   ├── Egg.tsx       # Modelo 3D del huevo
-│   └── Lights.tsx    # Iluminación 3D
-├── sections/         # Secciones de la landing
-│   ├── Hero.tsx
-│   ├── About.tsx
-│   ├── Products.tsx
-│   ├── Gallery.tsx
-│   └── Contact.tsx
-├── data/             # Datos estáticos (productos, etc)
-│   └── index.ts
-├── types/            # TypeScript types
-│   └── index.ts
-├── App.tsx
+├── pages/               # Páginas de la app
+│   ├── landing/         # Landing de producción (LandingPage + barrel)
+│   └── admin/           # Panel admin (login, tabla de leads)
+├── features/            # Lógica por feature
+│   └── landing/
+│       ├── sections/    # Secciones: Hero, AboutSection, PlansSection, FormSection, GallerySection
+│       ├── layout/      # Navbar, Footer, WhatsAppFloat, SectionSeparator
+│       ├── plans/       # PlanCard, PlansCarousel, PlanContext, data/plans.ts
+│       ├── media/       # ImageMaskReveal, VideoOnHover
+│       └── hooks/       # useActiveSection
+├── components/          # Componentes reutilizables
+│   └── Loader/          # Loader con precarga de assets
+├── config/              # Configuración centralizada
+│   └── index.ts         # URLs, contacto, metadata
+├── lib/                 # Utilidades
+│   └── scrollTo.ts
+├── types/               # Tipos de TypeScript
+│   └── lead.ts
+├── assets/              # Fuentes e íconos
 ├── main.tsx
-└── index.css         # Tailwind + custom theme
+└── index.css            # Tailwind + custom theme
 ```
 
 ## 🔒 Seguridad
@@ -109,7 +108,7 @@ src/
 --color-brown: #5C4033;
 ```
 
-### Productos (en `src/data/index.ts`)
+### Productos (en `src/features/landing/plans/data/plans.ts`)
 
 Editar el array `products` para cambiar los productos mostrados.
 
