@@ -20,7 +20,9 @@
     <meta property="og:url" content="https://amelipastoreo.vercel.app/" />
     <meta property="og:title" content="Ameli Pastoreo - Huevos Naturales de Pastoreo" />
     <meta property="og:description" content="Huevos de pastoreo, naturales y frescos. Del campo a tu mesa con amor y dedicación." />
-    <meta property="og:image" content="/og-image.svg" />
+    <meta property="og:image" content="https://amelipastoreo.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="es_UY" />
     <meta property="og:site_name" content="Ameli Pastoreo" />
     
@@ -29,7 +31,7 @@
     <meta property="twitter:url" content="https://amelipastoreo.vercel.app/" />
     <meta property="twitter:title" content="Ameli Pastoreo - Huevos Naturales de Pastoreo" />
     <meta property="twitter:description" content="Huevos de pastoreo, naturales y frescos. Del campo a tu mesa con amor y dedicación." />
-    <meta property="twitter:image" content="/og-image.svg" />
+    <meta property="twitter:image" content="https://amelipastoreo.vercel.app/og-image.png" />
     
     <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,10 +40,54 @@
     <link rel="preconnect" href="https://instagram.com" />
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://amelipastoreo.vercel.app/" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://amelipastoreo.vercel.app/#website",
+          "url": "https://amelipastoreo.vercel.app/",
+          "name": "Ameli Pastoreo",
+          "description": "Huevos de pastoreo, naturales y frescos. Del campo a tu mesa con amor y dedicación.",
+          "inLanguage": "es-UY",
+          "publisher": { "@id": "https://amelipastoreo.vercel.app/#organization" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://amelipastoreo.vercel.app/#organization",
+          "name": "Ameli Pastoreo",
+          "url": "https://amelipastoreo.vercel.app/",
+          "logo": "https://amelipastoreo.vercel.app/logo-ameli/logotipo01.png",
+          "image": "https://amelipastoreo.vercel.app/og-image.png",
+          "sameAs": [ "https://instagram.com/amelipastoreo" ]
+        },
+        {
+          "@type": "AgricultureBusiness",
+          "@id": "https://amelipastoreo.vercel.app/#localbusiness",
+          "name": "Ameli Pastoreo",
+          "description": "Huevos de pastoreo, naturales y frescos. Gallinas libres en pastoreo rotativo, del campo a tu mesa.",
+          "url": "https://amelipastoreo.vercel.app/",
+          "telephone": "+59891621580",
+          "image": "https://amelipastoreo.vercel.app/og-image.png",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "km 24, Soca",
+            "addressLocality": "Canelones",
+            "addressCountry": "UY"
+          },
+          "sameAs": [ "https://instagram.com/amelipastoreo" ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

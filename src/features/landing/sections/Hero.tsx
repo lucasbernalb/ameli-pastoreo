@@ -45,6 +45,8 @@ export const Hero = () => {
             alt="Campo Ameli Pastoreo"
             className="w-full h-full object-cover"
             loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
         </motion.div>
       </AnimatePresence>
