@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { buildClearSessionCookie } from './lib/session';
+import { buildClearSessionCookie } from './lib/session.js';
 
 export default async function handler(req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method !== 'POST') {

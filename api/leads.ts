@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { createLead } from './lib/apps-script';
-import { readJsonBody, HttpError } from './lib/http';
+import { createLead } from './lib/apps-script.js';
+import { readJsonBody, HttpError } from './lib/http.js';
 
 function sendJson(res: ServerResponse, status: number, body: Record<string, unknown>): void {
   res.statusCode = status;

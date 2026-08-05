@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { createSessionToken, buildSessionCookie, constantTimeEqual } from './lib/session';
-import { readJsonBody, HttpError } from './lib/http';
+import { createSessionToken, buildSessionCookie, constantTimeEqual } from './lib/session.js';
+import { readJsonBody, HttpError } from './lib/http.js';
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 

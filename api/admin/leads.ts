@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { SESSION_COOKIE_NAME, verifySessionToken } from '../lib/session';
-import { getLeads } from '../lib/apps-script';
+import { SESSION_COOKIE_NAME, verifySessionToken } from '../lib/session.js';
+import { getLeads } from '../lib/apps-script.js';
 
 function getSessionToken(cookieHeader: string | undefined): string | null {
   if (!cookieHeader) return null;
