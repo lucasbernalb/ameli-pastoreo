@@ -8,14 +8,26 @@ export const AdminLogin = ({ onSuccess }: AdminLoginProps) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
-      onSuccess();
-    } else {
-      setError('Contraseña incorrecta. Intentá de nuevo.');
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      if (res.ok) {
+        onSuccess();
+        return;
+      }
+
+      const json = (await res.json().catch(() => null)) as { error?: string } | null;
+      setError(json?.error || 'Error de conexión. Intentá de nuevo.');
+    } catch {
+      setError('Error de conexión. Intentá de nuevo.');
     }
   };
 

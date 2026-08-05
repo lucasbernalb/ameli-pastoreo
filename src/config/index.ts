@@ -35,7 +35,7 @@ export const SITE_CONFIG = {
   url: siteUrl,
   locale: 'es_UY',
   author: 'Ameli Pastoreo',
-  socialImage: '/og-image.svg',
+  socialImage: `${siteUrl}/og-image.png`,
 } as const;
 
 // Rutas de navegación

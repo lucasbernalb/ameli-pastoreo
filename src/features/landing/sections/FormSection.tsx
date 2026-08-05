@@ -23,7 +23,7 @@ const planChips: ChipData[] = [
 
 type ChipData = { value: string; label: string; subtitle: string };
 
-const Chip = ({ chip, selected, onChange, name }: { chip: ChipData; selected: boolean; onChange: React.ChangeEventHandler<HTMLInputElement>; name: string }) => (
+const Chip = ({ chip, selected, onChange, name, hasError }: { chip: ChipData; selected: boolean; onChange: React.ChangeEventHandler<HTMLInputElement>; name: string; hasError?: boolean }) => (
   <motion.label
     animate={{
       boxShadow: selected
@@ -35,6 +35,8 @@ const Chip = ({ chip, selected, onChange, name }: { chip: ChipData; selected: bo
         : undefined,
     }}
     transition={selected ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : undefined}
+    aria-invalid={hasError || undefined}
+    aria-describedby={hasError ? 'form-plan-error' : undefined}
     className={`cursor-pointer rounded-full border px-3 py-2.5 transition-all duration-200 ${
       selected
         ? 'bg-[#89B178] text-white border-gold shadow-md -translate-y-0.5'
@@ -71,7 +73,6 @@ export const FormSection = () => {
   const [formData, setFormData] = useState<FormData>({
     nombre: '', email: '', telefono: '', localidad: '', plan: '',
   });
-  const [countryCode] = useState('+598');
   const [customQuantity, setCustomQuantity] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -81,7 +82,6 @@ export const FormSection = () => {
   const sanitizeName = (value: string) => value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '').slice(0, 50);
   const sanitizeLocalidad = (value: string) => value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s-]/g, '').slice(0, 50);
   const sanitizeTelefono = (value: string) => value.replace(/\D/g, '').slice(0, 15);
-  const stripHtml = (value: string) => value.replace(/<[^>]*>/g, '');
 
   useEffect(() => {
     if (!selectedPlan) return;
@@ -160,24 +160,27 @@ export const FormSection = () => {
       const finalPlan = isPersonalized && customQuantity
         ? `Personalizado - ${customQuantity} huevos/semana`
         : formData.plan;
-      const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
-      if (!scriptUrl) {
-        setMessage({ type: 'error', text: 'Error de configuración. Contactanos por WhatsApp.' });
-        setLoading(false);
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: formData.nombre.trim(),
+          email: formData.email.trim(),
+          telefono: formData.telefono.trim(),
+          localidad: formData.localidad.trim(),
+          plan: finalPlan,
+        }),
+      });
+
+      if (res.ok) {
+        setMessage({ type: 'success', text: '¡Gracias! Te contactaremos en menos de 24 hs.' });
+        setFormData({ nombre: '', email: '', telefono: '', localidad: '', plan: '' });
+        setCustomQuantity('');
         return;
       }
-      const sanitizedData = {
-        nombre: stripHtml(formData.nombre.trim()),
-        email: stripHtml(formData.email.trim()),
-        telefono: `${countryCode} ${formData.telefono.trim()}`,
-        localidad: stripHtml(formData.localidad.trim()),
-        plan: finalPlan,
-      };
-      const params = new URLSearchParams({ ...sanitizedData, origen: 'Landing Cinematic' });
-      await fetch(scriptUrl, { method: 'POST', mode: 'no-cors', body: params });
-      setMessage({ type: 'success', text: '¡Gracias! Te contactaremos en menos de 24 hs.' });
-      setFormData({ nombre: '', email: '', telefono: '', localidad: '', plan: '' });
-      setCustomQuantity('');
+
+      const json = (await res.json().catch(() => null)) as { error?: string } | null;
+      setMessage({ type: 'error', text: json?.error || 'Error de conexión. Intentá de nuevo.' });
     } catch {
       setMessage({ type: 'error', text: 'Error de conexión. Intentá de nuevo.' });
     } finally {
@@ -287,32 +290,52 @@ export const FormSection = () => {
                     <input
                       id="form-nombre" type="text" name="nombre"
                       value={formData.nombre} onChange={handleChange}
+                      aria-invalid={!!errors.nombre}
+                      aria-describedby={errors.nombre ? 'form-nombre-error' : undefined}
                       className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
+                    {errors.nombre && (
+                      <p id="form-nombre-error" className="text-sm text-red-600 mt-1">{errors.nombre}</p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="form-email" className="block text-sm font-medium text-brown mb-1">Email</label>
                     <input
                       id="form-email" type="email" name="email"
                       value={formData.email} onChange={handleChange}
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? 'form-email-error' : undefined}
                       className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
+                    {errors.email && (
+                      <p id="form-email-error" className="text-sm text-red-600 mt-1">{errors.email}</p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="form-telefono" className="block text-sm font-medium text-brown mb-1">Teléfono</label>
                     <input
                       id="form-telefono" type="tel" name="telefono"
                       value={formData.telefono} onChange={handleChange}
+                      aria-invalid={!!errors.telefono}
+                      aria-describedby={errors.telefono ? 'form-telefono-error' : undefined}
                       className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
+                    {errors.telefono && (
+                      <p id="form-telefono-error" className="text-sm text-red-600 mt-1">{errors.telefono}</p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="form-localidad" className="block text-sm font-medium text-brown mb-1">Localidad</label>
                     <input
                       id="form-localidad" type="text" name="localidad"
                       value={formData.localidad} onChange={handleChange}
+                      aria-invalid={!!errors.localidad}
+                      aria-describedby={errors.localidad ? 'form-localidad-error' : undefined}
                       className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                     />
+                    {errors.localidad && (
+                      <p id="form-localidad-error" className="text-sm text-red-600 mt-1">{errors.localidad}</p>
+                    )}
                   </div>
                 </div>
 
@@ -321,7 +344,7 @@ export const FormSection = () => {
                   <a
                     href="#planes"
                     onClick={(e) => { e.preventDefault(); scrollToSection('planes'); }}
-                    className="text-xs uppercase tracking-wide text-gold font-semibold underline underline-offset-4 hover:opacity-70 transition-opacity shrink-0 cursor-pointer"
+                    className="text-xs uppercase tracking-wide text-green-dark font-semibold underline underline-offset-4 hover:opacity-70 transition-opacity shrink-0 cursor-pointer"
                   >
                     Ver planes
                   </a>
@@ -329,28 +352,31 @@ export const FormSection = () => {
                 {/* Mobile: 2+2+1 */}
                 <div className="grid grid-cols-2 gap-3 md:hidden">
                   {planChips.slice(0, 2).map((chip) => (
-                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
+                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
                   ))}
                 </div>
                 <div className="grid grid-cols-2 gap-3 mt-3 md:hidden">
                   {planChips.slice(2, 4).map((chip) => (
-                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
+                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
                   ))}
                 </div>
                 <div className="mt-3 md:hidden flex justify-center">
-                  <Chip chip={planChips[4]} selected={formData.plan === planChips[4].value} onChange={handleChange} name="plan" />
+                  <Chip chip={planChips[4]} selected={formData.plan === planChips[4].value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
                 </div>
                 {/* Desktop/tablet: 3+2 */}
                 <div className="hidden md:grid md:grid-cols-3 gap-3">
                   {planChips.slice(0, 3).map((chip) => (
-                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
+                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
                   ))}
                 </div>
                 <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-[66%] mx-auto mt-3">
                   {planChips.slice(3).map((chip) => (
-                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" />
+                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
                   ))}
                 </div>
+                {errors.plan && (
+                  <p id="form-plan-error" className="text-sm text-red-600 mt-3">{errors.plan}</p>
+                )}
 
                 <AnimatePresence>
                   {isPersonalized && (
@@ -371,8 +397,13 @@ export const FormSection = () => {
                           onChange={(e) => setCustomQuantity(e.target.value.replace(/\D/g, ''))}
                           placeholder="Ej: 36, 45 o 60"
                           min="31"
+                          aria-invalid={!!errors.customQuantity}
+                          aria-describedby={errors.customQuantity ? 'form-custom-quantity-error' : undefined}
                           className="w-full h-14 md:h-12 border border-brown/10 rounded-[20px] px-5 bg-white text-brown text-base focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all"
                         />
+                        {errors.customQuantity && (
+                          <p id="form-custom-quantity-error" className="text-sm text-red-600 mt-1">{errors.customQuantity}</p>
+                        )}
                         <p className="text-[12px] text-brown leading-relaxed mt-2">
                           Indicá una cantidad aproximada. Nuestro equipo calculará el plan ideal y te enviará una propuesta personalizada.
                         </p>

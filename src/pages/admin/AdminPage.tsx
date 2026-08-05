@@ -1,10 +1,17 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { AdminLogin } from './AdminLogin';
 import { AdminTable } from './AdminTable';
 import type { Lead } from '@/types/lead';
 
+type AuthStatus = 'checking' | 'unauthenticated' | 'authenticated';
+
+type LoadResult =
+  | { kind: 'success'; leads: Lead[] }
+  | { kind: 'unauthenticated' }
+  | { kind: 'error'; message: string };
+
 export const AdminPage = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [status, setStatus] = useState<AuthStatus>('checking');
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,34 +24,66 @@ export const AdminPage = () => {
     return new Date(+yyyy, +MM - 1, +dd, +hh, +mm);
   };
 
-  const fetchLeads = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+  const loadLeads = useCallback(async (): Promise<LoadResult> => {
     try {
-      const res = await fetch(import.meta.env.VITE_GOOGLE_SCRIPT_URL);
-      const json = await res.json();
-      if (!json.success) throw new Error(json.error || 'Error al obtener registros');
-      if (!Array.isArray(json.data)) throw new Error('Formato de respuesta inválido');
+      const res = await fetch('/api/admin/leads');
+      if (res.status === 401) {
+        return { kind: 'unauthenticated' };
+      }
+      const json = (await res.json()) as { ok?: boolean; data?: unknown; error?: string };
+      if (!res.ok || !json.ok) {
+        return { kind: 'error', message: json.error || 'Error al obtener registros' };
+      }
+      if (!Array.isArray(json.data)) {
+        return { kind: 'error', message: 'Formato de respuesta inválido' };
+      }
 
-      const sorted = [...json.data].sort(
+      const sorted = [...(json.data as Lead[])].sort(
         (a: Lead, b: Lead) => parseFecha(b.fecha).getTime() - parseFecha(a.fecha).getTime()
       );
 
-      setLeads(sorted);
+      return { kind: 'success', leads: sorted };
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Error de conexión');
-    } finally {
-      setLoading(false);
+      return { kind: 'error', message: err instanceof Error ? err.message : 'Error de conexión' };
     }
   }, []);
 
-  if (!isAuthenticated) {
-    return <AdminLogin onSuccess={() => { setIsAuthenticated(true); fetchLeads(); }} />;
+  const applyResult = useCallback((result: LoadResult) => {
+    if (result.kind === 'unauthenticated') {
+      setStatus('unauthenticated');
+      return;
+    }
+    if (result.kind === 'error') {
+      setError(result.message);
+      setStatus('authenticated');
+      return;
+    }
+    setLeads(result.leads);
+    setStatus('authenticated');
+  }, []);
+
+  const fetchLeads = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    await loadLeads().then(applyResult);
+    setLoading(false);
+  }, [loadLeads, applyResult]);
+
+  useEffect(() => {
+    loadLeads().then(applyResult);
+  }, [loadLeads, applyResult]);
+
+  if (status === 'checking') {
+    return null;
+  }
+
+  if (status === 'unauthenticated') {
+    return <AdminLogin onSuccess={() => { setStatus('authenticated'); fetchLeads(); }} />;
   }
 
   return (
     <AdminTable
-      onLogout={() => setIsAuthenticated(false)}
+      onLogout={() => setStatus('unauthenticated')}
       onRetry={fetchLeads}
       leads={leads}
       loading={loading}

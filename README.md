@@ -33,13 +33,25 @@ npm run preview
 
 ### Variables de Entorno (.env)
 
+#### Frontend (`VITE_*`)
+
+Variables públicas inlineadas por Vite en el bundle del cliente.
+
 | Variable | Descripción | Ejemplo |
 |----------|-------------|---------|
 | `VITE_WHATSAPP_NUMBER` | Número de WhatsApp (solo números, sin +) | `5989621580` |
 | `VITE_INSTAGRAM_USERNAME` | Usuario de Instagram (sin @) | `amelipastoreo` |
 | `VITE_SITE_URL` | URL pública del sitio (para Open Graph) | `https://tudominio.vercel.app` |
-| `VITE_GOOGLE_SCRIPT_URL` | URL del Google Apps Script (formulario y admin) | *(por entorno)* |
-| `VITE_ADMIN_PASSWORD` | Password de acceso al panel admin | *(por entorno)* |
+
+#### Backend (server-only)
+
+Variables que **solo** consume el backend (Vercel Functions). No viajan al bundle del cliente; se configuran en el dashboard de Vercel.
+
+| Variable | Descripción |
+|----------|-------------|
+| `ADMIN_PASSWORD` | Password de acceso al panel admin |
+| `SESSION_SECRET` | Secreto para firmar el JWT de sesión (cookie `__Host-session`) |
+| `GOOGLE_SCRIPT_URL` | URL del Google Apps Script (formulario y admin) |
 
 ## 🚢 Deploy a Vercel
 

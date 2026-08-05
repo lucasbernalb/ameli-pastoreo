@@ -13,6 +13,15 @@ interface AdminTableProps {
 export const AdminTable = ({ onLogout, onRetry, leads, loading, error }: AdminTableProps) => {
   const [search, setSearch] = useState('');
 
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/logout', { method: 'POST' });
+    } catch {
+      // Si el logout falla, igual se limpia el estado local.
+    }
+    onLogout();
+  };
+
   const filteredLeads = search.trim()
     ? leads.filter((lead) => {
         const q = search.toLowerCase();
@@ -68,7 +77,7 @@ export const AdminTable = ({ onLogout, onRetry, leads, loading, error }: AdminTa
           </div>
 
           <button
-            onClick={onLogout}
+            onClick={handleLogout}
             className="text-sm text-[#5C4033]/60 hover:text-[#5C4033] transition"
           >
             Cerrar sesión
