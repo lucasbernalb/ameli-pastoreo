@@ -90,7 +90,7 @@ export const Footer = () => {
                 <span className="text-white/40 mt-0.5 flex-shrink-0">
                   <img src={gmailIcon} alt="Email" className="w-4 h-4 opacity-40" />
                 </span>
-                <a href="mailto:hola@amelipastoreo.com" className="hover:text-gold transition-colors duration-300">hola@amelipastoreo.com</a>
+                <a href="mailto:ameliregenerativo@gmail.com" className="hover:text-gold transition-colors duration-300">ameliregenerativo@gmail.com</a>
               </li>
               <li className="flex items-start gap-3 text-white/65 text-sm">
                 <span className="text-white/40 mt-0.5 flex-shrink-0">
