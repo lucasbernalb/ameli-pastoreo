@@ -6,13 +6,14 @@ interface LogoConfig {
   src: string
   bg: string
   accent: string
+  scale: number
 }
 
 const LOGOS: LogoConfig[] = [
-  { src: '/logo-ameli/logotipo1.png', bg: '#4A3426', accent: '#FFFFFF' },
-  { src: '/logo-ameli/logotipo2.png', bg: '#F5C242', accent: '#5C4033' },
-  { src: '/logo-ameli/logotipo3.png', bg: '#5C4033', accent: '#F5F0E8' },
-  { src: '/logo-ameli/logotipo4.png', bg: '#F8F5F0', accent: '#5C4033' },
+  { src: '/logo-ameli/logotipo1.png', bg: '#4A3426', accent: '#FFFFFF', scale: 0.86 },
+  { src: '/logo-ameli/logotipo2.png', bg: '#F5C242', accent: '#5C4033', scale: 1 },
+  { src: '/logo-ameli/logotipo3.png', bg: '#5C4033', accent: '#F5F0E8', scale: 1.02 },
+  { src: '/logo-ameli/logotipo4.png', bg: '#F8F5F0', accent: '#5C4033', scale: 1.08 },
 ]
 
 export interface AmeliLoaderProps {
@@ -91,6 +92,7 @@ export const AmeliLoader = ({ children }: AmeliLoaderProps) => {
           <motion.div
             key="loader"
             className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+            initial={{ backgroundColor: LOGOS[0].bg }}
             animate={{ backgroundColor: LOGOS[logoIndex].bg }}
             exit={{ opacity: 0, scale: 1.02, filter: 'blur(4px)' }}
             transition={{ duration: 0.8, ease: 'easeInOut' }}
@@ -132,6 +134,7 @@ export const AmeliLoader = ({ children }: AmeliLoaderProps) => {
                     className="absolute inset-0 w-full h-full object-contain transition-all duration-500"
                     style={{
                       opacity: i === logoIndex ? 1 : 0,
+                      transform: `scale(${logo.scale})`,
                       filter: i === logoIndex
                         ? 'drop-shadow(0 4px 20px rgba(0,0,0,0.08))'
                         : 'none',
