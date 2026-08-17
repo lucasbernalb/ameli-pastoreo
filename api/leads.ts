@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { createLead } from './lib/apps-script.js';
+import { createLeadWithMake as createLead } from './lib/make.js';
 import { readJsonBody, HttpError } from './lib/http.js';
 
 function sendJson(res: ServerResponse, status: number, body: Record<string, unknown>): void {

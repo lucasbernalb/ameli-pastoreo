@@ -82,7 +82,7 @@ export const AmeliLoader = ({ children }: AmeliLoaderProps) => {
 
   return (
     <div className="relative min-h-screen">
-      <div className={phase !== 'complete' ? 'invisible' : ''}>
+      <div>
         {children}
       </div>
 

@@ -15,42 +15,12 @@ const CRITICAL_IMAGES = [
   ...LOGOS,
 ]
 
-const CRITICAL_VIDEOS = [
-  '/videos/video-gallinero-pasto-moviendose.mp4',
-]
-
 function preloadImage(src: string): Promise<void> {
   return new Promise((resolve) => {
     const img = new Image()
     img.onload = () => resolve()
     img.onerror = () => resolve()
     img.src = src
-  })
-}
-
-function preloadVideo(src: string): Promise<void> {
-  return new Promise((resolve) => {
-    const video = document.createElement('video')
-    video.muted = true
-    video.playsInline = true
-    video.preload = 'auto'
-
-    let settled = false
-    const resolveOnce = () => {
-      if (!settled) {
-        settled = true
-        resolve()
-      }
-    }
-
-    video.addEventListener('canplaythrough', resolveOnce, { once: true })
-    video.addEventListener('error', resolveOnce, { once: true })
-    video.addEventListener('abort', resolveOnce, { once: true })
-
-    video.src = src
-    video.load()
-
-    setTimeout(resolveOnce, 10000)
   })
 }
 
@@ -62,7 +32,7 @@ export function useAssetPreloader() {
   useEffect(() => {
     mountedRef.current = true
 
-    const total = CRITICAL_IMAGES.length + CRITICAL_VIDEOS.length
+    const total = CRITICAL_IMAGES.length
     let completed = 0
 
     const increment = () => {
@@ -77,11 +47,7 @@ export function useAssetPreloader() {
     const imagePromises = CRITICAL_IMAGES.map((src) =>
       preloadImage(src).then(increment)
     )
-    const videoPromises = CRITICAL_VIDEOS.map((src) =>
-      preloadVideo(src).then(increment)
-    )
-
-    Promise.all([...imagePromises, ...videoPromises]).then(() => {
+    Promise.all(imagePromises).then(() => {
       if (mountedRef.current) setReady(true)
     })
 

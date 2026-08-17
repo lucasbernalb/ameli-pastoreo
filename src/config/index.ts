@@ -8,7 +8,7 @@
 // Números de contacto - Leer de variables de entorno con fallback a valores demo
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || '59891621580';
 const instagramUsername = import.meta.env.VITE_INSTAGRAM_USERNAME || 'amelipastoreo';
-const siteUrl = import.meta.env.VITE_SITE_URL || '';
+const siteUrl = (import.meta.env.VITE_SITE_URL || 'https://www.ameli.uy').replace(/\/+$/, '')
 
 // URLs de WhatsApp
 export const WHATSAPP_BASE_URL = `https://wa.me/${whatsappNumber}`;

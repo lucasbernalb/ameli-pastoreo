@@ -51,7 +51,8 @@ Variables que **solo** consume el backend (Vercel Functions). No viajan al bundl
 |----------|-------------|
 | `ADMIN_PASSWORD` | Password de acceso al panel admin |
 | `SESSION_SECRET` | Secreto para firmar el JWT de sesión (cookie `__Host-session`) |
-| `GOOGLE_SCRIPT_URL` | URL del Google Apps Script (formulario y admin) |
+| `GOOGLE_SCRIPT_URL` | URL del Google Apps Script (lectura de leads en el panel admin) |
+| `MAKE_WEBHOOK_URL` | URL del Webhook de Make (escritura de leads del formulario) |
 
 ## 🚢 Deploy a Vercel
 

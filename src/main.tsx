@@ -6,8 +6,19 @@ import { LandingPage } from '@/pages/landing'
 import { AmeliLoader } from '@/components/Loader'
 import { PlanProvider } from '@/features/landing/plans/PlanProvider'
 
+const isAdminRoute = window.location.pathname === '/admin'
+
+if (isAdminRoute) {
+  document.title = 'Admin | Ameli Pastoreo'
+  document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex, nofollow')
+  document.querySelector('meta[name="description"]')?.setAttribute('content', 'Panel de administración de Ameli Pastoreo.')
+  document.querySelector('link[rel="canonical"]')?.remove()
+  document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]').forEach((meta) => meta.remove())
+  document.querySelector('script[type="application/ld+json"]')?.remove()
+}
+
 export const Page = () => {
-  if (window.location.pathname === '/admin') {
+  if (isAdminRoute) {
     return <AdminPage />
   }
   return (
