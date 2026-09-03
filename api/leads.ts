@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { createLeadWithMake as createLead } from './lib/make.js';
+import { createLeadWithMake as createLead, MakeError } from './lib/make.js';
 import { readJsonBody, HttpError } from './lib/http.js';
 
 function sendJson(res: ServerResponse, status: number, body: Record<string, unknown>): void {
@@ -116,7 +116,23 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       origen: 'Landing Cinematic',
     });
     sendJson(res, 200, { ok: true });
-  } catch {
+  } catch (err) {
+    if (err instanceof MakeError) {
+      console.error('Error al enviar lead a Make', {
+        code: err.code,
+        message: err.message,
+      });
+
+      if (err.code === 'CONFIG_MISSING' || err.code === 'CONFIG_INVALID') {
+        sendJson(res, 500, { ok: false, code: 'CONFIGURATION_ERROR', error: 'Error de configuración del servidor.' });
+        return;
+      }
+    } else {
+      console.error('Error inesperado al enviar lead a Make', {
+        name: err instanceof Error ? err.name : 'UnknownError',
+      });
+    }
+
     sendJson(res, 500, { ok: false, code: 'UPSTREAM_ERROR', error: 'Error de conexión. Intentá nuevamente.' });
   }
 }

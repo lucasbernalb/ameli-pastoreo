@@ -1,6 +1,16 @@
 import { randomBytes } from 'node:crypto';
 
-const MAKE_WEBHOOK_URL = process.env.MAKE_WEBHOOK_URL;
+export type MakeErrorCode = 'CONFIG_MISSING' | 'CONFIG_INVALID' | 'UPSTREAM_STATUS' | 'UPSTREAM_FETCH';
+
+export class MakeError extends Error {
+  readonly code: MakeErrorCode;
+
+  constructor(code: MakeErrorCode, message: string) {
+    super(message);
+    this.name = 'MakeError';
+    this.code = code;
+  }
+}
 
 export interface CreateLeadInput {
   nombre: string;
@@ -21,9 +31,22 @@ function generateLeadId(): string {
 }
 
 export async function createLeadWithMake(input: CreateLeadInput): Promise<void> {
-  if (!MAKE_WEBHOOK_URL) {
-    throw new Error('MAKE_WEBHOOK_URL no configurado');
+  const webhookUrl = process.env.MAKE_WEBHOOK_URL?.trim();
+  if (!webhookUrl) {
+    throw new MakeError('CONFIG_MISSING', 'MAKE_WEBHOOK_URL no configurado');
   }
+
+  let parsedUrl: URL;
+  try {
+    parsedUrl = new URL(webhookUrl);
+  } catch {
+    throw new MakeError('CONFIG_INVALID', 'MAKE_WEBHOOK_URL no contiene una URL válida');
+  }
+
+  if (parsedUrl.protocol !== 'https:') {
+    throw new MakeError('CONFIG_INVALID', 'MAKE_WEBHOOK_URL debe usar HTTPS');
+  }
+
   const payload = {
     ...input,
     leadId: generateLeadId(),
@@ -32,16 +55,21 @@ export async function createLeadWithMake(input: CreateLeadInput): Promise<void> 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10_000);
   try {
-    const res = await fetch(MAKE_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: controller.signal,
-      redirect: 'follow',
-    });
+    let res: Response;
+    try {
+      res = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+        redirect: 'follow',
+      });
+    } catch {
+      throw new MakeError('UPSTREAM_FETCH', 'No se pudo contactar al webhook de Make');
+    }
     // En el futuro: validar un JSON { ok: true } sin hacerlo obligatorio todavía.
     if (!res.ok) {
-      throw new Error(`Make respondió con estado ${res.status}`);
+      throw new MakeError('UPSTREAM_STATUS', `Make respondió con estado ${res.status}`);
     }
   } finally {
     clearTimeout(timeout);
