@@ -6,7 +6,8 @@ import { LandingPage } from '@/pages/landing'
 import { AmeliLoader } from '@/components/Loader'
 import { PlanProvider } from '@/features/landing/plans/PlanProvider'
 
-const isAdminRoute = window.location.pathname === '/admin'
+const normalizedPathname = window.location.pathname.replace(/\/+$/, '') || '/'
+const isAdminRoute = normalizedPathname === '/admin' || normalizedPathname.startsWith('/admin/')
 
 if (isAdminRoute) {
   document.title = 'Admin | Ameli Pastoreo'

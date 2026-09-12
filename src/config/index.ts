@@ -44,7 +44,7 @@ export const NAV_LINKS = [
   { name: 'Nosotros', href: '#nosotros' },
   { name: 'Planes', href: '#planes' },
   { name: 'Galería', href: '#galeria' },
-  { name: 'Contacto', href: '#contacto' },
+  { name: 'Contacto', href: '#contact-form' },
 ] as const;
 
 // Exportar todo como objeto para acceso rápido
