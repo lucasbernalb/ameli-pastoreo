@@ -87,7 +87,7 @@ export const Hero = () => {
           loading="eager"
         />
 
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 min-h-0 flex flex-col">
           {/* Badge - anchored at top on mobile, animated as part of stagger */}
           <motion.div
             initial="hidden"
@@ -116,7 +116,7 @@ export const Hero = () => {
           </motion.div>
 
           {/* H1, subtitle, CTA - vertically centered */}
-          <div className="flex-1 flex flex-col justify-center -mt-[95px] md:mt-0">
+          <div className="flex-1 min-h-0 flex flex-col justify-center -mt-[95px] pb-16 md:mt-0 md:pb-0">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -181,7 +181,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
-          className="pb-7 md:pb-9 pr-16 md:pr-0"
+          className="shrink-0 pb-7 md:pb-9 pr-16 md:pr-0"
         >
           <div className="flex gap-2 mb-5">
             {heroSlides.map((_, i) => (
