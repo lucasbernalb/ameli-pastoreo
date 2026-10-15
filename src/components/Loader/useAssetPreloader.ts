@@ -1,18 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
-const LOGOS = [
-  '/logo-ameli/logotipo1.png',
-  '/logo-ameli/logotipo2.png',
-  '/logo-ameli/logotipo3.png',
-  '/logo-ameli/logotipo4.png',
-]
-
 const CRITICAL_IMAGES = [
   '/images/optimized/chickens-group.webp',
   '/images/optimized/chickens-group2.webp',
   '/logo-ameli/logo-blanco.png',
   '/texturas/278759-egg-shell.png',
-  ...LOGOS,
 ]
 
 function preloadImage(src: string): Promise<void> {

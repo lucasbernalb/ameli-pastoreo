@@ -12,11 +12,13 @@ export const PlansSection = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: 'url("/images/gallery/Maples%20packaging.webp")',
-          backgroundSize: 'contain',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
+          filter: 'blur(5px)',
+          transform: 'scale(1.06)',
         }}
       />
-      <div className="absolute inset-0 bg-[rgba(28,20,14,0.7)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[rgba(28,20,14,0.78)] pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/30 pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4">

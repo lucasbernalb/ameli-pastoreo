@@ -193,7 +193,17 @@ export const FormSection = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(rgba(28,20,14,.88), rgba(28,20,14,.88))',
+          backgroundImage: 'url("/images/gallery/Gallinas%20en%20el%20pasto.webp")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 40%',
+          filter: 'blur(4px)',
+          transform: 'scale(1.06)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(28,20,14,.95) 0%, rgba(28,20,14,.88) 45%, rgba(28,20,14,.95) 100%)',
         }}
       />
       <div
@@ -263,7 +273,7 @@ export const FormSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-10 md:mt-12 max-w-2xl mx-auto"
+          className="mt-10 md:mt-12 max-w-3xl mx-auto"
         >
             <div
               className="relative rounded-[28px] overflow-hidden"

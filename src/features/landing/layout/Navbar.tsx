@@ -93,7 +93,8 @@ export const Navbar = () => {
               <button
                 className="md:hidden text-[#F8F5F0]/80 p-3 hover:bg-white/5 rounded-lg transition-colors"
                 onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label="Toggle menu"
+                aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
+                aria-expanded={mobileOpen}
               >
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   {mobileOpen ? (

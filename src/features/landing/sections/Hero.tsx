@@ -25,28 +25,31 @@ export const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         <motion.div
           key={heroSlides[index].image}
           className="absolute inset-0"
-          initial={{ x: '100%', scale: 1 }}
-          animate={{ x: 0, scale: [1, 1.03] }}
-          exit={{ x: '-100%', scale: 1 }}
-          transition={{ duration: 0.6, ease: 'easeInOut' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.4, ease: 'easeInOut' }}
         >
-          <img
+          <motion.img
             src={heroSlides[index].image}
             alt="Campo Ameli Pastoreo"
             className="w-full h-full object-cover"
             loading="eager"
             fetchPriority="high"
             decoding="async"
+            initial={{ scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 7, ease: 'linear' }}
           />
         </motion.div>
       </AnimatePresence>
@@ -61,6 +64,11 @@ export const Hero = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ boxShadow: 'inset 0 0 180px rgba(0,0,0,.45)' }}
+      />
+
+      <div
+        className="absolute inset-x-0 bottom-0 h-56 md:h-44 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(26,17,12,.82) 0%, rgba(26,17,12,.45) 55%, transparent 100%)' }}
       />
 
       <div
@@ -88,7 +96,6 @@ export const Hero = () => {
             className="max-w-2xl pt-10 md:pt-6"
           >
             <motion.div variants={item}>
-              <div className="w-12 h-px bg-gold/60 mb-3" />
               <span className="inline-block relative">
                 <span
                   className="absolute inset-0 scale-110 scale-x-[1.15] pointer-events-none"
@@ -99,7 +106,7 @@ export const Hero = () => {
                   }}
                 />
                 <span
-                  className="relative text-sm md:text-lg tracking-[0.35em] uppercase font-semibold text-white"
+                  className="relative text-[0.8rem] md:text-lg tracking-[0.22em] md:tracking-[0.35em] uppercase font-semibold text-white"
                   style={{ textShadow: '0 1px 4px rgba(0,0,0,.4)' }}
                 >
                   gallinas libres en pastoreo rotativo
@@ -171,49 +178,52 @@ export const Hero = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
-          className="flex gap-2 pb-6 md:pb-8 justify-center"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.8 }}
+          className="pb-7 md:pb-9 pr-16 md:pr-0"
         >
-          {heroSlides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              aria-label={`Ir a slide ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === index ? 'bg-white w-8' : 'bg-white/40 w-1.5'
-              }`}
-            />
-          ))}
-        </motion.div>
-      </div>
+          <div className="flex gap-2 mb-5">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                aria-label={`Ir a slide ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === index ? 'bg-gold w-8' : 'bg-white/40 w-1.5'
+                }`}
+              />
+            ))}
+          </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute bottom-9 md:bottom-10 left-6 right-6 md:left-auto md:right-12 lg:right-20 backdrop-blur-md bg-black/30 border border-white/10 rounded-xl p-4 md:p-5 space-y-2.5 max-w-none md:max-w-[260px]"
-      >
-        {benefits.map((b, i) => (
-          <div key={i} className="flex items-center gap-3 text-white/80">
-            <svg
+          <ul className="flex flex-wrap gap-x-7 gap-y-2.5 border-t border-white/15 pt-4">
+            {benefits.map((b, i) => (
+              <li key={i} className="flex items-center gap-2 text-white/90">
+                <svg
                   className="shrink-0"
-                  width="22"
-                  height="22"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#D4A544"
-                  strokeWidth="2.5"
+                  stroke="#F5C242"
+                  strokeWidth="3"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  aria-hidden="true"
                 >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-            <span className="text-xs md:text-sm leading-snug font-medium">{b.text}</span>
-          </div>
-        ))}
-      </motion.div>
+                <span
+                  className="text-[0.8rem] md:text-sm leading-snug font-medium"
+                  style={{ textShadow: '0 1px 3px rgba(0,0,0,.5)' }}
+                >
+                  {b.text}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
     </section>
   );
 };

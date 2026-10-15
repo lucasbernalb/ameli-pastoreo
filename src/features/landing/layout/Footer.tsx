@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { CONTACT_INFO, WHATSAPP_ORDER_URL } from '@/config';
+import { CONTACT_INFO, INSTAGRAM_URL, WHATSAPP_ORDER_URL } from '@/config';
 import { scrollToSection } from '@/lib/scrollTo';
 import locationIcon from '@/assets/icons/location.svg';
 import whatsappIcon from '@/assets/icons/whatsapp.svg';
@@ -45,7 +45,7 @@ export const Footer = () => {
       >
         <div className="flex items-center gap-3 justify-center mb-14 md:mb-18">
           <div className="h-px flex-1 max-w-[120px]" style={{ backgroundColor: 'rgba(255,255,255,.12)' }} />
-          <span className="text-gold/40 text-xs tracking-[0.35em] uppercase font-semibold select-none">
+          <span className="text-gold/70 text-xs tracking-[0.35em] uppercase font-semibold select-none">
             Ameli Pastoreo
           </span>
           <div className="h-px flex-1 max-w-[120px]" style={{ backgroundColor: 'rgba(255,255,255,.12)' }} />
@@ -58,58 +58,58 @@ export const Footer = () => {
               alt="Ameli Pastoreo"
               className="h-14 md:h-16 w-auto mb-4"
             />
-            <p className="text-gold/70 text-sm font-semibold tracking-wide uppercase mb-3">
+            <p className="text-gold/90 text-sm font-semibold tracking-wide uppercase mb-3">
               Huevos de campo en pastoreo
             </p>
-            <p className="text-white/50 text-sm leading-relaxed">
+            <p className="text-white/75 text-sm leading-relaxed">
               Producción familiar enfocada en bienestar animal, alimentación natural y entrega semanal de huevos frescos en Montevideo, Canelones y la costa.
             </p>
-            <p className="text-gold/70 text-sm italic mt-6 leading-relaxed">
+            <p className="text-gold/90 text-sm italic mt-6 leading-relaxed">
               "Cada huevo cuenta una historia."
             </p>
           </div>
 
           <div>
-            <h4 className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-semibold mb-6">
+            <h4 className="text-gold/80 text-xs tracking-[0.3em] uppercase font-semibold mb-6">
               Contacto
             </h4>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-white/65 text-sm">
-                <span className="text-white/40 mt-0.5 flex-shrink-0">
-                  <img src={locationIcon} alt="Ubicación" className="w-4 h-4 opacity-40" />
+              <li className="flex items-start gap-3 text-white/80 text-sm">
+                <span className="text-white/70 mt-0.5 flex-shrink-0">
+                  <img src={locationIcon} alt="Ubicación" className="w-4 h-4 opacity-70" />
                 </span>
                 <span>Soca, Canelones</span>
               </li>
-              <li className="flex items-start gap-3 text-white/65 text-sm">
-                <span className="text-white/40 mt-0.5 flex-shrink-0">
-                  <img src={whatsappIcon} alt="WhatsApp" className="w-4 h-4 opacity-40" />
+              <li className="flex items-start gap-3 text-white/80 text-sm">
+                <span className="text-white/70 mt-0.5 flex-shrink-0">
+                  <img src={whatsappIcon} alt="WhatsApp" className="w-4 h-4 opacity-70" />
                 </span>
                 <a href={WHATSAPP_ORDER_URL} target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors duration-300">{CONTACT_INFO.phone}</a>
               </li>
-              <li className="flex items-start gap-3 text-white/65 text-sm">
-                <span className="text-white/40 mt-0.5 flex-shrink-0">
-                  <img src={gmailIcon} alt="Email" className="w-4 h-4 opacity-40" />
+              <li className="flex items-start gap-3 text-white/80 text-sm">
+                <span className="text-white/70 mt-0.5 flex-shrink-0">
+                  <img src={gmailIcon} alt="Email" className="w-4 h-4 opacity-70" />
                 </span>
                 <a href="mailto:ameliregenerativo@gmail.com" className="hover:text-gold transition-colors duration-300">ameliregenerativo@gmail.com</a>
               </li>
-              <li className="flex items-start gap-3 text-white/65 text-sm">
-                <span className="text-white/40 mt-0.5 flex-shrink-0">
-                  <img src={instagramIcon} alt="Instagram" className="w-4 h-4 opacity-40" />
+              <li className="flex items-start gap-3 text-white/80 text-sm">
+                <span className="text-white/70 mt-0.5 flex-shrink-0">
+                  <img src={instagramIcon} alt="Instagram" className="w-4 h-4 opacity-70" />
                 </span>
                 <a
-                  href="https://www.instagram.com/amelipastoreo/"
+                  href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-gold transition-colors duration-300"
                 >
-                  @ameli_pastoreo
+                  @{CONTACT_INFO.instagram}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white/40 text-[10px] tracking-[0.3em] uppercase font-semibold mb-6">
+            <h4 className="text-gold/80 text-xs tracking-[0.3em] uppercase font-semibold mb-6">
               Enlaces
             </h4>
             <ul className="space-y-3">
@@ -118,7 +118,7 @@ export const Footer = () => {
                   <a
                     href={link.href}
                     onClick={(e) => { e.preventDefault(); scrollToSection(link.href.replace('#', '')); }}
-                    className="inline-block text-white/65 text-sm hover:text-gold transition-all duration-300 hover:translate-x-0.5"
+                    className="inline-block py-0.5 text-white/80 text-sm hover:text-gold transition-all duration-300 hover:translate-x-0.5"
                   >
                     {link.name}
                   </a>
@@ -134,10 +134,10 @@ export const Footer = () => {
         />
 
         <div className="text-center">
-          <p className="text-gold/40 text-xs tracking-[0.15em] uppercase mb-2">
+          <p className="text-gold/75 text-xs tracking-[0.15em] uppercase mb-2">
             Del campo a tu mesa.
           </p>
-          <p className="text-white/20 text-[11px]">
+          <p className="text-white/50 text-xs">
             &copy; {new Date().getFullYear()} Ameli Pastoreo &middot; Todos los derechos reservados
           </p>
         </div>
