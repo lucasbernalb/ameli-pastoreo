@@ -45,7 +45,7 @@ export const PlansCarousel = () => {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
           {plans.map((plan, i) => (
-            <div key={plan.value} className="shrink-0 w-full px-2">
+            <div key={plan.value} className="shrink-0 w-full px-2 pt-5">
               <PlanCard plan={plan} index={i} carousel />
             </div>
           ))}

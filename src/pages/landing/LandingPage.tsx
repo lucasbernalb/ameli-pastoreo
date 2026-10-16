@@ -163,9 +163,13 @@ export const LandingPage = () => {
         <PlansSection />
       </section>
 
+      <SectionSeparator variant="b" />
+
       <section id="sumate">
         <FormSection />
       </section>
+
+      <SectionSeparator variant="a" />
 
       <section id="galeria">
         <GallerySection />

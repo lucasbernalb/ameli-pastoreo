@@ -5,6 +5,9 @@ import { scrollToSection } from '@/lib/scrollTo';
 
 type Plan = (typeof PLANS_DATA)[number];
 
+/** 1400 -> "1.400". Manual para que se vea igual en cualquier celular, sin depender del idioma del dispositivo. */
+const formatPrice = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
 export const PlanCard = ({ plan, index, carousel }: { plan: Plan; index: number; carousel?: boolean }) => {
   const { onSelectPlan } = usePlanContext();
   return (
@@ -43,16 +46,12 @@ export const PlanCard = ({ plan, index, carousel }: { plan: Plan; index: number;
               ],
             }}
             transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative z-10 inline-block text-[11px] uppercase tracking-[0.2em] font-bold text-brown bg-gold px-3 py-1 rounded-full mb-4"
+            className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap text-[11px] uppercase tracking-[0.2em] font-bold text-brown bg-gold px-4 py-1.5 rounded-full"
           >
             Más elegido
           </motion.span>
         </>
-      ) : (
-        <div className="mb-4">
-          <div className="h-[21px]" />
-        </div>
-      )}
+      ) : null}
 
       <div
         className={`absolute inset-0 rounded-[28px] pointer-events-none ${
@@ -75,81 +74,85 @@ export const PlanCard = ({ plan, index, carousel }: { plan: Plan; index: number;
         />
       )}
 
-      <div className={`relative z-10 flex flex-col flex-1`}>
-          <div
-            className={`inline-block px-4 py-2.5 rounded-xl mb-4 ${
-              plan.popular
-                ? 'bg-white/20'
-                : 'bg-[#5C7A4E]/15'
-            }`}
-          >
-            <p
-              className={`text-6xl md:text-7xl font-bold leading-[0.9] mb-0.5 ${
-                plan.popular ? 'text-white' : 'text-brown'
-              }`}
-            >
-              {plan.label}
-            </p>
-            <p
-              className={`text-[13px] uppercase tracking-[0.25em] font-semibold ${
-                plan.popular ? 'text-white/90' : 'text-[#7A5F4F]'
-              }`}
-            >
-              huevos por semana
-            </p>
-          </div>
-
-          <h3
-            className={`text-xl font-playfair font-bold ${
+      <div className="relative z-10 flex flex-col flex-1">
+        <div className="mb-5">
+          <p
+            className={`font-playfair font-bold leading-[0.85] text-7xl md:text-[5.5rem] [font-variant-numeric:lining-nums] ${
               plan.popular ? 'text-white' : 'text-brown'
             }`}
           >
-            {plan.title}
-          </h3>
+            {plan.label}
+          </p>
+          {/* Subrayado de marcador, dibujado a mano */}
+          <svg viewBox="0 0 100 10" className="w-24 h-2.5 mt-1.5 overflow-visible" aria-hidden="true">
+            <path
+              d="M2 6 C 20 2, 40 9, 62 5 S 92 4, 98 6"
+              fill="none"
+              stroke="#F5C242"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+          </svg>
+          <p
+            className={`text-[12px] uppercase tracking-[0.25em] font-semibold mt-2.5 ${
+              plan.popular ? 'text-white/90' : 'text-[#7A5F4F]'
+            }`}
+          >
+            huevos por semana
+          </p>
+        </div>
 
-          {plan.price ? (
-            <p
-              className={`text-3xl md:text-4xl font-bold mt-1 mb-5 ${
-                plan.popular ? 'text-white' : 'text-brown'
+        <h3
+          className={`text-2xl font-playfair font-bold leading-tight ${
+            plan.popular ? 'text-white' : 'text-brown'
+          }`}
+        >
+          {plan.title}
+        </h3>
+
+        {plan.price ? (
+          <p
+            className={`text-3xl md:text-4xl font-bold mt-1 ${
+              plan.popular ? 'text-white' : 'text-brown'
+            }`}
+          >
+            ${formatPrice(plan.price)}
+          </p>
+        ) : (
+          <p
+            className={`text-base font-medium italic mt-1 ${
+              plan.popular ? 'text-white/70' : 'text-[#6B4F3F]/80'
+            }`}
+          >
+            {plan.customPriceLabel}
+          </p>
+        )}
+
+        <div className={`h-px my-5 ${plan.popular ? 'bg-white/25' : 'bg-brown/10'}`} />
+
+        <ul className="space-y-1.5 mb-6 flex-1">
+          {plan.benefits.map((benefit) => (
+            <li
+              key={benefit}
+              className={`flex items-center gap-2 text-[13px] ${
+                plan.popular ? 'text-white/90' : 'text-brown/85 font-medium'
               }`}
             >
-              ${plan.price.toLocaleString()}
-            </p>
-          ) : (
-            <p
-              className={`text-base font-medium italic mt-1 mb-5 ${
-                plan.popular ? 'text-white/70' : 'text-[#6B4F3F]/80'
-              }`}
-            >
-              {plan.customPriceLabel}
-            </p>
-          )}
-
-          <ul className="space-y-2 mb-5">
-            {plan.benefits.map((benefit) => (
-              <li
-                key={benefit}
-                className={`flex items-center gap-2 text-sm ${
-                  plan.popular ? 'text-white/85' : 'text-brown font-medium'
-                }`}
+              <svg
+                className={`w-3 h-3 flex-shrink-0 ${plan.popular ? 'text-[#C7E0B8]' : 'text-green'}`}
+                viewBox="0 0 14 14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <svg
-                  className={`w-3.5 h-3.5 flex-shrink-0 ${
-                    plan.popular ? 'text-[#C7E0B8]' : 'text-green'
-                  }`}
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="2 7 5.5 10.5 12 4" />
-                </svg>
-                {benefit}
-              </li>
-            ))}
-          </ul>
+                <polyline points="2 7 5.5 10.5 12 4" />
+              </svg>
+              {benefit}
+            </li>
+          ))}
+        </ul>
 
         <button
           onClick={() => {

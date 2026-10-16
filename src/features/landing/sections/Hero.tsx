@@ -30,7 +30,7 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden" style={{ minHeight: '100svh' }}>
       <AnimatePresence initial={false}>
         <motion.div
           key={heroSlides[index].image}
@@ -76,14 +76,14 @@ export const Hero = () => {
         style={{ backgroundColor: 'rgba(245,194,66,.03)' }}
       />
 
-      <div className="relative z-10 min-h-screen flex flex-col px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
+      <div className="relative z-10 min-h-screen flex flex-col px-6 md:px-12 lg:px-20 max-w-7xl mx-auto" style={{ minHeight: '100svh' }}>
         <motion.img
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           src="/logo-ameli/logo-blanco.png"
           alt="Ameli Pastoreo"
-          className="self-start w-28 md:w-36 pt-6 md:pt-10 drop-shadow-lg"
+          className="self-start w-28 md:w-[clamp(6.5rem,15vh,9rem)] pt-6 md:pt-[clamp(1rem,4.5vh,2.5rem)] drop-shadow-lg"
           loading="eager"
         />
 
@@ -93,7 +93,7 @@ export const Hero = () => {
             initial="hidden"
             animate="visible"
             transition={{ staggerChildren: 0.12, delayChildren: 0.25 }}
-            className="max-w-2xl pt-10 md:pt-6"
+            className="max-w-2xl pt-10 md:pt-[clamp(0.25rem,2.5vh,1.5rem)]"
           >
             <motion.div variants={item}>
               <span className="inline-block relative">
@@ -116,7 +116,7 @@ export const Hero = () => {
           </motion.div>
 
           {/* H1, subtitle, CTA - vertically centered */}
-          <div className="flex-1 min-h-0 flex flex-col justify-center -mt-[95px] pb-16 md:mt-0 md:pb-12">
+          <div className="flex-1 min-h-0 flex flex-col justify-center -mt-[95px] pb-16 md:mt-0 md:pb-[clamp(1rem,3vh,3rem)]">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -125,8 +125,8 @@ export const Hero = () => {
             >
               <motion.h1
                 variants={item}
-                className="font-playfair font-bold text-white leading-[0.88] tracking-[-0.02em] mt-0 md:mt-8"
-                style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)' }}
+                className="font-playfair font-bold text-white leading-[0.88] tracking-[-0.02em] mt-0 md:mt-[clamp(0.75rem,3.2vh,2rem)]"
+                style={{ fontSize: 'clamp(3.5rem, min(8vw, 14.5vh), 7rem)' }}
               >
                 HUEVOS DE
                 <br />
@@ -150,17 +150,17 @@ export const Hero = () => {
 
               <motion.p
                 variants={item}
-                className="text-white/90 max-w-lg mt-6 md:mt-5 leading-relaxed font-semibold"
+                className="text-white/90 max-w-lg mt-6 md:mt-[clamp(0.5rem,2vh,1.25rem)] leading-relaxed font-semibold"
                 style={{ fontSize: 'clamp(1rem, 1.3vw, 1.15rem)' }}
               >
                 Producto artesanal, calidad superior
               </motion.p>
 
-              <motion.div variants={item} className="flex items-center gap-5 mt-10 md:mt-8">
+              <motion.div variants={item} className="flex items-center gap-5 mt-10 md:mt-[clamp(1rem,3.2vh,2rem)]">
                 <a
                   href="#planes"
                   onClick={(e) => { e.preventDefault(); scrollToSection('planes'); }}
-                  className="relative inline-flex items-center justify-center bg-[#5C7A4E] text-white px-8 py-5 rounded-full font-bold text-base shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl active:translate-y-0 overflow-hidden"
+                  className="relative inline-flex items-center justify-center bg-[#5C7A4E] text-white px-8 py-5 md:py-[clamp(0.75rem,2.2vh,1.25rem)] rounded-full font-bold text-base shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-3xl active:translate-y-0 overflow-hidden"
                 >
                   <div
                     className="absolute inset-0 opacity-[0.08] pointer-events-none"
@@ -181,9 +181,9 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
-          className="shrink-0 pb-7 md:pb-9 pr-16 md:pr-0"
+          className="shrink-0 pb-7 md:pb-[clamp(1rem,4vh,2.25rem)] pr-16 md:pr-0"
         >
-          <div className="flex gap-2 mb-5">
+          <div className="flex gap-2 mb-5 md:mb-[clamp(0.6rem,2.4vh,1.25rem)]">
             {heroSlides.map((_, i) => (
               <button
                 key={i}

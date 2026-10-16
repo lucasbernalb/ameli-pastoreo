@@ -23,50 +23,53 @@ const planChips: ChipData[] = [
 
 type ChipData = { value: string; label: string; subtitle: string };
 
-const Chip = ({ chip, selected, onChange, name, hasError }: { chip: ChipData; selected: boolean; onChange: React.ChangeEventHandler<HTMLInputElement>; name: string; hasError?: boolean }) => (
-  <motion.label
-    animate={{
-      boxShadow: selected
-        ? [
-            '0 0 0px rgba(245,194,66,0), 0 0 0px rgba(245,194,66,0)',
-            '0 0 10px rgba(245,194,66,0.4), 0 0 20px rgba(245,194,66,0.15)',
-            '0 0 0px rgba(245,194,66,0), 0 0 0px rgba(245,194,66,0)',
-          ]
-        : undefined,
-    }}
-    transition={selected ? { duration: 2.5, repeat: Infinity, ease: 'easeInOut' } : undefined}
-    aria-invalid={hasError || undefined}
-    aria-describedby={hasError ? 'form-plan-error' : undefined}
-    className={`cursor-pointer rounded-full border px-3 py-2.5 transition-all duration-200 ${
-      selected
-        ? 'bg-[#89B178] text-white border-gold shadow-md -translate-y-0.5'
-        : 'bg-[#F0EBE6] text-brown border-gold/30 hover:border-gold/60 hover:shadow-sm hover:-translate-y-0.5'
-    }`}
-  >
-    <input
-      type="radio" name={name} value={chip.value}
-      checked={selected} onChange={onChange}
-      className="hidden"
-    />
-    <div className="text-center">
-      <span className={`text-sm font-bold block leading-tight ${
-        selected ? 'text-white' : 'text-brown'
-      }`}>
-        {chip.label}
+const Chip = ({ chip, selected, onChange, name, hasError, className = '' }: { chip: ChipData; selected: boolean; onChange: React.ChangeEventHandler<HTMLInputElement>; name: string; hasError?: boolean; className?: string }) => {
+  // "12 HUEVOS" -> número grande + palabra; el texto leído es el mismo
+  const [amount, ...rest] = chip.label.split(' ');
+  const unit = rest.join(' ');
+
+  return (
+    <label
+      aria-invalid={hasError || undefined}
+      aria-describedby={hasError ? 'form-plan-error' : undefined}
+      className={`relative cursor-pointer rounded-2xl border-2 px-2 pt-3 pb-3 text-center transition-all duration-200 focus-within:ring-2 focus-within:ring-gold/60 ${
+        selected
+          ? 'bg-[#6F9760] border-gold text-white shadow-lg -translate-y-0.5'
+          : 'bg-white/70 border-brown/15 text-brown hover:border-green/60 hover:bg-white hover:-translate-y-0.5 hover:shadow-md'
+      } ${className}`}
+    >
+      <input
+        type="radio" name={name} value={chip.value}
+        checked={selected} onChange={onChange}
+        className="sr-only"
+      />
+
+      {selected && (
+        <span
+          aria-hidden="true"
+          className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gold text-brown flex items-center justify-center shadow-md"
+        >
+          <svg className="w-3.5 h-3.5" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="2 7.5 5.5 11 12 3.5" />
+          </svg>
+        </span>
+      )}
+
+      <span className="font-playfair font-bold text-4xl leading-none block [font-variant-numeric:lining-nums]">{amount}</span>
+      <span className={`block text-[11px] font-bold uppercase tracking-[0.18em] mt-1 ${selected ? 'text-white' : 'text-brown'}`}>
+        {unit}{' '}
+        <span className={`normal-case tracking-normal font-semibold ${selected ? 'text-white/85' : 'text-brown-mid'}`}>
+          por semana
+        </span>
       </span>
-      <span className={`text-[10px] font-semibold block leading-tight ${
-        selected ? 'text-white/80' : 'text-brown-mid/90'
-      }`}>
-        por semana
-      </span>
-      <span className={`text-xs font-semibold block mt-0.5 ${
-        selected ? 'text-white/80' : 'text-brown-mid'
+      <span className={`block text-xs font-semibold leading-snug mt-2 pt-2 border-t ${
+        selected ? 'text-white border-white/30' : 'text-brown-mid border-brown/10'
       }`}>
         {chip.subtitle}
       </span>
-    </div>
-  </motion.label>
-);
+    </label>
+  );
+};
 
 export const FormSection = () => {
   const { selectedPlan, onSelectPlan } = usePlanContext();
@@ -349,8 +352,8 @@ export const FormSection = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center gap-2 mt-6 mb-3 flex-wrap">
-                  <p className="text-sm font-semibold text-brown">Elegí tu plan de huevos</p>
+                <div className="flex items-baseline justify-between gap-3 mt-7 mb-3.5">
+                  <p className="text-sm font-medium text-brown">Elegí tu plan de huevos</p>
                   <a
                     href="#planes"
                     onClick={(e) => { e.preventDefault(); scrollToSection('planes'); }}
@@ -359,29 +362,23 @@ export const FormSection = () => {
                     Ver planes
                   </a>
                 </div>
-                {/* Mobile: 2+2+1 */}
-                <div className="grid grid-cols-2 gap-3 md:hidden">
-                  {planChips.slice(0, 2).map((chip) => (
-                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
-                  ))}
-                </div>
-                <div className="grid grid-cols-2 gap-3 mt-3 md:hidden">
-                  {planChips.slice(2, 4).map((chip) => (
-                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
-                  ))}
-                </div>
-                <div className="mt-3 md:hidden flex justify-center">
-                  <Chip chip={planChips[4]} selected={formData.plan === planChips[4].value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
-                </div>
-                {/* Desktop/tablet: 3+2 */}
-                <div className="hidden md:grid md:grid-cols-3 gap-3">
-                  {planChips.slice(0, 3).map((chip) => (
-                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
-                  ))}
-                </div>
-                <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-[66%] mx-auto mt-3">
-                  {planChips.slice(3).map((chip) => (
-                    <Chip key={chip.value} chip={chip} selected={formData.plan === chip.value} onChange={handleChange} name="plan" hasError={!!errors.plan} />
+
+                {/* Una sola grilla: 2+2+1 en celular y 3+2 en pantallas grandes, todas del mismo tamaño */}
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-3 pt-1">
+                  {planChips.map((chip, i) => (
+                    <Chip
+                      key={chip.value}
+                      chip={chip}
+                      selected={formData.plan === chip.value}
+                      onChange={handleChange}
+                      name="plan"
+                      hasError={!!errors.plan}
+                      className={[
+                        'md:col-span-2',
+                        i === 3 ? 'md:col-start-2' : '',
+                        i === 4 ? 'col-span-2 w-[calc(50%-0.375rem)] justify-self-center md:w-auto md:justify-self-stretch md:col-start-4' : '',
+                      ].join(' ')}
+                    />
                   ))}
                 </div>
                 {errors.plan && (
@@ -432,11 +429,7 @@ export const FormSection = () => {
 
                 <motion.button
                   type="submit" disabled={loading}
-                  className="w-full mt-6 h-14 rounded-full font-bold text-sm uppercase tracking-[0.125em] shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_12px_30px_rgba(0,0,0,.18)] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={{
-                    backgroundColor: '#7EA96F',
-                    color: '#fff',
-                  }}
+                  className="w-full mt-7 h-14 rounded-full font-bold text-sm uppercase tracking-[0.125em] text-white bg-gradient-to-r from-green to-green-dark shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_12px_30px_rgba(0,0,0,.18)] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed"
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
                 >

@@ -54,15 +54,11 @@ export const PlansSection = () => {
           <PlansCarousel />
         </div>
 
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto justify-items-center">
-          {plans.slice(0, 3).map((plan, i) => (
-            <PlanCard key={plan.value} plan={plan} index={i} />
-          ))}
-        </div>
-
-        <div className="hidden md:grid md:grid-cols-2 gap-8 max-w-full md:max-w-3xl mx-auto mt-8 justify-items-center">
-          {plans.slice(3).map((plan, i) => (
-            <PlanCard key={plan.value} plan={plan} index={i + 3} />
+        <div className="hidden md:flex md:flex-wrap justify-center gap-8 max-w-5xl mx-auto">
+          {plans.map((plan, i) => (
+            <div key={plan.value} className="flex w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)]">
+              <PlanCard plan={plan} index={i} />
+            </div>
           ))}
         </div>
       </div>
