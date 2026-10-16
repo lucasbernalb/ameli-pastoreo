@@ -116,7 +116,7 @@ export const Hero = () => {
           </motion.div>
 
           {/* H1, subtitle, CTA - vertically centered */}
-          <div className="flex-1 min-h-0 flex flex-col justify-center -mt-[95px] pb-16 md:mt-0 md:pb-0">
+          <div className="flex-1 min-h-0 flex flex-col justify-center -mt-[95px] pb-16 md:mt-0 md:pb-12">
             <motion.div
               initial="hidden"
               animate="visible"
